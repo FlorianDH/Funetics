@@ -9,13 +9,34 @@
     tools:showIn="@layout/activity_main"
     tools:context=".MainActivity">
 
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingLeft="1dp">
+
+        <TextView
+            android:id="@+id/titel"
+            android:layout_width="527dp"
+            android:layout_height="153dp"
+            android:paddingLeft="50dp"
+            android:text="Funatics"
+            android:textSize="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.013"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.022" />
+
+        <ImageView
+            android:id="@+id/homeImage"
+            android:layout_width="450dp"
+            android:layout_height="320dp"
+            android:layout_toRightOf="@+id/titel"
+            android:paddingLeft="50dp"
+            app:srcCompat="@drawable/home" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
