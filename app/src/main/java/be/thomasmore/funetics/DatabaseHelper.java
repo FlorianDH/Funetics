@@ -155,10 +155,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     // rawQuery-methode
-    public List<Kind> getKinderen() {
+    public List<Kind> getKinderen(int actief) {
         List<Kind> lijst = new ArrayList<Kind>();
+        String selectQuery;
 
-        String selectQuery = "SELECT  * FROM kind ORDER BY voornaam";
+        if (actief == 0){
+            selectQuery = "SELECT  * FROM kind ORDER BY voornaam";
+        }
+        else {
+            selectQuery = "SELECT  * FROM kind WHERE actief = 1 ORDER BY voornaam";
+        }
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -177,10 +183,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     // rawQuery-methode
-    public List<Kind> getKinderenWhereGroepId(int groepId) {
+    public List<Kind> getKinderenWhereGroepId(int groepId, int actief) {
         List<Kind> lijst = new ArrayList<Kind>();
+        String selectQuery;
 
-        String selectQuery = "SELECT * FROM kind WHERE groepId = " + groepId + " ORDER BY voornaam";
+        if (actief == 0){
+            selectQuery = "SELECT * FROM kind WHERE groepId = " + groepId + " ORDER BY voornaam";
+        }
+        else {
+            selectQuery = "SELECT * FROM kind WHERE groepId = " + groepId + " AND actief = 1 ORDER BY voornaam";
+        }
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

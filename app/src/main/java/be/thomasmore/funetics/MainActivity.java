@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+                selectedGroep = null;
             }
         });
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void leesKinderen(){
-        final List<Kind> kinderen = db.getKinderen();
+        final List<Kind> kinderen = db.getKinderen(1);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinnerKind);
 
@@ -70,7 +70,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void leesKinderenWhereGroep(int groepId){
-        final List<Kind> kinderen = db.getKinderenWhereGroepId(groepId);
+        final List<Kind> kinderen = db.getKinderenWhereGroepId(groepId, 1);
+
+        if (kinderen.isEmpty()){
+            selectedKind = null;
+        }
 
         Spinner spinner = (Spinner) findViewById(R.id.spinnerKind);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -81,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+                selectedKind = null;
             }
         });
 
