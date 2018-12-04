@@ -128,7 +128,13 @@ public class MainActivity extends AppCompatActivity {
             showErrorDialog();
         }
         else {
+            long selectedKindId = selectedKind.getId();
+
+            Bundle bundle = new Bundle();
+            bundle.putLong("kindId", selectedKindId);
+
             Intent intent = new Intent(this, DetailKindActivity.class);
+            intent.putExtras(bundle);
 
             startActivity(intent);
 

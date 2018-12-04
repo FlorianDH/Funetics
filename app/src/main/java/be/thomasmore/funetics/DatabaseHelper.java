@@ -130,7 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     // query-methode
-    public Kind getKind(long id) {
+    public Kind getKindById(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(

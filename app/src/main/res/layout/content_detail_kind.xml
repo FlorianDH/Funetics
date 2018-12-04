@@ -8,14 +8,53 @@
     tools:context=".DetailKindActivity"
     tools:showIn="@layout/activity_detail_kind">
 
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Detail activity"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintVertical_bias="0.0"
+        android:background="#ABABAB">
+
+        <TextView
+            android:id="@+id/naamKind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="50dp"
+            android:text="Fout bij laden van kind"
+            android:textSize="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.013"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.022" />
+
+        <Button
+            android:id="@+id/buttonBeheren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beheren"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="100dp"
+            android:layout_marginLeft="100dp"
+            android:padding="50dp"
+            android:onClick="goBeheren_onClick"/>
+        <Button
+            android:id="@+id/buttonVolgende"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volgende"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="100dp"
+            android:layout_marginRight="100dp"
+            android:padding="50dp"
+            android:onClick="goDetail_onClick"/>
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
