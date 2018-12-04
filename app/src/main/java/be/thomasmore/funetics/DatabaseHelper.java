@@ -1,4 +1,4 @@
-package be.thomasmore.funetics.;
+package be.thomasmore.funetics;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -79,45 +79,49 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     //-------------------------------------------------------------------------------------------------
 
     // insert-methode met ContentValues
-    public long insertPresident(President president) {
+    public long insertKind(Kind kind) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("name", president.getName());
-        values.put("term", president.getTerm());
-        values.put("partyId", president.getPartyId());
+        values.put("voornaam", kind.getVoornaam());
+        values.put("naam", kind.getNaam());
+        values.put("leeftijd", kind.getLeeftijd());
+        values.put("actief", kind.getActief());
+        values.put("groepId", kind.getGroepId());
 
-        long id = db.insert("president", null, values);
+        long id = db.insert("kind", null, values);
 
         db.close();
         return id;
     }
 
     // update-methode met ContentValues
-    public boolean updatePresident(President president) {
+    public boolean updateKind(Kind kind) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("name", president.getName());
-        values.put("term", president.getTerm());
-        values.put("partyId", president.getPartyId());
+        values.put("voornaam", kind.getVoornaam());
+        values.put("naam", kind.getNaam());
+        values.put("leeftijd", kind.getLeeftijd());
+        values.put("actief", kind.getActief());
+        values.put("groepId", kind.getGroepId());
 
         int numrows = db.update(
-                "president",
+                "kind",
                 values,
                 "id = ?",
-                new String[] { String.valueOf(president.getId()) });
+                new String[] { String.valueOf(kind.getId()) });
 
         db.close();
         return numrows > 0;
     }
 
     // delete-methode
-    public boolean deletePresident(long id) {
+    public boolean deleteKind(long id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         int numrows = db.delete(
-                "president",
+                "kind",
                 "id = ?",
                 new String[] { String.valueOf(id) });
 
@@ -126,12 +130,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     // query-methode
-    public President getPresident(long id) {
+    public Kind getKind(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(
-                "president",      // tabelnaam
-                new String[] { "id", "name", "term", "partyId" }, // kolommen
+                "kind",      // tabelnaam
+                new String[] { "id", "voornaam", "naam", "leeftijd", "actief", "groepId" }, // kolommen
                 "id = ?",  // selectie
                 new String[] { String.valueOf(id) }, // selectieparameters
                 null,           // groupby
@@ -139,31 +143,31 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 null,           // sorting
                 null);          // ??
 
-        President president = new President();
+        Kind kind = new Kind();
 
         if (cursor.moveToFirst()) {
-            president = new President(cursor.getLong(0),
-                    cursor.getString(1), cursor.getString(2), cursor.getLong(3));
+            kind = new Kind(cursor.getLong(0),
+                    cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5));
         }
         cursor.close();
         db.close();
-        return president;
+        return kind;
     }
 
     // rawQuery-methode
-    public List<President> getPresidents() {
-        List<President> lijst = new ArrayList<President>();
+    public List<Kind> getKinderen() {
+        List<Kind> lijst = new ArrayList<Kind>();
 
-        String selectQuery = "SELECT  * FROM president ORDER BY term";
+        String selectQuery = "SELECT  * FROM kind ORDER BY voornaam";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
-                President president = new President(cursor.getLong(0),
-                        cursor.getString(1), cursor.getString(2), cursor.getLong(3));
-                lijst.add(president);
+                Kind kind = new Kind(cursor.getLong(0),
+                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5));
+                lijst.add(kind);
             } while (cursor.moveToNext());
         }
 
@@ -173,18 +177,18 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     // rawQuery-methode
-    public List<Party> getParties() {
-        List<Party> lijst = new ArrayList<Party>();
+    public List<Groep> getGroepen() {
+        List<Groep> lijst = new ArrayList<Groep>();
 
-        String selectQuery = "SELECT  * FROM party ORDER BY name";
+        String selectQuery = "SELECT  * FROM groep ORDER BY naam";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
-                Party party = new Party(cursor.getLong(0), cursor.getString(1));
-                lijst.add(party);
+                Groep groep = new Groep(cursor.getLong(0), cursor.getString(1));
+                lijst.add(groep);
             } while (cursor.moveToNext());
         }
 
@@ -194,8 +198,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     // rawQuery-methode
-    public int getCountPresidents() {
-        String selectQuery = "SELECT  * FROM president";
+    public int getCountKinderen() {
+        String selectQuery = "SELECT  * FROM kind";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
