@@ -159,6 +159,8 @@ public class BeherenActivity extends AppCompatActivity {
 
     public void kindToevoegen_onClick(View v){
 
+        // todo Niet lege persoon toevoegen
+
         EditText textVoornaamKind = (EditText) findViewById(R.id.voornaamInput);
         final String voornaam = textVoornaamKind.getText().toString();
 
@@ -168,6 +170,14 @@ public class BeherenActivity extends AppCompatActivity {
         Spinner groepSpinner = (Spinner) findViewById(R.id.spinnerGroep);
         String groep = groepSpinner.getSelectedItem().toString();
 
+        Switch actiefSwitch = (Switch) findViewById(R.id.switchActief);
+        final int isActief;
+        if( actiefSwitch.isChecked()){
+            isActief = 1;
+        }else{
+            isActief = 0;
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Wil je '" + voornaam + " " + naam + "' toevoegen aan " + groep + "?")
 
@@ -176,7 +186,7 @@ public class BeherenActivity extends AppCompatActivity {
                         Kind newKind = new Kind();
                         newKind.setVoornaam(voornaam);
                         newKind.setNaam(naam);
-                        newKind.setActief(1);
+                        newKind.setActief(isActief);
                         newKind.setGroepId((int)selectedGroep.getId());
 
                         db.insertKind(newKind);
@@ -195,7 +205,58 @@ public class BeherenActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    public void kindWijzigen_onClick(View v){
+
+        // todo Niet lege persoon wijzigen
+
+        EditText textVoornaamKind = (EditText) findViewById(R.id.voornaamInput);
+        final String voornaam = textVoornaamKind.getText().toString();
+
+        EditText textNaamKind = (EditText) findViewById(R.id.naamInput);
+        final String naam = textNaamKind.getText().toString();
+
+        Spinner groepSpinner = (Spinner) findViewById(R.id.spinnerGroep);
+        String groep = groepSpinner.getSelectedItem().toString();
+
+        Switch actiefSwitch = (Switch) findViewById(R.id.switchActief);
+        final int isActief;
+        if( actiefSwitch.isChecked()){
+            isActief = 1;
+        }else{
+            isActief = 0;
+        }
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Wil je de gegevens van '" + voornaam + " " + naam + "' wijzigen?")
+
+                .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Kind newKind = selectedKind;
+                        newKind.setVoornaam(voornaam);
+                        newKind.setNaam(naam);
+                        newKind.setActief(isActief);
+                        newKind.setGroepId((int)selectedGroep.getId());
+
+                        db.updateKind(newKind);
+
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
+                    }
+
+                })
+                .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     public void kindVerwijderen_onClick(View v){
+
+        // Todo Niet lege persoon verwijderen
 
         EditText textVoornaamKind = (EditText) findViewById(R.id.voornaamInput);
         final String voornaam = textVoornaamKind.getText().toString();
