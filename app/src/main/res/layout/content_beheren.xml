@@ -69,6 +69,7 @@
                 android:id="@+id/voornaamLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:text="Voornaam" />
 
             <EditText
@@ -76,6 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:layout_marginBottom="5dp"
                 android:hint="Voornaam"
                 android:inputType="textPersonName"
                 android:text="Voornaam" />
@@ -84,12 +86,14 @@
                 android:id="@+id/naamLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:text="Naam" />
 
             <EditText
                 android:id="@+id/naamInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:ems="10"
                 android:hint="Naam"
                 android:inputType="textPersonName"
@@ -99,6 +103,7 @@
                 android:id="@+id/leeftijdLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:text="Leeftijd" />
 
             <EditText
@@ -108,42 +113,56 @@
                 android:ems="10"
                 android:hint="Leeftijd"
                 android:inputType="number"
-                android:text="Leeftijd" />
+                android:layout_marginBottom="5dp"
+                />
 
             <TextView
                 android:id="@+id/groepLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:text="Groep" />
 
             <Spinner
                 android:id="@+id/spinnerGroep"
-                android:layout_width="400dp"
-                android:layout_height="60dp"/>
+                android:layout_width="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_height="wrap_content"/>
 
-            <ToggleButton
-                android:id="@+id/toggleButton"
+            <TextView
+                android:id="@+id/actiefLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ToggleButton" />
+                android:layout_marginBottom="5dp"
+                android:text="Zet een persoon inactief als diegene geen tests meer zal doen maar je wel de gegevens nog wilt bewaren van deze persoon" />
 
             <Switch
-                android:id="@+id/switch1"
+                android:id="@+id/switchActief"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Switch" />
+                android:layout_marginBottom="5dp"
+                android:text="Is actief" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/wijzigButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:layout_marginBottom="5dp"
+                android:text="Wijzigen" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/opslaanButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:layout_marginBottom="5dp"
+                android:text="Opslaan" />
+
+            <Button
+                android:id="@+id/verwijderButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Verwijderen" />
 
         </LinearLayout>
 

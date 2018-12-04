@@ -9,8 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.List;
@@ -53,24 +55,32 @@ public class BeherenActivity extends AppCompatActivity {
                         leesKinderenWhereGroep(selectedGroepId);
                     }
                 });
+    }
 
-//        listViewGroepen.setOnItemClickListener(){
-//            @Override
-//            public void onItemClick(AdapterView<?> parentView, View childView, int position, long id) {
-//                int selectedGroep = (int) groepen.get(position).getId();
-//                leesKinderenWhereGroep(selectedGroep);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parentView) {
-//                // your code here
-//            }
-//        });
+    private void leesGroepenInSpinner(){
+        final List<Groep> groepen = db.getGroepen();
+        int groepId = selectedKind.getGroepId();
 
-//        ArrayAdapter<Groep> aa = new ArrayAdapter(this,android.R.layout.simple_list_item_1, groepen);
-//        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerGroep);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View childView, int position, long id) {
+                selectedGroep = groepen.get(position);
+                int selectedGroepId = (int) selectedGroep.getId();
+                leesKinderenWhereGroep(selectedGroepId);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                selectedGroep = null;
+            }
+        });
+
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, groepen);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
-//        listViewGroepen.setAdapter(aa);
+        spinner.setAdapter(aa);
+        spinner.setSelection(groepId-1);
     }
 
     private void leesKinderenWhereGroep(int groepId){
@@ -107,10 +117,22 @@ public class BeherenActivity extends AppCompatActivity {
 
         final Kind huidigKind = db.getKindById(kindId);
 
-        TextView textNaamKind = (TextView) findViewById(R.id.naamKind);
-        textNaamKind.setText(huidigKind.toString());
+        EditText textVoornaamKind = (EditText) findViewById(R.id.voornaamInput);
+        textVoornaamKind.setText(huidigKind.getVoornaam());
 
-        TextView textGroepKind = (TextView) findViewById(R.id.naamKind);
-        textNaamKind.setText(huidigKind.toString());
+        EditText textNaamKind = (EditText) findViewById(R.id.naamInput);
+        textNaamKind.setText(huidigKind.getNaam());
+
+        EditText textLeeftijdKind = (EditText) findViewById(R.id.leeftijdInput);
+        textLeeftijdKind.setText(huidigKind.getLeeftijd());
+
+        leesGroepenInSpinner();
+
+        Switch switchIsActief = (Switch) findViewById(R.id.switchActief);
+        if(huidigKind.getActief() == 1){
+            switchIsActief.setChecked(true);
+        }else{
+            switchIsActief.setChecked(false);
+        }
     }
 }
