@@ -151,11 +151,12 @@
                 android:text="Wijzigen" />
 
             <Button
-                android:id="@+id/opslaanButton"
+                android:id="@+id/toevoegenButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="Opslaan" />
+                android:text="Toevoegen"
+                android:onClick="kindToevoegen_onClick"/>
 
             <Button
                 android:id="@+id/verwijderButton"
@@ -165,6 +166,5 @@
                 android:text="Verwijderen" />
 
         </LinearLayout>
-
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -29,9 +29,16 @@ public class BeherenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_beheren);
 
         db = new DatabaseHelper(this);
+        final List<Groep> groepen = db.getGroepen();
 
         leesGroepen();
         leesKinderenWhereGroep(0);
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerGroep);
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, groepen);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        spinner.setAdapter(aa);
     }
 
     private void leesGroepen(){
@@ -123,8 +130,8 @@ public class BeherenActivity extends AppCompatActivity {
         EditText textNaamKind = (EditText) findViewById(R.id.naamInput);
         textNaamKind.setText(huidigKind.getNaam());
 
-        EditText textLeeftijdKind = (EditText) findViewById(R.id.leeftijdInput);
-        textLeeftijdKind.setText(huidigKind.getLeeftijd());
+//        EditText textLeeftijdKind = (EditText) findViewById(R.id.leeftijdInput);
+//        textLeeftijdKind.setText(huidigKind.getLeeftijd());
 
         leesGroepenInSpinner();
 
@@ -134,5 +141,9 @@ public class BeherenActivity extends AppCompatActivity {
         }else{
             switchIsActief.setChecked(false);
         }
+    }
+
+    private void kindToevoegen_onClick(){
+
     }
 }
