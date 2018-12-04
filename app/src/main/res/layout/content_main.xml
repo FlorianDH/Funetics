@@ -93,6 +93,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
         android:layout_marginRight="100dp"
+        android:background="#8226ff00"
         android:padding="50dp"
         android:onClick="goDetail_onClick"/>
 </RelativeLayout>

@@ -77,10 +77,10 @@ public class BeherenActivity extends AppCompatActivity {
         List<Kind> kinderenLijst;
 
         if(groepId == 0){
-            kinderenLijst = db.getKinderen();
+            kinderenLijst = db.getKinderen(0);
 
         }else{
-            kinderenLijst = db.getKinderenWhereGroepId(groepId);
+            kinderenLijst = db.getKinderenWhereGroepId(groepId, 0);
         }
 
         final List<Kind> kinderen = kinderenLijst;

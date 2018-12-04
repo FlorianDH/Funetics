@@ -1,7 +1,9 @@
 package be.thomasmore.funetics;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.view.View;
 import android.widget.TextView;
 
 public class DetailKindActivity extends Activity {
@@ -23,6 +25,11 @@ public class DetailKindActivity extends Activity {
 
         TextView textNaamKind = (TextView) findViewById(R.id.naamKind);
         textNaamKind.setText(huidigKind.toString());
+    }
+
+    public void goTerug_onClick(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 }
