@@ -1,6 +1,7 @@
 package be.thomasmore.funetics;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -179,7 +180,12 @@ public class BeherenActivity extends AppCompatActivity {
                         newKind.setGroepId((int)selectedGroep.getId());
 
                         db.insertKind(newKind);
+
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
                     }
+
                 })
                 .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -197,21 +203,16 @@ public class BeherenActivity extends AppCompatActivity {
         EditText textNaamKind = (EditText) findViewById(R.id.naamInput);
         final String naam = textNaamKind.getText().toString();
 
-        Spinner groepSpinner = (Spinner) findViewById(R.id.spinnerGroep);
-        String groep = groepSpinner.getSelectedItem().toString();
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Wil je '" + voornaam + " " + naam + "' toevoegen aan " + groep + "?")
+        builder.setTitle("Ben je zeker dat je '" + voornaam + " " + naam + "' wilt verwijderen?")
 
                 .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        Kind newKind = new Kind();
-                        newKind.setVoornaam(voornaam);
-                        newKind.setNaam(naam);
-                        newKind.setActief(1);
-                        newKind.setGroepId((int)selectedGroep.getId());
+                        db.deleteKind(selectedKind.getId());
 
-                        db.insertKind(newKind);
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
