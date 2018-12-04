@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -104,6 +105,12 @@ public class BeherenActivity extends AppCompatActivity {
 
     private void leesKindDetail(long kindId){
 
-        final Kind kind = db.getKindById(kindId);
+        final Kind huidigKind = db.getKindById(kindId);
+
+        TextView textNaamKind = (TextView) findViewById(R.id.naamKind);
+        textNaamKind.setText(huidigKind.toString());
+
+        TextView textGroepKind = (TextView) findViewById(R.id.naamKind);
+        textNaamKind.setText(huidigKind.toString());
     }
 }

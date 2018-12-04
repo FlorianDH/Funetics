@@ -61,9 +61,89 @@
             android:id="@+id/kindDetailVenster"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="#3940ba">
+            android:background="#3940ba"
+            android:padding="32dp"
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/voornaamLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Voornaam" />
+
+            <EditText
+                android:id="@+id/voornaamInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Voornaam"
+                android:inputType="textPersonName"
+                android:text="Voornaam" />
+
+            <TextView
+                android:id="@+id/naamLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Naam" />
+
+            <EditText
+                android:id="@+id/naamInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Naam"
+                android:inputType="textPersonName"
+                android:text="Naam" />
+
+            <TextView
+                android:id="@+id/leeftijdLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Leeftijd" />
+
+            <EditText
+                android:id="@+id/leeftijdInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Leeftijd"
+                android:inputType="number"
+                android:text="Leeftijd" />
+
+            <TextView
+                android:id="@+id/groepLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Groep" />
+
+            <Spinner
+                android:id="@+id/spinnerGroep"
+                android:layout_width="400dp"
+                android:layout_height="60dp"/>
+
+            <ToggleButton
+                android:id="@+id/toggleButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ToggleButton" />
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Switch" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
 
         </LinearLayout>
 
