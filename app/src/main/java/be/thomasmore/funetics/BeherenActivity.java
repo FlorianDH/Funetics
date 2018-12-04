@@ -1,8 +1,10 @@
 package be.thomasmore.funetics;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +37,17 @@ public class BeherenActivity extends AppCompatActivity {
         leesKinderenWhereGroep(0);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinnerGroep);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View childView, int position, long id) {
+                selectedGroep = groepen.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                selectedGroep = null;
+            }
+        });
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, groepen);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
@@ -143,7 +156,69 @@ public class BeherenActivity extends AppCompatActivity {
         }
     }
 
-    private void kindToevoegen_onClick(){
+    public void kindToevoegen_onClick(View v){
 
+        EditText textVoornaamKind = (EditText) findViewById(R.id.voornaamInput);
+        final String voornaam = textVoornaamKind.getText().toString();
+
+        EditText textNaamKind = (EditText) findViewById(R.id.naamInput);
+        final String naam = textNaamKind.getText().toString();
+
+        Spinner groepSpinner = (Spinner) findViewById(R.id.spinnerGroep);
+        String groep = groepSpinner.getSelectedItem().toString();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Wil je '" + voornaam + " " + naam + "' toevoegen aan " + groep + "?")
+
+                .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Kind newKind = new Kind();
+                        newKind.setVoornaam(voornaam);
+                        newKind.setNaam(naam);
+                        newKind.setActief(1);
+                        newKind.setGroepId((int)selectedGroep.getId());
+
+                        db.insertKind(newKind);
+                    }
+                })
+                .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void kindVerwijderen_onClick(View v){
+
+        EditText textVoornaamKind = (EditText) findViewById(R.id.voornaamInput);
+        final String voornaam = textVoornaamKind.getText().toString();
+
+        EditText textNaamKind = (EditText) findViewById(R.id.naamInput);
+        final String naam = textNaamKind.getText().toString();
+
+        Spinner groepSpinner = (Spinner) findViewById(R.id.spinnerGroep);
+        String groep = groepSpinner.getSelectedItem().toString();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Wil je '" + voornaam + " " + naam + "' toevoegen aan " + groep + "?")
+
+                .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Kind newKind = new Kind();
+                        newKind.setVoornaam(voornaam);
+                        newKind.setNaam(naam);
+                        newKind.setActief(1);
+                        newKind.setGroepId((int)selectedGroep.getId());
+
+                        db.insertKind(newKind);
+                    }
+                })
+                .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
