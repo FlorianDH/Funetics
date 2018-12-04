@@ -34,6 +34,18 @@ public class MainActivity extends AppCompatActivity {
         final List<Groep> groepen = db.getGroepen();
 
         Spinner spinner = (Spinner) findViewById(R.id.spinnerGroep);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View childView, int position, long id) {
+                int selectedGroep = (int) groepen.get(position).getId();
+                leesKinderenWhereGroep(selectedGroep);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
 
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, groepen);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
