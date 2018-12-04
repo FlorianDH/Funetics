@@ -75,15 +75,16 @@
         android:layout_alignLeft="@+id/labelKind"
         android:layout_marginTop="20dp" />
     <Button
-        android:id="@+id/buttonInstellingen"
+        android:id="@+id/buttonBeheren"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Instellingen"
+        android:text="Beheren"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
         android:layout_marginLeft="100dp"
-        android:padding="50dp"/>
+        android:padding="50dp"
+        android:onClick="goBeheren_onClick"/>
     <Button
         android:id="@+id/buttonVolgende"
         android:layout_width="wrap_content"
@@ -93,7 +94,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
         android:layout_marginRight="100dp"
-        android:padding="50dp"/>
+        android:padding="50dp"
+        android:onClick="goDetail_onClick"/>
 </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
