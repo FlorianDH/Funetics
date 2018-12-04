@@ -26,6 +26,9 @@
             android:name=".BeherenActivity"
             android:label="@string/title_activity_beheren"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DetailKindActivity"
+            android:label="@string/title_activity_detail_kind" />
     </application>
 
 </manifest>

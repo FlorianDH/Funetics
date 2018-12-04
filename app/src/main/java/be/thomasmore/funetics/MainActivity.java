@@ -1,5 +1,8 @@
 package be.thomasmore.funetics;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +22,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
+    private Groep selectedGroep = null;
+    private Kind selectedKind = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
         db = new DatabaseHelper(this);
         leesGroepen();
-        leesKinderenWhereGroep(1);
     }
 
     private void leesGroepen(){
@@ -37,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View childView, int position, long id) {
-                int selectedGroep = (int) groepen.get(position).getId();
-                leesKinderenWhereGroep(selectedGroep);
+                selectedGroep = groepen.get(position);
+                int selectedGroepId = (int) selectedGroep.getId();
+                leesKinderenWhereGroep(selectedGroepId);
             }
 
             @Override
@@ -68,6 +73,17 @@ public class MainActivity extends AppCompatActivity {
         final List<Kind> kinderen = db.getKinderenWhereGroepId(groepId);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinnerKind);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View childView, int position, long id) {
+                selectedKind = kinderen.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+        });
 
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, kinderen);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -105,5 +121,34 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
 //        startActivityForResult(intent, 1);  // 1 is requestCode
+    }
+
+    public void goDetail_onClick(View v) {
+        if (selectedKind == null){
+            showErrorDialog();
+        }
+        else {
+            Intent intent = new Intent(this, DetailKindActivity.class);
+
+            startActivity(intent);
+
+            //startActivityForResult(intent, 1);  // 1 is requestCode
+        }
+
+    }
+
+    private void showErrorDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.errordialog_message)
+                .setPositiveButton(R.string.dialog_ok,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int whichButton) {
+                                Toast.makeText(getBaseContext(), getString(R.string.dialog_kies_kind),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
