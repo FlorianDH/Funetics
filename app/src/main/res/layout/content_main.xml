@@ -9,48 +9,91 @@
     tools:showIn="@layout/activity_main"
     tools:context=".MainActivity">
 
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="1045dp"
-        tools:layout_editor_absoluteY="555dp" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintHorizontal_bias="1.0"
+    app:layout_constraintVertical_bias="0.0"
+    android:background="#ABABAB">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="160dp" />
+        android:id="@+id/titel"
+        android:layout_width="527dp"
+        android:layout_height="153dp"
+        android:paddingLeft="50dp"
+        android:text="Funatics"
+        android:textSize="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="603dp" />
+    <ImageView
+        android:id="@+id/homeImage"
+        android:layout_width="450dp"
+        android:layout_height="320dp"
+        android:layout_below="@+id/titel"
+        android:layout_alignLeft="@+id/titel"
+        android:paddingLeft="50dp"
+        app:srcCompat="@drawable/home" />
 
-    <MultiAutoCompleteTextView
-        android:id="@+id/multiAutoCompleteTextView"
-        android:layout_width="wrap_content"
+    <TextView android:id="@+id/labelGroep"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:text="MultiAutoCompleteTextView"
-        tools:layout_editor_absoluteX="870dp"
-        tools:layout_editor_absoluteY="186dp" />
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="100dp"
+        android:text="Selecteer groep" />
 
     <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="516dp"
-        android:layout_height="81dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.182"
-        app:layout_constraintStart_toStartOf="@+id/button3"
-        tools:layout_editor_absoluteY="301dp" />
+        android:id="@+id/spinnerGroep"
+        android:layout_width="400dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/labelGroep"
+        android:layout_alignLeft="@+id/labelGroep"
+        android:layout_marginTop="20dp"/>
+
+    <TextView android:id="@+id/labelKind"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerGroep"
+        android:layout_alignLeft="@+id/spinnerGroep"
+        android:layout_marginTop="20dp"
+        android:text="Selecteer kind" />
+
+    <Spinner
+        android:id="@+id/spinnerKind"
+        android:layout_width="400dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/labelKind"
+        android:layout_alignLeft="@+id/labelKind"
+        android:layout_marginTop="20dp" />
+    <Button
+        android:id="@+id/buttonInstellingen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Instellingen"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="100dp"
+        android:padding="50dp"/>
+    <Button
+        android:id="@+id/buttonVolgende"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volgende"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_marginRight="100dp"
+        android:padding="50dp"/>
+</RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
