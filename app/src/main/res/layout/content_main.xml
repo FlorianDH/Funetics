@@ -24,7 +24,7 @@
         android:layout_width="527dp"
         android:layout_height="153dp"
         android:paddingLeft="50dp"
-        android:text="Funatics"
+        android:text="Funetics"
         android:textSize="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.013"

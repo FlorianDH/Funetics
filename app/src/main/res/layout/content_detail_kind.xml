@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="50dp"
+            android:paddingTop="20dp"
             android:text="Fout bij laden van kind"
             android:textSize="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -40,8 +41,8 @@
             android:text="Terug"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="100dp"
-            android:layout_marginLeft="100dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="50dp"
             android:background="#82ff0000"
             android:padding="50dp"
             android:onClick="goTerug_onClick"/>
@@ -49,14 +50,14 @@
             android:id="@+id/buttonVolgende"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Volgende"
+            android:text="Start test"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="100dp"
-            android:layout_marginRight="100dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginRight="50dp"
             android:background="#8226ff00"
             android:padding="50dp"
-            android:onClick="goTerug_onClick"/>
+            android:onClick="goStartTest_onClick"/>
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
