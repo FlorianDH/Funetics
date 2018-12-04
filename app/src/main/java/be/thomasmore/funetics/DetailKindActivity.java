@@ -13,6 +13,7 @@ public class DetailKindActivity extends Activity {
 
     private DatabaseHelper db;
     private Kind huidigKind;
+    private int selectedConditie = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,8 @@ public class DetailKindActivity extends Activity {
                 .setSingleChoiceItems(items, 0, null)
                 .setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        int selectedConditie = ((AlertDialog)dialog).getListView().getCheckedItemPosition() + 1; //conditie 1 geeft als waarde ook 1
+                        selectedConditie = ((AlertDialog)dialog).getListView().getCheckedItemPosition() + 1; //conditie 1 geeft als waarde ook 1
+                        beginTest();
                     }
                 })
                 .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
@@ -57,6 +59,17 @@ public class DetailKindActivity extends Activity {
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void beginTest(){
+        Bundle bundle = new Bundle();
+        bundle.putLong("conditie", selectedConditie);
+        bundle.putLong("kindId", huidigKind.getId());
+
+        Intent intent = new Intent(this, DetailKindActivity.class);
+        intent.putExtras(bundle);
+
+        startActivity(intent);
     }
 
 }
