@@ -341,5 +341,53 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return aantal;
     }
 
+    // query-methode
+    public Conditie getConditieById(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "conditie",      // tabelnaam
+                new String[] { "id", "naam"}, // kolommen
+                "id = ?",  // selectie
+                new String[] { String.valueOf(id) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+
+        Conditie conditie = new Conditie();
+
+        if (cursor.moveToFirst()) {
+            conditie = new Conditie(cursor.getLong(0), cursor.getString(1));
+        }
+        cursor.close();
+        db.close();
+        return conditie;
+    }
+
+    // query-methode
+    public Woordenset getWoordensetById(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "woordenset",      // tabelnaam
+                new String[] { "id", "naam"}, // kolommen
+                "id = ?",  // selectie
+                new String[] { String.valueOf(id) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+
+        Woordenset woordenset = new Woordenset();
+
+        if (cursor.moveToFirst()) {
+            woordenset = new Woordenset(cursor.getLong(0), cursor.getString(1));
+        }
+        cursor.close();
+        db.close();
+        return woordenset;
+    }
+
 }
 

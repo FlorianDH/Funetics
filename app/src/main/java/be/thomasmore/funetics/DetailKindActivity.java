@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class DetailKindActivity extends Activity {
 
@@ -63,10 +62,10 @@ public class DetailKindActivity extends Activity {
 
     public void beginTest(){
         Bundle bundle = new Bundle();
-        bundle.putLong("conditie", selectedConditie);
         bundle.putLong("kindId", huidigKind.getId());
+        bundle.putLong("conditie", selectedConditie);
 
-        Intent intent = new Intent(this, DetailKindActivity.class);
+        Intent intent = new Intent(this, OefeningActivity.class);
         intent.putExtras(bundle);
 
         startActivity(intent);
