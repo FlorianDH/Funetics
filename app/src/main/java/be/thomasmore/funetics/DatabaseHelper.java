@@ -48,8 +48,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 "datumTijd TEXT NOT NULL," +
                 "kindId INTEGER NOT NULL, " +
-                "FOREIGN KEY (kindId) REFERENCES kind(id), " +
                 "conditieId INTEGER NOT NULL, " +
+                "FOREIGN KEY (kindId) REFERENCES kind(id), " +
                 "FOREIGN KEY (conditieId) REFERENCES conditie(id))";
         db.execSQL(CREATE_TABLE_TEST);
 
@@ -81,8 +81,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "score INTEGER, " +
                 "aantalPogingen INTEGER, " +
                 "oefeningId INTEGER NOT NULL, " +
-                "FOREIGN KEY (oefeningId) REFERENCES oefening(id), " +
                 "getestWoordId INTEGER NOT NULL, " +
+                "FOREIGN KEY (oefeningId) REFERENCES oefening(id), " +
                 "FOREIGN KEY (getestWoordId) REFERENCES getestWoord(id))";
         db.execSQL(CREATE_TABLE_GETESTEOEFENING);
 
@@ -159,6 +159,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS groep");
         db.execSQL("DROP TABLE IF EXISTS kind");
+        db.execSQL("DROP TABLE IF EXISTS test");
+        db.execSQL("DROP TABLE IF EXISTS conditie");
+        db.execSQL("DROP TABLE IF EXISTS getestWoord");
+        db.execSQL("DROP TABLE IF EXISTS doelwoord");
+        db.execSQL("DROP TABLE IF EXISTS woordenset");
+        db.execSQL("DROP TABLE IF EXISTS getesteOefening");
+        db.execSQL("DROP TABLE IF EXISTS oefening");
 
         // Create tables again
         onCreate(db);
