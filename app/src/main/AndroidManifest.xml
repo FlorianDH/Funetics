@@ -29,6 +29,14 @@
         <activity
             android:name=".DetailKindActivity"
             android:label="@string/title_activity_detail_kind" />
+        <activity
+            android:name=".PreteachingActivity"
+            android:label="@string/title_activity_preteaching"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TestActivity"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

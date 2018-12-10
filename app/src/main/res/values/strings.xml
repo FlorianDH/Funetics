@@ -86,4 +86,6 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_beheren">beherenActivity</string>
     <string name="title_activity_detail_kind">DetailKindActivity</string>
+    <string name="title_activity_preteaching">PreteachingActivity</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>
