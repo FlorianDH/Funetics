@@ -11,25 +11,50 @@ import android.widget.Button;
 
 public class PreteachingActivity extends AppCompatActivity {
 
+    private MediaPlayer sound1;
+    private MediaPlayer sound2;
+    private MediaPlayer sound3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preteaching);
 
-        final MediaPlayer Sound1 = MediaPlayer.create(this, R.raw.preteach1);
-        final MediaPlayer Sound2 = MediaPlayer.create(this, R.raw.preteach2);
-        final MediaPlayer Sound3 = MediaPlayer.create(this, R.raw.preteach3);
+        sound1 = MediaPlayer.create(this, R.raw.preteach1);
+        sound2 = MediaPlayer.create(this, R.raw.preteach2);
+        sound3 = MediaPlayer.create(this, R.raw.preteach3);
 
-        final Button playSound = (Button) this.findViewById(R.id.replayButton);
+        final FloatingActionButton playSound = (FloatingActionButton) this.findViewById(R.id.replayButton);
 
         playSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sound1.start();
-                Sound2.start();
-                Sound3.start();
+                if (sound1.isPlaying() || sound2.isPlaying() || sound3.isPlaying()){
+                    stopGeluid();
+                }
+                else {
+                    startGeluid();
+                }
             }
         });
+    }
+
+    public void startGeluid(){
+        sound1.start();
+        while (sound1.isPlaying()){
+        }
+        sound2.start();
+        while (sound2.isPlaying()){
+        }
+        sound3.start();
+        while (sound3.isPlaying()){
+        }
+    }
+
+    public void stopGeluid(){
+        sound1.stop();
+        sound2.stop();
+        sound3.stop();
     }
 
 }

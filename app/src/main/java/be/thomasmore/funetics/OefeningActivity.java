@@ -1,6 +1,7 @@
 package be.thomasmore.funetics;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -88,10 +89,11 @@ public class OefeningActivity extends Activity {
         //Eerste woord uit de lijst
         huidigDoelwoord = doelwoorden.get(0);
 
-        startVoormeting();
+        startPreteaching();
     }
 
-    public void startVoormeting(){
-
+    public void startPreteaching(){
+        Intent intent = new Intent(this, PreteachingActivity.class);
+        startActivity(intent);
     }
 }
