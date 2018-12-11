@@ -69,6 +69,7 @@ public class DetailKindActivity extends Activity {
         intent.putExtras(bundle);
 
         startActivity(intent);
+
     }
 
 }
