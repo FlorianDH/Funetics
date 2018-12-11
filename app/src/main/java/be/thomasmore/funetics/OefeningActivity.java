@@ -3,15 +3,21 @@ package be.thomasmore.funetics;
 import android.app.Activity;
 import android.os.Bundle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OefeningActivity extends Activity {
     private DatabaseHelper db;
     private Kind huidigKind;
     private Conditie huidigeConditie;
     private Woordenset huidigeWoordenset;
+    private List<Doelwoord> doelwoorden = new ArrayList<Doelwoord>();
+    private Doelwoord huidigDoelwoord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_oefening);
 
         Bundle bundle = getIntent().getExtras();
         Long kindId = bundle.getLong("kindId");
@@ -76,5 +82,16 @@ public class OefeningActivity extends Activity {
                 huidigeWoordenset = db.getWoordensetById(1);
             }
         }
+
+        //Alle doelwoorden van de huidige woordenset in een lijst zetten
+        doelwoorden = db.getDoelwoordenWhereWoordensetId((int) huidigeWoordenset.getId());
+        //Eerste woord uit de lijst
+        huidigDoelwoord = doelwoorden.get(0);
+
+        startVoormeting();
+    }
+
+    public void startVoormeting(){
+
     }
 }

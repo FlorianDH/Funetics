@@ -389,5 +389,27 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return woordenset;
     }
 
+    // rawQuery-methode
+    public List<Doelwoord> getDoelwoordenWhereWoordensetId(int woordensetId) {
+        List<Doelwoord> lijst = new ArrayList<Doelwoord>();
+        String selectQuery;
+
+        selectQuery = "SELECT * FROM doelwoord WHERE woordensetId = " + woordensetId + " ORDER BY id";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Doelwoord doelwoord = new Doelwoord(cursor.getLong(0),
+                        cursor.getString(1), cursor.getInt(2));
+                lijst.add(doelwoord);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return lijst;
+    }
 }
 
