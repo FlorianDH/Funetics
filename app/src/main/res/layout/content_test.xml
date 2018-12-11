@@ -10,13 +10,10 @@
 
 
     <LinearLayout
-        android:id="@+id/testLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical"
-        app:layout_constraintHeight_percent="100"
-        app:layout_constraintWidth_percent="100%"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"
         tools:ignore="MissingConstraints">
@@ -42,7 +39,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Opnieuw" />
+                android:text="Opnieuw"/>
 
         </LinearLayout>
 

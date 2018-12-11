@@ -20,9 +20,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity
             android:name=".BeherenActivity"
             android:label="@string/title_activity_beheren"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -37,6 +34,7 @@
             android:name=".TestActivity"
             android:label="@string/title_activity_test"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".OefeningActivity"></activity>
     </application>
 
 </manifest>
