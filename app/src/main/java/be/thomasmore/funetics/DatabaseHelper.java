@@ -411,5 +411,20 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.close();
         return lijst;
     }
+
+    // insert-methode met ContentValues
+    public long insertTest(Test test) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("datumTijd", test.getDatumTijd());
+        values.put("kindId", test.getKindId());
+        values.put("conditieId", test.getConditieId());
+
+        long id = db.insert("test", null, values);
+
+        db.close();
+        return id;
+    }
 }
 

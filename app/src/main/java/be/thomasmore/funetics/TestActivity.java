@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class TestActivity extends AppCompatActivity {
 
         final MediaPlayer SoundMediaPlayer = MediaPlayer.create(this, R.raw.duikbril);
 
-        final Button playSound = (Button) this.findViewById(R.id.replayButton);
+        final ImageButton playSound = (ImageButton) this.findViewById(R.id.replayButton);
 
         playSound.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,7 +29,4 @@ public class TestActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 }

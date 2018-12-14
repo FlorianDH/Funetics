@@ -29,17 +29,22 @@
                 android:layout_height="70dp"
                 android:layout_gravity="center_horizontal|center"
                 android:layout_marginLeft="35dp"
-                android:layout_marginBottom="35dp"
                 android:lineSpacingExtra="30sp"
                 android:text="DUIKBRIL"
-                android:textSize="36sp" />
+                android:textAlignment="center"
+                android:textSize="40sp"
+                android:layout_marginStart="35dp" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/replayButton"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Opnieuw"/>
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:padding="0dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="speaker icon"
+                app:srcCompat="@drawable/speaker_icon" />
 
         </LinearLayout>
 
@@ -55,16 +60,18 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/imageView1"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
+                    android:contentDescription="afbeelding"
                     tools:srcCompat="@tools:sample/avatars[11]" />
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/imageView3"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:layout_marginTop="30dp"
+                    android:contentDescription="afbeelding"
                     tools:srcCompat="@tools:sample/avatars[5]" />
             </LinearLayout>
 
@@ -74,16 +81,18 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    tools:srcCompat="@tools:sample/avatars[2]" />
-
-                <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
+                    android:contentDescription="afbeelding"
+                    tools:srcCompat="@tools:sample/avatars[2]" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
                     android:layout_marginTop="30dp"
+                    android:contentDescription="afbeelding"
                     tools:srcCompat="@tools:sample/avatars[3]" />
             </LinearLayout>
 

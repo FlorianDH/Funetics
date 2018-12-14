@@ -1,5 +1,7 @@
 package be.thomasmore.funetics;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class PreteachingActivity extends AppCompatActivity {
 
@@ -25,6 +28,7 @@ public class PreteachingActivity extends AppCompatActivity {
         sound3 = MediaPlayer.create(this, R.raw.preteach3);
 
         final FloatingActionButton playSound = (FloatingActionButton) this.findViewById(R.id.replayButton);
+        final ImageButton imageButton = (ImageButton) this.findViewById(R.id.imageButton);
 
         playSound.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +39,15 @@ public class PreteachingActivity extends AppCompatActivity {
                 else {
                     startGeluid();
                 }
+            }
+        });
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent returnIntent = new Intent();
+                setResult(Activity.RESULT_OK, returnIntent);
+                finish();
             }
         });
     }
