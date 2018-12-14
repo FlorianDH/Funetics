@@ -426,5 +426,34 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.close();
         return id;
     }
+
+    // insert-methode met ContentValues
+    public long insertGetestWoord(GetestWoord getestWoord) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("doelwoordId", getestWoord.getDoelwoordId());
+
+        long id = db.insert("getestWoord", null, values);
+
+        db.close();
+        return id;
+    }
+
+    // insert-methode met ContentValues
+    public long insertGetesteOefening(GetesteOefening getesteOefening) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("score", getesteOefening.getScore());
+        values.put("aantalPogingen", getesteOefening.getAantalPogingen());
+        values.put("oefeningId", getesteOefening.getOefeningId());
+        values.put("getestWoordId", getesteOefening.getGetestWoordId());
+
+        long id = db.insert("getesteOefening", null, values);
+
+        db.close();
+        return id;
+    }
 }
 

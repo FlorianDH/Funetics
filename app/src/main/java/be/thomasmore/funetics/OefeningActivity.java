@@ -3,6 +3,7 @@ package be.thomasmore.funetics;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class OefeningActivity extends Activity {
     private Woordenset huidigeWoordenset;
     private List<Doelwoord> doelwoorden = new ArrayList<Doelwoord>();
     private Doelwoord huidigDoelwoord;
+    private long huidigGetestWoordId;
 
     //Requestcodes
     final int requestVoormeting = 1;
@@ -117,7 +119,27 @@ public class OefeningActivity extends Activity {
         //Voormeting is beeindigd
         if (requestCode == requestVoormeting) {
             if(resultCode == Activity.RESULT_OK){
-                String result =data.getStringExtra("result");
+                //Score ophalen
+                //De opgehaalde score is 0 => geeft een fout
+                String scoreString = data.getStringExtra("score");
+                int score = Integer.parseInt(data.getStringExtra("score")); //hier loopt iets fout
+                int aantalPogingen = Integer.parseInt(data.getStringExtra("aantalPogingen"));
+
+                //Opslaan in database
+                //Eerst een nieuw getest woord aanmaken
+                GetestWoord nieuwGetestWoord = new GetestWoord();
+                nieuwGetestWoord.setDoelwoordId((int) huidigDoelwoord.getId());
+                huidigGetestWoordId = db.insertGetestWoord(nieuwGetestWoord);
+                //Nu een nieuwe geteste oefening maken
+                GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                nieuweGetesteOefening.setScore(score);
+                nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
+                nieuweGetesteOefening.setOefeningId(0);
+                nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
+                db.insertGetesteOefening(nieuweGetesteOefening);
+
+                //Volgende activity starten
+                startPreteaching();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -126,7 +148,7 @@ public class OefeningActivity extends Activity {
         //Preteaching is beeindigd
         else if (requestCode == requestPreteaching){
             if(resultCode == Activity.RESULT_OK){
-                String result =data.getStringExtra("result");
+
             }
         }
     }

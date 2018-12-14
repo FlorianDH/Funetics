@@ -2,6 +2,7 @@ package be.thomasmore.funetics;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -36,6 +37,12 @@ public class TestActivity extends AppCompatActivity {
         foutPlayer = MediaPlayer.create(this, R.raw.fout);
         duikbrilPlayer = MediaPlayer.create(this, R.raw.duikbril);
         playSound = (ImageButton) this.findViewById(R.id.replayButton);
+
+        ImageButton1 = (ImageButton) this.findViewById(R.id.imageButton1);
+        ImageButton2 = (ImageButton) this.findViewById(R.id.imageButton2);
+        ImageButton3 = (ImageButton) this.findViewById(R.id.imageButton3);
+        ImageButton4 = (ImageButton) this.findViewById(R.id.imageButton4);
+
         ImageButton1.setImageResource(R.drawable.duikbril_fout1);
         ImageButton2.setImageResource(R.drawable.duikbril_fout2);
         ImageButton3.setImageResource(R.drawable.duikbril_juist);
