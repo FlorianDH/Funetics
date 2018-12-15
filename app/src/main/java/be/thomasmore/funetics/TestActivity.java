@@ -66,8 +66,8 @@ public class TestActivity extends AppCompatActivity {
 
             //Terug naar oefening activity
             Intent returnIntent = new Intent();
-            returnIntent.putExtra("score", score);
-            returnIntent.putExtra("aantalPogingen", aantalPogingen);
+            returnIntent.putExtra("score", String.valueOf(score));
+            returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
             setResult(Activity.RESULT_OK,returnIntent);
             finish();
         }
