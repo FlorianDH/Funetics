@@ -16,18 +16,18 @@ public class PreteachingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preteaching);
 
-        final MediaPlayer Sound1 = MediaPlayer.create(this, R.raw.preteach1);
-        final MediaPlayer Sound2 = MediaPlayer.create(this, R.raw.preteach2);
-        final MediaPlayer Sound3 = MediaPlayer.create(this, R.raw.preteach3);
+        final MediaPlayer sound1 = MediaPlayer.create(this, R.raw.preteach1);
+        final MediaPlayer sound2 = MediaPlayer.create(this, R.raw.preteach2);
+        final MediaPlayer sound3 = MediaPlayer.create(this, R.raw.preteach3);
 
         final Button playSound = (Button) this.findViewById(R.id.replayButton);
 
         playSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sound1.start();
-                Sound2.start();
-                Sound3.start();
+                sound1.start();
+                sound2.start();
+                sound3.start();
             }
         });
     }

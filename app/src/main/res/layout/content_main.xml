@@ -24,7 +24,7 @@
         android:layout_width="527dp"
         android:layout_height="153dp"
         android:paddingLeft="50dp"
-        android:text="Funetics"
+        android:text="@string/app_name"
         android:textSize="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.013"

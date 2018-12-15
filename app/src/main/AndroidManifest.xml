@@ -8,31 +8,36 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".BeherenActivity"
             android:label="@string/title_activity_beheren"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".DetailKindActivity"
-            android:label="@string/title_activity_detail_kind" />
+            android:label="@string/title_activity_detail_kind"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".PreteachingActivity"
             android:label="@string/title_activity_preteaching"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".TestActivity"
             android:label="@string/title_activity_test"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".OefeningActivity"></activity>
     </application>

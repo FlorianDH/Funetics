@@ -29,17 +29,17 @@
                 android:layout_height="70dp"
                 android:layout_gravity="center_horizontal|center"
                 android:layout_marginLeft="35dp"
-                android:layout_marginBottom="35dp"
                 android:lineSpacingExtra="30sp"
-                android:text="DUIKBRIL"
-                android:textSize="36sp" />
+                android:text="@string/duikbril"
+                android:textSize="36sp"
+                android:layout_marginStart="35dp" />
 
             <Button
                 android:id="@+id/replayButton"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Opnieuw"/>
+                android:text="@string/opnieuw"/>
 
         </LinearLayout>
 
@@ -58,6 +58,7 @@
                     android:id="@+id/imageView3"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
+                    android:contentDescription="@string/efsef"
                     tools:srcCompat="@tools:sample/avatars[11]" />
 
                 <ImageView
@@ -65,7 +66,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:layout_marginTop="30dp"
-                    tools:srcCompat="@tools:sample/avatars[5]" />
+                    tools:srcCompat="@tools:sample/avatars[5]"
+                    android:contentDescription="@string/todo" />
             </LinearLayout>
 
             <LinearLayout
@@ -77,14 +79,16 @@
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
-                    tools:srcCompat="@tools:sample/avatars[2]" />
+                    tools:srcCompat="@tools:sample/avatars[2]"
+                    android:contentDescription="TODO" />
 
                 <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:layout_marginTop="30dp"
-                    tools:srcCompat="@tools:sample/avatars[3]" />
+                    tools:srcCompat="@tools:sample/avatars[3]"
+                    android:contentDescription="TODO" />
             </LinearLayout>
 
         </LinearLayout>
