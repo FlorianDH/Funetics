@@ -169,8 +169,8 @@
                     android:layout_marginBottom="5dp"
                     android:ems="10"
                     android:hint="@string/naam"
-                    android:inputType="textPersonName"
-                    android:importantForAutofill="no" />
+                    android:importantForAutofill="no"
+                    android:inputType="textPersonName"/>
 
                 <TextView
                     android:id="@+id/leeftijdLabel"
@@ -186,8 +186,8 @@
                     android:layout_marginBottom="5dp"
                     android:ems="10"
                     android:hint="@string/leeftijd"
-                    android:inputType="number"
-                    android:importantForAutofill="no" />
+                    android:importantForAutofill="no"
+                    android:inputType="number" />
 
                 <TextView
                     android:id="@+id/groepLabel"

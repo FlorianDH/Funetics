@@ -7,57 +7,100 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".DetailKindActivity"
     tools:showIn="@layout/activity_detail_kind">
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintVertical_bias="0.0"
-        android:background="#ABABAB">
-
-        <TextView
-            android:id="@+id/naamKind"
-            android:layout_width="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/detailTopBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="50dp"
-            android:paddingTop="20dp"
-            android:text="Fout bij laden van kind"
-            android:textSize="60dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.013"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.022" />
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
+            android:background="@color/color_primary_dark">
 
-        <Button
-            android:id="@+id/buttonTerug"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Terug"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="50dp"
-            android:layout_marginLeft="50dp"
-            android:background="#82ff0000"
-            android:padding="50dp"
-            android:onClick="goTerug_onClick"/>
-        <Button
-            android:id="@+id/buttonVolgende"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start test"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="50dp"
-            android:layout_marginRight="50dp"
-            android:background="#8226ff00"
-            android:padding="50dp"
-            android:onClick="goStartTest_onClick"/>
-    </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/detailTitle"
+                android:layout_width="0dp"
+                android:layout_weight="0.50"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
 
+                <TextView
+                    android:id="@+id/textViewDetailTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detailTitle" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/testenTitle"
+                android:layout_width="0dp"
+                android:layout_weight="0.43"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/textViewTestenTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/testen" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/kindDetailfTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="0dp">
+
+                <Button
+                    android:id="@+id/buttonTerug"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/beherenTerugBtn"
+                    android:onClick="goTerug_onClick"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.50"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/color_orange">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:id="@+id/naamKind"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fout"
+                        android:textSize="60sp"/>
+
+                    <Button
+                        android:id="@+id/buttonVolgende"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="goStartTest_onClick"
+                        android:text="@string/startTest" />
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/listViewTesten"
+                android:layout_width="0dp"
+                android:layout_weight="0.50"
+                android:layout_height="match_parent"
+                android:background="@color/color_primary_light"/>
+        </LinearLayout>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

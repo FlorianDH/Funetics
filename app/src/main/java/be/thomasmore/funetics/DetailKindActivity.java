@@ -6,12 +6,20 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class DetailKindActivity extends Activity {
 
     private DatabaseHelper db;
     private Kind huidigKind;
+    private Test selectedTest = null;
     private int selectedConditie = 0;
 
     @Override
@@ -32,6 +40,7 @@ public class DetailKindActivity extends Activity {
 
     public void goTerug_onClick(View v) {
         Intent intent = new Intent(this, MainActivity.class);
+        finish();
         startActivity(intent);
     }
 
@@ -69,7 +78,54 @@ public class DetailKindActivity extends Activity {
         intent.putExtras(bundle);
 
         startActivity(intent);
+    }
 
+    private void leesTestenWhereKind(int kindId){
+
+        List<Test> testenLijst;
+
+        testenLijst = db.getTestenWhereKindId(kindId);
+
+        final List<Test> testen = testenLijst;
+
+        final ListView listViewTesten = (ListView) findViewById(R.id.listViewTesten);
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_list_item_1, testen);
+        listViewTesten.setAdapter(aa);
+
+        listViewTesten.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parentView,
+                                            View childView, int position, long id) {
+                        selectedTest = testen.get(position);
+                        long selectedTestId = (long) selectedTest.getId();
+                        leesTestDetail(selectedTestId);
+                    }
+                });
+
+    }
+
+    private void leesTestDetail(long testId){
+
+//        final Test huidigTest = db.getKindById(testId);
+//
+//        EditText textVoornaamKind = (EditText) findViewById(R.id.voornaamInput);
+//        textVoornaamKind.setText(huidigKind.getVoornaam());
+//
+//        EditText textNaamKind = (EditText) findViewById(R.id.naamInput);
+//        textNaamKind.setText(huidigKind.getNaam());
+//
+////        EditText textLeeftijdKind = (EditText) findViewById(R.id.leeftijdInput);
+////        textLeeftijdKind.setText(huidigKind.getLeeftijd());
+//
+//        leesGroepenInSpinner();
+//
+//        Switch switchIsActief = (Switch) findViewById(R.id.switchActief);
+//        if(huidigKind.getActief() == 1){
+//            switchIsActief.setChecked(true);
+//        }else{
+//            switchIsActief.setChecked(false);
+//        }
     }
 
 }

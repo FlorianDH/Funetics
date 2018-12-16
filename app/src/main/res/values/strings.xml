@@ -1,11 +1,6 @@
 <resources>
     <string name="app_name">Funetics</string>
 
-    <string name="title_activity_detail">DetailActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_settings">Settings</string>
-
     <string name="dialog_ok">OK</string>
     <string name="dialog_start">Start</string>
     <string name="dialog_annuleer">Annuleren</string>
@@ -89,6 +84,31 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="duikbril">DUIKBRIL</string>
     <string name="opnieuw">Opnieuw</string>
-    <string name="efsef">efsef</string>
-    <string name="todo">TODO</string>
+
+    <!-- Content_main -->
+    <string name="volgende">Volgende</string>
+    <string name="beheren">Beheren</string>
+    <string name="selectGroep">Selecteer groep</string>
+    <string name="selectKind">Selecteer kind</string>
+    <string name="homeImage">Home afbeelding</string>
+
+    <!-- Content_beheren -->
+    <string name="groepTitle">Groepen</string>
+    <string name="kinderenTitle">Kinderen</string>
+    <string name="detailTitle">Details</string>
+    <string name="beherenTerugBtn">Terug</string>
+    <string name="voornaam">Voornaam</string>
+    <string name="naam">Naam</string>
+    <string name="leeftijd">Leeftijd</string>
+    <string name="groep">Groep</string>
+    <string name="actief">Is actief</string>
+    <string name="actiefExplain">Zet een persoon inactief als diegene geen tests meer zal doen maar je wel de gegevens nog wilt bewaren van deze persoon</string>
+    <string name="wijzigbtn">Wijzigen</string>
+    <string name="toevoegenbtn">Toevoegen</string>
+    <string name="verwijderbtn">Verwijderen</string>
+
+    <!-- Content_detail_kind -->
+    <string name="testen">Vorige testen</string>
+    <string name="fout">Fout bij laden van gegevens</string>
+    <string name="startTest">Start nieuwe test</string>
 </resources>

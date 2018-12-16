@@ -286,4 +286,10 @@ public class BeherenActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    public void goTerug_onClick(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
+        finish();
+        startActivity(intent);
+    }
 }

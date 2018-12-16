@@ -48,4 +48,8 @@
     <style name="title.light" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/color_grey</item>
     </style>
+
+    <!-- spinner -->
+
+
 </resources>

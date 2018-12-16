@@ -308,6 +308,29 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     // rawQuery-methode
+    public List<Test> getTestenWhereKindId(int kindId) {
+        List<Test> lijst = new ArrayList<Test>();
+        String selectQuery;
+
+            selectQuery = "SELECT * FROM test WHERE kindId = " + kindId;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Test test = new Test(cursor.getLong(0),
+                        cursor.getString(1), cursor.getInt(3), cursor.getInt(4));
+                lijst.add(test);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return lijst;
+    }
+
+    // rawQuery-methode
     public List<Groep> getGroepen() {
         List<Groep> lijst = new ArrayList<Groep>();
 
@@ -410,6 +433,50 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         cursor.close();
         db.close();
         return lijst;
+    }
+
+    // insert-methode met ContentValues
+    public long insertTest(Test test) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("datumTijd", test.getDatumTijd());
+        values.put("kindId", test.getKindId());
+        values.put("conditieId", test.getConditieId());
+
+        long id = db.insert("test", null, values);
+
+        db.close();
+        return id;
+    }
+
+    // insert-methode met ContentValues
+    public long insertGetestWoord(GetestWoord getestWoord) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("doelwoordId", getestWoord.getDoelwoordId());
+
+        long id = db.insert("getestWoord", null, values);
+
+        db.close();
+        return id;
+    }
+
+    // insert-methode met ContentValues
+    public long insertGetesteOefening(GetesteOefening getesteOefening) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("score", getesteOefening.getScore());
+        values.put("aantalPogingen", getesteOefening.getAantalPogingen());
+        values.put("oefeningId", getesteOefening.getOefeningId());
+        values.put("getestWoordId", getesteOefening.getGetestWoordId());
+
+        long id = db.insert("getesteOefening", null, values);
+
+        db.close();
+        return id;
     }
 }
 

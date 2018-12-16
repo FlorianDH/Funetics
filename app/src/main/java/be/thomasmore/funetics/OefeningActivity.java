@@ -1,10 +1,15 @@
 package be.thomasmore.funetics;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class OefeningActivity extends Activity {
     private DatabaseHelper db;
@@ -13,6 +18,11 @@ public class OefeningActivity extends Activity {
     private Woordenset huidigeWoordenset;
     private List<Doelwoord> doelwoorden = new ArrayList<Doelwoord>();
     private Doelwoord huidigDoelwoord;
+    private long huidigGetestWoordId;
+
+    //Requestcodes
+    final int requestVoormeting = 1;
+    final int requestPreteaching = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +98,75 @@ public class OefeningActivity extends Activity {
         //Eerste woord uit de lijst
         huidigDoelwoord = doelwoorden.get(0);
 
+        //Nieuwe test toevoegen in de database
+        Test nieuweTest = new Test();
+
+        String huidigeDateTime = getDateTime();
+
+        nieuweTest.setConditieId((int) huidigeConditie.getId());
+        nieuweTest.setKindId((int) huidigKind.getId());
+        nieuweTest.setDatumTijd(huidigeDateTime);
+
+        db.insertTest(nieuweTest);
+
+        //Voormeting opstarten
         startVoormeting();
     }
 
-    public void startVoormeting(){
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        //Voormeting is beeindigd
+        if (requestCode == requestVoormeting) {
+            if(resultCode == Activity.RESULT_OK){
+                //Score ophalen
+                //De opgehaalde score is 0 => geeft een fout
+                String scoreString = data.getStringExtra("score");
+                int score = Integer.parseInt(data.getStringExtra("score")); //hier loopt iets fout
+                int aantalPogingen = Integer.parseInt(data.getStringExtra("aantalPogingen"));
+
+                //Opslaan in database
+                //Eerst een nieuw getest woord aanmaken
+                GetestWoord nieuwGetestWoord = new GetestWoord();
+                nieuwGetestWoord.setDoelwoordId((int) huidigDoelwoord.getId());
+                huidigGetestWoordId = db.insertGetestWoord(nieuwGetestWoord);
+                //Nu een nieuwe geteste oefening maken
+                GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                nieuweGetesteOefening.setScore(score);
+                nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
+                nieuweGetesteOefening.setOefeningId(0);
+                nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
+                db.insertGetesteOefening(nieuweGetesteOefening);
+
+                //Volgende activity starten
+                startPreteaching();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+        //Preteaching is beeindigd
+        else if (requestCode == requestPreteaching){
+            if(resultCode == Activity.RESULT_OK){
+
+            }
+        }
+    }
+
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "dd-MM-yyyy HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
+    public void startPreteaching(){
+        Intent intent = new Intent(this, PreteachingActivity.class);
+        startActivityForResult(intent, requestPreteaching);
+    }
+
+    public void startVoormeting(){
+        Intent intent = new Intent(this, TestActivity.class);
+        startActivityForResult(intent, requestVoormeting);
     }
 }

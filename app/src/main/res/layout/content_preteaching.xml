@@ -26,7 +26,7 @@
         app:srcCompat="@drawable/preteachingplaat" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/replayButton"
         android:layout_width="102dp"
         android:layout_height="81dp"
         android:layout_marginTop="8dp"

@@ -8,94 +8,135 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintHorizontal_bias="1.0"
-    app:layout_constraintVertical_bias="0.0"
-    android:background="#ABABAB">
-
-    <TextView
-        android:id="@+id/titel"
-        android:layout_width="527dp"
-        android:layout_height="153dp"
-        android:paddingLeft="50dp"
-        android:text="@string/app_name"
-        android:textSize="100dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_primary_dark"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintVertical_bias="1.0">
 
-    <ImageView
-        android:id="@+id/homeImage"
-        android:layout_width="450dp"
-        android:layout_height="320dp"
-        android:layout_below="@+id/titel"
-        android:layout_alignLeft="@+id/titel"
-        android:paddingLeft="50dp"
-        app:srcCompat="@drawable/home" />
+        <LinearLayout
+            android:id="@+id/homeLeftPanel"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
 
-    <TextView android:id="@+id/labelGroep"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="100dp"
-        android:text="Selecteer groep" />
+            <ImageView
+                android:id="@+id/homeImage1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/homeImage"
+                app:srcCompat="@drawable/kid1" />
 
-    <Spinner
-        android:id="@+id/spinnerGroep"
-        android:layout_width="400dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/labelGroep"
-        android:layout_alignLeft="@+id/labelGroep"
-        android:layout_marginTop="20dp"/>
+        </LinearLayout>
 
-    <TextView android:id="@+id/labelKind"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinnerGroep"
-        android:layout_alignLeft="@+id/spinnerGroep"
-        android:layout_marginTop="20dp"
-        android:text="Selecteer kind" />
+        <LinearLayout
+            android:id="@+id/homeMiddlePanel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_margin="25dp"
+            android:layout_toStartOf="@id/homeRightPanel"
+            android:layout_toLeftOf="@id/homeRightPanel"
+            android:layout_toEndOf="@id/homeLeftPanel"
+            android:layout_toRightOf="@id/homeLeftPanel"
+            android:background="@color/color_orange"
+            android:orientation="vertical"
+            android:padding="25dp">
 
-    <Spinner
-        android:id="@+id/spinnerKind"
-        android:layout_width="400dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/labelKind"
-        android:layout_alignLeft="@+id/labelKind"
-        android:layout_marginTop="20dp" />
-    <Button
-        android:id="@+id/buttonBeheren"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Beheren"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
-        android:layout_marginLeft="100dp"
-        android:padding="50dp"
-        android:onClick="goBeheren_onClick"/>
-    <Button
-        android:id="@+id/buttonVolgende"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Volgende"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
-        android:layout_marginRight="100dp"
-        android:background="#8226ff00"
-        android:padding="50dp"
-        android:onClick="goDetail_onClick"/>
-</RelativeLayout>
+            <TextView
+                android:id="@+id/titel"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:text="@string/app_name"
+                android:textSize="80sp" />
+
+            <TextView
+                android:id="@+id/labelGroep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/selectGroep" />
+
+            <Spinner
+                android:id="@+id/spinnerGroep"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white" />
+
+            <TextView
+                android:id="@+id/labelKind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/selectKind" />
+
+            <Spinner
+                android:id="@+id/spinnerKind"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonVolgende"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/buttonBeheren"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginRight="0dp"
+                    android:onClick="goDetail_onClick"
+                    android:padding="40dp"
+                    android:text="@string/volgende" />
+
+                <Button
+                    android:id="@+id/buttonBeheren"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="10dp"
+                    android:onClick="goBeheren_onClick"
+                    android:padding="40dp"
+                    android:text="@string/beheren" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/homeRightPanel"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/homeImage2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="13dp"
+                android:contentDescription="@string/homeImage"
+                app:srcCompat="@drawable/kid2" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
