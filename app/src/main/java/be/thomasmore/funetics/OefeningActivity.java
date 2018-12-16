@@ -23,6 +23,14 @@ public class OefeningActivity extends Activity {
     //Requestcodes
     final int requestVoormeting = 1;
     final int requestPreteaching = 2;
+    final int requestOef1 = 3;
+    final int requestOef2 = 4;
+    final int requestOef3 = 5;
+    final int requestOef4 = 6;
+    final int requestOef5 = 7;
+    final int requestOef6 = 8;
+    final int requestNameting = 9;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +157,11 @@ public class OefeningActivity extends Activity {
         else if (requestCode == requestPreteaching){
             if(resultCode == Activity.RESULT_OK){
 
+                //Volgende activity starten
+                startOef1();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
             }
         }
     }
@@ -160,13 +173,49 @@ public class OefeningActivity extends Activity {
         return dateFormat.format(date);
     }
 
+    public void startVoormeting() {
+        Intent intent = new Intent(this, TestActivity.class);
+        startActivityForResult(intent, requestVoormeting);
+    }
+
     public void startPreteaching(){
         Intent intent = new Intent(this, PreteachingActivity.class);
         startActivityForResult(intent, requestPreteaching);
     }
 
-    public void startVoormeting(){
-        Intent intent = new Intent(this, TestActivity.class);
-        startActivityForResult(intent, requestVoormeting);
+    public void startOef1(){
+        Intent intent = new Intent(this, Oef1Activity.class);
+        startActivityForResult(intent, requestOef1);
     }
+
+    public void startOef2(){
+        Intent intent = new Intent(this, TestActivity.class);
+        startActivityForResult(intent, requestOef2);
+    }
+
+    public void startOef3(){
+        Intent intent = new Intent(this, TestActivity.class);
+        startActivityForResult(intent, requestOef3);
+    }
+
+    public void startOef4(){
+        Intent intent = new Intent(this, TestActivity.class);
+        startActivityForResult(intent, requestOef4);
+    }
+
+    public void startOef5(){
+        Intent intent = new Intent(this, TestActivity.class);
+        startActivityForResult(intent, requestOef5);
+    }
+
+    public void startOef6(){
+        Intent intent = new Intent(this, TestActivity.class);
+        startActivityForResult(intent, requestOef6);
+    }
+
+    public void startNameting(){
+        Intent intent = new Intent(this, TestActivity.class);
+        startActivityForResult(intent, requestNameting);
+    }
+
 }

@@ -111,4 +111,6 @@
     <string name="testen">Vorige testen</string>
     <string name="fout">Fout bij laden van gegevens</string>
     <string name="startTest">Start nieuwe test</string>
+    <string name="title_activity_oef1">Oef1Activity</string>
+    <string name="title_activity_oef2">Oef2Activity</string>
 </resources>
