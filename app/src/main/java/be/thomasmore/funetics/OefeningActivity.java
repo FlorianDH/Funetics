@@ -165,6 +165,39 @@ public class OefeningActivity extends Activity {
                 //Write your code if there's no result
             }
         }
+        //OEF1 is beeindigd
+        else if (requestCode == requestOef1){
+            if(resultCode == Activity.RESULT_OK){
+
+                //Volgende activity starten
+                startOef2();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+        //Preteaching is beeindigd
+        else if (requestCode == requestOef2){
+            if(resultCode == Activity.RESULT_OK){
+
+                //Volgende activity starten
+                startOef2();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+        //Preteaching is beeindigd
+        else if (requestCode == requestOef3){
+            if(resultCode == Activity.RESULT_OK){
+
+                //Volgende activity starten
+                startOef3();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
     }
 
     private String getDateTime() {

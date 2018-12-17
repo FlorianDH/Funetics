@@ -33,7 +33,6 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
     public void playAudioPlayer(){
 
         setAudioPlayer();
-        audioPlayer.release();
         audioPlayer.stop();
         audioPlayer.start();
     }
