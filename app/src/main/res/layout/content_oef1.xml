@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.50"
-            app:srcCompat="@drawable/duikbril_juist" />
+            app:srcCompat="@drawable/duikbril" />
 
         <LinearLayout
             android:layout_width="match_parent"

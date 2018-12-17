@@ -2,16 +2,10 @@ package be.thomasmore.funetics;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -54,7 +48,37 @@ public class TestActivity extends AppCompatActivity {
         textViewWoord.setText(huidigDoelwoord.getNaam());
 
         foutPlayer = MediaPlayer.create(this, R.raw.fout);
-        woordPlayer = MediaPlayer.create(this, R.raw.duikbril);
+        if (huidigDoelwoord.getId() == 0){
+            woordPlayer = MediaPlayer.create(this, R.raw.duikbril);
+        }
+        else if (huidigDoelwoord.getId() == 1){
+            woordPlayer = MediaPlayer.create(this, R.raw.klimtouw);
+        }
+        else if (huidigDoelwoord.getId() == 2){
+            woordPlayer = MediaPlayer.create(this, R.raw.kroos);
+        }
+        else if (huidigDoelwoord.getId() == 3){
+            woordPlayer = MediaPlayer.create(this, R.raw.riet);
+        }
+        else if (huidigDoelwoord.getId() == 4){
+            woordPlayer = MediaPlayer.create(this, R.raw.val);
+        }
+        else if (huidigDoelwoord.getId() == 5){
+            woordPlayer = MediaPlayer.create(this, R.raw.kompas);
+        }
+        else if (huidigDoelwoord.getId() == 6){
+            woordPlayer = MediaPlayer.create(this, R.raw.steil);
+        }
+        else if (huidigDoelwoord.getId() == 7){
+            woordPlayer = MediaPlayer.create(this, R.raw.zwaan);
+        }
+        else if (huidigDoelwoord.getId() == 8){
+            woordPlayer = MediaPlayer.create(this, R.raw.kamp);
+        }
+        else if (huidigDoelwoord.getId() == 9){
+            woordPlayer = MediaPlayer.create(this, R.raw.zaklamp);
+        }
+
         playSound = (ImageButton) this.findViewById(R.id.replayButton);
 
         ImageButton1 = (ImageButton) this.findViewById(R.id.imageButton1);
@@ -62,10 +86,10 @@ public class TestActivity extends AppCompatActivity {
         ImageButton3 = (ImageButton) this.findViewById(R.id.imageButton3);
         ImageButton4 = (ImageButton) this.findViewById(R.id.imageButton4);
 
-        ImageButton1.setImageResource(R.drawable.duikbril_fout1);
-        ImageButton2.setImageResource(R.drawable.duikbril_fout2);
-        ImageButton3.setImageResource(R.drawable.duikbril_juist);
-        ImageButton4.setImageResource(R.drawable.duikbril_fout3);
+        ImageButton1.setImageResource(R.drawable.kompas);
+        ImageButton2.setImageResource(R.drawable.kroos);
+        ImageButton3.setImageResource(R.drawable.duikbril);
+        ImageButton4.setImageResource(R.drawable.klimtouw);
 
         playSound.setOnClickListener(new View.OnClickListener() {
             @Override
