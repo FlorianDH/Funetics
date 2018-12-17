@@ -1,8 +1,11 @@
 package be.thomasmore.funetics;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
 
@@ -15,7 +18,6 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef1);
 
-        setAudioPlayer();
         playAudioPlayer();
     }
 
@@ -29,6 +31,10 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     public void playAudioPlayer(){
+
+        setAudioPlayer();
+        audioPlayer.release();
+        audioPlayer.stop();
         audioPlayer.start();
     }
 
@@ -40,6 +46,17 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
             arg0.setOnCompletionListener(this);
             arg0.start();
         }
+    }
+
+    public void playButton_onClick(View view) {
+        currentTrack = 0;
+        playAudioPlayer();
+    }
+
+    public void volgendeButton_onClick(View view) {
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
     }
 
     @Override

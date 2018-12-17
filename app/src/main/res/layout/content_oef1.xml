@@ -13,35 +13,76 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/detailTopBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
+            android:background="@color/color_primary_dark">
+
+            <LinearLayout
+                android:id="@+id/detailTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/textViewDetailTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="OEF 1 : Definitie" />
+            </LinearLayout>
+        </LinearLayout>
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.30"
+            android:gravity="center"
             android:text="Duikbril"
             android:textAppearance="@style/title.dark"
-            android:textSize="36sp"
-            android:translationX="500dp" />
+            android:textSize="50sp" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.30"
+            android:layout_weight="0.20"
+            android:gravity="center"
             android:text="Uitleg wat een duikbril is " />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.40"
+            android:layout_weight="0.50"
             app:srcCompat="@drawable/duikbril_juist" />
 
-        <Button
-            android:id="@+id/button"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.30"
-            android:text="Volgende" />
+            android:orientation="horizontal"
+            android:gravity="center">
+            <Button
+                android:id="@+id/button"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:gravity="center"
+                android:text="Opnieuw afspelen"
+                android:onClick="playButton_onClick"/>
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="15dp"
+                android:text="Volgende oefening"
+                android:onClick="volgendeButton_onClick"/>
+        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
