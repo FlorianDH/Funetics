@@ -13,15 +13,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class TestActivity extends AppCompatActivity {
+
+    private DatabaseHelper db;
+    private Doelwoord huidigDoelwoord;
+    private String huidigDoelwoordUpper;
+    private String huidigDoelwoordLower;
 
     public int score = 0;
     public int aantalPogingen = 0;
 
-    private MediaPlayer foutPlayer;
+    private TextView textViewWoord;
 
-    private MediaPlayer duikbrilPlayer;
+    private MediaPlayer foutPlayer;
+    private MediaPlayer woordPlayer;
     private ImageButton playSound;
 
     private ImageButton ImageButton1;
@@ -34,8 +41,20 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+        Bundle bundle = getIntent().getExtras();
+        Long doelwoordId = bundle.getLong("doelwoordId");
+
+        db = new DatabaseHelper(this);
+
+        huidigDoelwoord = db.getDoelwoordById(doelwoordId);
+        huidigDoelwoordUpper = huidigDoelwoord.getNaam().toUpperCase();
+        huidigDoelwoordLower = huidigDoelwoord.getNaam().toLowerCase();
+
+        textViewWoord = (TextView) this.findViewById(R.id.textViewWoord);
+        textViewWoord.setText(huidigDoelwoord.getNaam());
+
         foutPlayer = MediaPlayer.create(this, R.raw.fout);
-        duikbrilPlayer = MediaPlayer.create(this, R.raw.duikbril);
+        woordPlayer = MediaPlayer.create(this, R.raw.duikbril);
         playSound = (ImageButton) this.findViewById(R.id.replayButton);
 
         ImageButton1 = (ImageButton) this.findViewById(R.id.imageButton1);
@@ -51,7 +70,7 @@ public class TestActivity extends AppCompatActivity {
         playSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                duikbrilPlayer.start();
+                woordPlayer.start();
             }
         });
     }

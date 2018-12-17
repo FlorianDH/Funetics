@@ -103,6 +103,7 @@ public class OefeningActivity extends Activity {
 
         //Alle doelwoorden van de huidige woordenset in een lijst zetten
         doelwoorden = db.getDoelwoordenWhereWoordensetId((int) huidigeWoordenset.getId());
+        doelwoorden.add(0, db.getDoelwoordById(0));
         //Eerste woord uit de lijst
         huidigDoelwoord = doelwoorden.get(0);
 
@@ -174,7 +175,11 @@ public class OefeningActivity extends Activity {
     }
 
     public void startVoormeting() {
+        Bundle bundle = new Bundle();
+        bundle.putLong("doelwoordId", huidigDoelwoord.getId());
+
         Intent intent = new Intent(this, TestActivity.class);
+        intent.putExtras(bundle);
         startActivityForResult(intent, requestVoormeting);
     }
 
