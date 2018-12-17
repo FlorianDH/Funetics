@@ -12,7 +12,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     // Database Version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     // Database Name
     private static final String DATABASE_NAME = "funatics";
 
@@ -67,6 +67,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         String CREATE_TABLE_DOELWOORD = "CREATE TABLE doelwoord (" +
                 "id INTEGER PRIMARY KEY NOT NULL," +
                 "naam TEXT NOT NULL," +
+                "defenitie TEXT NOT NULL," +
+                "juisteZin TEXT NOT NULL," +
+                "fouteZin TEXT NOT NULL," +
+                "keuzeWeb TEXT NOT NULL," +
                 "woordensetId INTEGER NOT NULL, " +
                 "FOREIGN KEY (woordensetId) REFERENCES woordenset(id))";
         db.execSQL(CREATE_TABLE_DOELWOORD);
@@ -127,17 +131,19 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     private void insertDoelwoorden(SQLiteDatabase db) {
-        db.execSQL("INSERT INTO doelwoord (id, naam, woordensetId) VALUES (1, 'Klimtouw', 1);");
-        db.execSQL("INSERT INTO doelwoord (id, naam, woordensetId) VALUES (2, 'Kroos', 1);");
-        db.execSQL("INSERT INTO doelwoord (id, naam, woordensetId) VALUES (3, 'Riet', 1);");
+        db.execSQL("INSERT INTO doelwoord (id, naam, defenitie, juisteZin, fouteZin, keuzeWeb, woordensetId) VALUES (0, 'Duikbril', 'Een duikbril is een bril voor onder water. Daarmee kun je onder water je ogen open houden.', 'Met zijn duikbril kan de jongen de vissen onder water goed bekijken.', 'Met een duikbril kan ik schrijven op papier.', 'Ogen,Zwemmen,In de zee,Schrijven', 10);");
 
-        db.execSQL("INSERT INTO doelwoord (id, naam, woordensetId) VALUES (4, 'Val', 2);");
-        db.execSQL("INSERT INTO doelwoord (id, naam, woordensetId) VALUES (5, 'Kompas', 2);");
-        db.execSQL("INSERT INTO doelwoord (id, naam, woordensetId) VALUES (6, 'Steil', 2);");
+        db.execSQL("INSERT INTO doelwoord (id, naam, defenitie, juisteZin, fouteZin, keuzeWeb, woordensetId) VALUES (1, 'Klimtouw', 'Een klimtouw is een touw waarin je omhoog kunt klimmen.', 'In de turnzaal klim ik omhoog in het klimtouw.', 'Ik wacht op de bus in het klimtouw.', 'Klimmen,Sterk,De turnzaal,Het zwembad', 1);");
+        db.execSQL("INSERT INTO doelwoord (id, naam, defenitie, juisteZin, fouteZin, keuzeWeb, woordensetId) VALUES (2, 'Kroos', 'Kroos bestaat uit kleine, groene plantjes die op het water groeien. Je ziet het bijvoorbeeld in een sloot.', 'De vijver is groen door het kroos.', 'Oma en het kroos zitten in de auto.', 'Groen,In de vijver,De eend,De lamp', 1);");
+        db.execSQL("INSERT INTO doelwoord (id, naam, defenitie, juisteZin, fouteZin, keuzeWeb, woordensetId) VALUES (3, 'Riet', 'Riet lijkt op hoog gras. Het heeft lange stengels en groeit langs het water.', 'De eenden zitten bij het water tussen het riet.', 'Ik ga naar buiten met mijn jas en het riet aan.', 'De vijver,De eend,Het bos,De bril', 1);");
 
-        db.execSQL("INSERT INTO doelwoord (id, naam, woordensetId) VALUES (7, 'Zwaan', 3);");
-        db.execSQL("INSERT INTO doelwoord (id, naam, woordensetId) VALUES (8, 'Kamp', 3);");
-        db.execSQL("INSERT INTO doelwoord (id, naam, woordensetId) VALUES (9, 'Zaklamp', 3);");
+        db.execSQL("INSERT INTO doelwoord (id, naam, defenitie, juisteZin, fouteZin, keuzeWeb, woordensetId) VALUES (4, 'Val', 'Als je een val maakt, val je op de grond.', 'Wat was dat een pijnlijke val!', 'Jan zit op de val aan tafel.', 'De pijn,Naar voor,De pleister,De appel', 2);");
+        db.execSQL("INSERT INTO doelwoord (id, naam, defenitie, juisteZin, fouteZin, keuzeWeb, woordensetId) VALUES (5, 'Kompas', 'Met een kompas weet je waar je naartoe moet. De naald van het kompas geeft het noorden aan.', 'Omdat papa niet weet waar we naartoe moeten lopen, kijkt hij op zijn kompas.', 'Mama belt met het kompas naar papa.', 'Wandelen,De rugzak,De landkaart,Het bad', 2);");
+        db.execSQL("INSERT INTO doelwoord (id, naam, defenitie, juisteZin, fouteZin, keuzeWeb, woordensetId) VALUES (6, 'Steil', 'Een steile berg gaat heel schuin omhoog of omlaag.', 'Jan loopt de steile berg omhoog.', 'Papa leest een steil verhaaltje voor.', 'De berg,Beklimmen,De trap,De bloem', 2);");
+
+        db.execSQL("INSERT INTO doelwoord (id, naam, defenitie, juisteZin, fouteZin, keuzeWeb, woordensetId) VALUES (7, 'Zwaan', 'Een zwaan is een grote vogel met een lange, kromme hals. Meestal zijn zwanen wit, maar soms zwart.', 'In de vijver in het park zwemt een witte zwaan.', 'De zwaan fietst in het park.', 'De vijver,Vleugels,Wit,Het boek', 3);");
+        db.execSQL("INSERT INTO doelwoord (id, naam, defenitie, juisteZin, fouteZin, keuzeWeb, woordensetId) VALUES (8, 'Kamp', 'Een kamp is een plaats om buiten te wonen en te slapen, bijvoorbeeld in tenten.', 'De kinderen zitten te eten tussen de tenten van het kamp.', 'Jonas wast zich met het kamp.', 'De tent,Kampvuur,In de slaapzak,De deur', 3);");
+        db.execSQL("INSERT INTO doelwoord (id, naam, defenitie, juisteZin, fouteZin, keuzeWeb, woordensetId) VALUES (9, 'Zaklamp', 'Een zaklamp is een kleine lamp die je overal mee naartoe kunt nemen.', 'De jongen schijnt met de zaklamp in de donkere grot.', 'Jef opent de deur met de zaklamp.', 'Het licht,De batterij,In het donker,Het paard', 3);");
     }
 
     private void insertOefeningen(SQLiteDatabase db) {
@@ -412,6 +418,30 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return woordenset;
     }
 
+    // query-methode
+    public Doelwoord getDoelwoordById(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "doelwoord",      // tabelnaam
+                new String[] { "id", "naam", "defenitie", "juisteZin", "fouteZin", "keuzeWeb", "woordensetId"}, // kolommen
+                "id = ?",  // selectie
+                new String[] { String.valueOf(id) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+
+        Doelwoord doelwoord = new Doelwoord();
+
+        if (cursor.moveToFirst()) {
+            doelwoord = new Doelwoord(cursor.getLong(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+        }
+        cursor.close();
+        db.close();
+        return doelwoord;
+    }
+
     // rawQuery-methode
     public List<Doelwoord> getDoelwoordenWhereWoordensetId(int woordensetId) {
         List<Doelwoord> lijst = new ArrayList<Doelwoord>();
@@ -424,8 +454,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         if (cursor.moveToFirst()) {
             do {
-                Doelwoord doelwoord = new Doelwoord(cursor.getLong(0),
-                        cursor.getString(1), cursor.getInt(2));
+                Doelwoord doelwoord = new Doelwoord(cursor.getLong(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
                 lijst.add(doelwoord);
             } while (cursor.moveToNext());
         }
