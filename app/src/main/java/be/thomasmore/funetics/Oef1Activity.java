@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
 
     private MediaPlayer audioPlayer = null;
-    int[] tracks = new int[3];
+    int[] tracks = new int[4];
     int currentTrack = 0;
 
     @Override
@@ -34,12 +34,18 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     public void onCompletion(MediaPlayer arg0) {
         arg0.release();
-        if (currentTrack < tracks.length) {
+        if (currentTrack < tracks.length-1) {
             currentTrack++;
             arg0 = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
             arg0.setOnCompletionListener(this);
             arg0.start();
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        audioPlayer.release();
     }
 
 }
