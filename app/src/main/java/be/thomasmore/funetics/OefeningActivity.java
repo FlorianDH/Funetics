@@ -227,7 +227,7 @@ public class OefeningActivity extends Activity {
     }
 
     public void startOef2(){
-        Intent intent = new Intent(this, TestActivity.class);
+        Intent intent = new Intent(this, Oef2Activity.class);
         startActivityForResult(intent, requestOef2);
     }
 
