@@ -4,10 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
@@ -21,13 +18,8 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef2);
 
+        currentTrack = 0;
         playAudioPlayer();
-    }
-
-    public void volgendeButton_onClick(View view) {
-        Intent returnIntent = new Intent();
-        setResult(Activity.RESULT_OK,returnIntent);
-        finish();
     }
 
     public void setAudioPlayer() {
@@ -40,23 +32,39 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     public void playAudioPlayer(){
         setAudioPlayer();
-        audioPlayer.stop();
         audioPlayer.start();
     }
 
-    public void onCompletion(MediaPlayer arg0) {
-        arg0.release();
+    public void onCompletion(MediaPlayer audioPlayer) {
+        audioPlayer.release();
         if (currentTrack < tracks.length-1) {
             currentTrack++;
-            arg0 = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
-            arg0.setOnCompletionListener(this);
-            arg0.start();
+            audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+            audioPlayer.setOnCompletionListener(this);
+            audioPlayer.start();
         }
     }
 
     public void playButton_onClick(View view) {
         currentTrack = 0;
         playAudioPlayer();
+    }
+
+    public void volgendeButton_onClick(View view) {
+        if(audioPlayer.isPlaying())
+        {
+            audioPlayer.pause();
+            audioPlayer.release();
+        }
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        audioPlayer.release();
     }
 
 }

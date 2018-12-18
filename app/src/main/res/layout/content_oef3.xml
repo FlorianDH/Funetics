@@ -7,6 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Oef3Activity"
     tools:showIn="@layout/activity_oef3">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,10 +17,10 @@
             android:id="@+id/detailTopBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/color_primary_dark"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp"
-            android:background="@color/color_primary_dark">
+            tools:layout_editor_absoluteY="8dp">
 
             <LinearLayout
                 android:id="@+id/detailTitle"
@@ -30,92 +31,79 @@
 
                 <TextView
                     android:id="@+id/textViewDetailTitle"
+                    style="@style/title_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_activity_oef3"
                     android:layout_weight="0.50"
-                    style="@style/title_white"/>
+                    android:text="@string/title_activity_oef3" />
 
                 <TextView
                     android:id="@+id/textViewNaam"
+                    style="@style/title_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Naam kind"
-                    android:gravity="right"
                     android:layout_weight="0.50"
-                    style="@style/title_white"/>
+                    android:gravity="right"
+                    android:text="Naam kind" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/imageView2"
+            android:layout_height="400dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.50"
-                app:srcCompat="@drawable/duikbril" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.50"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="hello"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="hello"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="hello"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="hello"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="hello"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="hello"/>
-                </LinearLayout>
-            </LinearLayout>
+                android:gravity="center"
+                android:textSize="22sp"
+                android:text="‘De jongen kan onder water kijken naar zijn vriendje, want hij heeft een duikbril op.’"/>
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:gravity="center">
 
             <Button
-                android:id="@+id/button2"
-                android:layout_width="400dp"
+                android:id="@+id/buttonReplay"
+                android:layout_width="800dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_margin="15dp"
-                android:text="Volgende oefening"
-                android:onClick="volgendeButton_onClick"/>
+                android:padding="25dp"
+                android:text="Opnieuw afspelen"
+                android:onClick="playButton_onClick"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="385dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_margin="15dp"
+                    android:padding="50dp"
+                    android:text="Fout"
+                    android:onClick="volgendeButton_onClick"/>
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="385dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_margin="15dp"
+                    android:padding="50dp"
+                    android:text="Goed"
+                    android:onClick="volgendeButton_onClick"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

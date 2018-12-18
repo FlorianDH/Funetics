@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
@@ -32,17 +33,16 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     public void playAudioPlayer(){
         setAudioPlayer();
-        audioPlayer.stop();
         audioPlayer.start();
     }
 
-    public void onCompletion(MediaPlayer arg0) {
-        arg0.release();
+    public void onCompletion(MediaPlayer audioPlayer2) {
+        audioPlayer2.release();
         if (currentTrack < tracks.length-1) {
             currentTrack++;
-            arg0 = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
-            arg0.setOnCompletionListener(this);
-            arg0.start();
+            audioPlayer2 = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+            audioPlayer2.setOnCompletionListener(this);
+            audioPlayer2.start();
         }
     }
 
@@ -52,6 +52,27 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     public void volgendeButton_onClick(View view) {
+//        if(audioPlayer.isPlaying())
+//        {
+//            try {
+//                audioPlayer.pause();
+//            } catch (Exception e) {}
+//
+//            try {
+//                audioPlayer.reset();
+//            } catch (Exception e) {}
+//
+//            try {
+//                audioPlayer.stop();
+//            } catch (Exception e) {}
+//
+//            try {
+//                audioPlayer.release();
+//            } catch (Exception e) {}
+
+//            audioPlayer.reset();
+//            audioPlayer.stop();
+//        }
         Intent returnIntent = new Intent();
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
