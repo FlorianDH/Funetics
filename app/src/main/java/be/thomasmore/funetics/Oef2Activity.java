@@ -16,6 +16,9 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
     int[] tracks = new int[3];
     int currentTrack = 0;
 
+    public int score = 0;
+    public int aantalPogingen = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +27,25 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
         playAudioPlayer();
     }
 
-    public void volgendeButton_onClick(View view) {
+    public void foutButton_onClick(View view) {
+        aantalPogingen++;
+
+        //Terug naar oefening activity
         Intent returnIntent = new Intent();
+        returnIntent.putExtra("score", String.valueOf(score));
+        returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
+    }
+
+    public void goedButton_onClick(View view) {
+        aantalPogingen++;
+        score++;
+
+        //Terug naar oefening activity
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("score", String.valueOf(score));
+        returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
     }

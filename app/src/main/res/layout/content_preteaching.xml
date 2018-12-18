@@ -27,13 +27,13 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/replayButton"
-        android:layout_width="102dp"
-        android:layout_height="81dp"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_sync_black_24dp" />
+        app:srcCompat="@drawable/speaker_icon" />
 </android.support.constraint.ConstraintLayout>
