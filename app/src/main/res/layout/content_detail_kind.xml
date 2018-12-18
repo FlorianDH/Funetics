@@ -33,7 +33,8 @@
                     android:id="@+id/textViewDetailTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/detailTitle" />
+                    android:text="@string/detailTitle"
+                    style="@style/title_white"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/testenTitle"
@@ -47,7 +48,8 @@
                     android:id="@+id/textViewTestenTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/testen" />
+                    android:text="@string/testen"
+                    style="@style/title_white"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/kindDetailfTitle"

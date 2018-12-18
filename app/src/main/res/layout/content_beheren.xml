@@ -34,7 +34,8 @@
                     android:id="@+id/textViewGroepenTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/groepTitle" />
+                    android:text="@string/groepTitle"
+                    style="@style/title_white"/>
             </LinearLayout>
 
 
@@ -49,7 +50,8 @@
                     android:id="@+id/textViewKinderenTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/kinderenTitle" />
+                    android:text="@string/kinderenTitle"
+                    style="@style/title_white"/>
             </LinearLayout>
 
             <LinearLayout
@@ -63,7 +65,8 @@
                     android:id="@+id/textViewdetailTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/detailTitle" />
+                    android:text="@string/detailTitle"
+                    style="@style/title_white"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/kindDetailfTitle"
