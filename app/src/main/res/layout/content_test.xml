@@ -13,10 +13,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical|center_horizontal"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        tools:ignore="MissingConstraints">
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/detailTopBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
+            android:background="@color/color_primary_dark">
+
+            <LinearLayout
+                android:id="@+id/detailTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/textViewDetailTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_activity_test"
+                    android:layout_weight="0.50"
+                    style="@style/title_white"/>
+
+                <TextView
+                    android:id="@+id/textViewNaam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Naam kind"
+                    android:gravity="right"
+                    android:layout_weight="0.50"
+                    style="@style/title_white"/>
+            </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,15 +57,13 @@
 
             <TextView
                 android:id="@+id/textViewWoord"
-                android:layout_width="900dp"
+                android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:layout_gravity="center_horizontal|center"
-                android:layout_marginLeft="35dp"
+                android:gravity="center"
                 android:lineSpacingExtra="30sp"
                 android:text="DUIKBRIL"
                 android:textAlignment="center"
-                android:textSize="40sp"
-                android:layout_marginStart="35dp" />
+                android:textSize="40sp"/>
 
             <ImageButton
                 android:id="@+id/replayButton"
@@ -55,7 +85,8 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="600dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.50"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
@@ -63,7 +94,7 @@
                 <ImageButton
                     android:id="@+id/imageButton1"
                     android:layout_width="wrap_content"
-                    android:layout_height="300dp"
+                    android:layout_height="270dp"
                     tools:srcCompat="@tools:sample/avatars[11]"
                     android:contentDescription="fout"
                     android:onClick="imageButton_onClick" />
@@ -71,7 +102,7 @@
                 <ImageButton
                     android:id="@+id/imageButton3"
                     android:layout_width="wrap_content"
-                    android:layout_height="300dp"
+                    android:layout_height="270dp"
                     android:layout_marginTop="30dp"
                     tools:srcCompat="@tools:sample/avatars[5]"
                     android:contentDescription="juist"
@@ -79,7 +110,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="600dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.50"
                 android:layout_height="fill_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
@@ -87,13 +119,14 @@
                 <ImageButton
                     android:id="@+id/imageButton2"
                     android:layout_width="wrap_content"
-                    android:layout_height="300dp"
+                    android:layout_height="270dp"
                     android:contentDescription="fout"
-                    android:onClick="imageButton_onClick" />
+                    android:onClick="imageButton_onClick"
+                    tools:srcCompat="@tools:sample/avatars" />
                 <ImageButton
                     android:id="@+id/imageButton4"
                     android:layout_width="wrap_content"
-                    android:layout_height="300dp"
+                    android:layout_height="270dp"
                     android:layout_marginTop="30dp"
                     tools:srcCompat="@tools:sample/avatars[3]"
                     android:contentDescription="fout"
@@ -102,4 +135,21 @@
 
         </LinearLayout>
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/soundFAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="25dp"
+            android:clickable="true"
+            android:padding="25dp"
+            app:fabCustomSize="80dp"
+            app:srcCompat="@drawable/speaker_icon"
+            android:focusable="true"/>
+    </RelativeLayout>
+
 </android.support.constraint.ConstraintLayout>

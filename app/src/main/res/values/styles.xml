@@ -46,6 +46,7 @@
         <item name="android:textSize">22sp</item>
         <item name="android:textAllCaps">true</item>
     </style>
+
     <style name="title_white" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/color_white</item>
         <item name="android:textSize">22sp</item>
