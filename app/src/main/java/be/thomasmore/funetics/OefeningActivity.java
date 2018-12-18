@@ -181,7 +181,7 @@ public class OefeningActivity extends Activity {
             if(resultCode == Activity.RESULT_OK){
 
                 //Volgende activity starten
-                startOef2();
+                startOef3();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -192,7 +192,51 @@ public class OefeningActivity extends Activity {
             if(resultCode == Activity.RESULT_OK){
 
                 //Volgende activity starten
-                startOef3();
+                startOef4();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+        //Preteaching is beeindigd
+        else if (requestCode == requestOef4){
+            if(resultCode == Activity.RESULT_OK){
+
+                //Volgende activity starten
+                startOef5();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+        //Preteaching is beeindigd
+        else if (requestCode == requestOef5){
+            if(resultCode == Activity.RESULT_OK){
+
+                //Volgende activity starten
+                startOef6();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+        //Preteaching is beeindigd
+        else if (requestCode == requestOef6){
+            if(resultCode == Activity.RESULT_OK){
+
+                //Volgende activity starten
+                startNameting();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+        //Preteaching is beeindigd
+        else if (requestCode == requestNameting){
+            if(resultCode == Activity.RESULT_OK){
+
+                //Volgende activity starten
+//                startOef3();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -232,22 +276,22 @@ public class OefeningActivity extends Activity {
     }
 
     public void startOef3(){
-        Intent intent = new Intent(this, TestActivity.class);
+        Intent intent = new Intent(this, Oef3Activity.class);
         startActivityForResult(intent, requestOef3);
     }
 
     public void startOef4(){
-        Intent intent = new Intent(this, TestActivity.class);
+        Intent intent = new Intent(this, Oef4Activity.class);
         startActivityForResult(intent, requestOef4);
     }
 
     public void startOef5(){
-        Intent intent = new Intent(this, TestActivity.class);
+        Intent intent = new Intent(this, Oef5Activity.class);
         startActivityForResult(intent, requestOef5);
     }
 
     public void startOef6(){
-        Intent intent = new Intent(this, TestActivity.class);
+        Intent intent = new Intent(this, Oef6Activity.class);
         startActivityForResult(intent, requestOef6);
     }
 

@@ -111,6 +111,22 @@
     <string name="testen">Vorige testen</string>
     <string name="fout">Fout bij laden van gegevens</string>
     <string name="startTest">Start nieuwe test</string>
-    <string name="title_activity_oef1">Oef1Activity</string>
-    <string name="title_activity_oef2">Oef2Activity</string>
+
+    <!-- Content_oef1 -->
+    <string name="title_activity_oef1">Oefening 1 : Definitie van het woord</string>
+
+    <!-- Content_oef2 -->
+    <string name="title_activity_oef2">Oefening 2 : Herhalen van het woord</string>
+
+    <!-- Content_oef3 -->
+    <string name="title_activity_oef3">Oefening 3 : Context</string>
+
+    <!-- Content_oef4 -->
+    <string name="title_activity_oef4">Oefening 4 : Connectie</string>
+
+    <!-- Content_oef5 -->
+    <string name="title_activity_oef5">Oefening 5 : 1 woord 3 foto\'s</string>
+
+    <!-- Content_oef6 -->
+    <string name="title_activity_oef6">Oefening 6 : Conditie training</string>
 </resources>

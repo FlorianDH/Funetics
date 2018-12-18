@@ -47,6 +47,22 @@
         <activity
             android:name=".Oef2Activity"
             android:label="@string/title_activity_oef2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Oef3Activity"
+            android:label="@string/title_activity_oef3"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Oef4Activity"
+            android:label="@string/title_activity_oef4"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Oef5Activity"
+            android:label="@string/title_activity_oef5"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Oef6Activity"
+            android:label="@string/title_activity_oef6"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
