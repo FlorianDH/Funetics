@@ -129,9 +129,7 @@ public class OefeningActivity extends Activity {
         if (requestCode == requestVoormeting) {
             if(resultCode == Activity.RESULT_OK){
                 //Score ophalen
-                //De opgehaalde score is 0 => geeft een fout
-                String scoreString = data.getStringExtra("score");
-                int score = Integer.parseInt(data.getStringExtra("score")); //hier loopt iets fout
+                int score = Integer.parseInt(data.getStringExtra("score"));
                 int aantalPogingen = Integer.parseInt(data.getStringExtra("aantalPogingen"));
 
                 //Opslaan in database
@@ -143,7 +141,7 @@ public class OefeningActivity extends Activity {
                 GetesteOefening nieuweGetesteOefening = new GetesteOefening();
                 nieuweGetesteOefening.setScore(score);
                 nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
-                nieuweGetesteOefening.setOefeningId(0);
+                nieuweGetesteOefening.setOefeningId(0); //Id van de oefening
                 nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
                 db.insertGetesteOefening(nieuweGetesteOefening);
 
@@ -157,7 +155,6 @@ public class OefeningActivity extends Activity {
         //Preteaching is beeindigd
         else if (requestCode == requestPreteaching){
             if(resultCode == Activity.RESULT_OK){
-
                 //Volgende activity starten
                 startOef1();
             }
@@ -168,6 +165,11 @@ public class OefeningActivity extends Activity {
         //OEF1 is beeindigd
         else if (requestCode == requestOef1){
             if(resultCode == Activity.RESULT_OK){
+                //Nieuwe geteste oefening opslaan in database
+                GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                nieuweGetesteOefening.setOefeningId(1); //Id van de oefening
+                nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
+                db.insertGetesteOefening(nieuweGetesteOefening);
 
                 //Volgende activity starten
                 startOef2();
@@ -179,6 +181,17 @@ public class OefeningActivity extends Activity {
         //Preteaching is beeindigd
         else if (requestCode == requestOef2){
             if(resultCode == Activity.RESULT_OK){
+                //Score ophalen
+                int score = Integer.parseInt(data.getStringExtra("score"));
+                int aantalPogingen = Integer.parseInt(data.getStringExtra("aantalPogingen"));
+
+                //Nieuwe geteste oefening opslaan in database
+                GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                nieuweGetesteOefening.setScore(score);
+                nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
+                nieuweGetesteOefening.setOefeningId(2); //Id van de oefening
+                nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
+                db.insertGetesteOefening(nieuweGetesteOefening);
 
                 //Volgende activity starten
                 startOef3();
@@ -266,12 +279,22 @@ public class OefeningActivity extends Activity {
     }
 
     public void startOef1(){
+        Bundle bundle = new Bundle();
+        bundle.putLong("doelwoordId", huidigDoelwoord.getId());
+        bundle.putLong("kindId", huidigKind.getId());
+
         Intent intent = new Intent(this, Oef1Activity.class);
+        intent.putExtras(bundle);
         startActivityForResult(intent, requestOef1);
     }
 
     public void startOef2(){
+        Bundle bundle = new Bundle();
+        bundle.putLong("doelwoordId", huidigDoelwoord.getId());
+        bundle.putLong("kindId", huidigKind.getId());
+
         Intent intent = new Intent(this, Oef2Activity.class);
+        intent.putExtras(bundle);
         startActivityForResult(intent, requestOef2);
     }
 

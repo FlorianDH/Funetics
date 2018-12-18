@@ -23,6 +23,13 @@ public class PreteachingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preteaching);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.soundFAB);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startGeluid();
+            }
+        });
 
 //        final MediaPlayer sound1 = MediaPlayer.create(this, R.raw.preteach1);
 //        final MediaPlayer sound2 = MediaPlayer.create(this, R.raw.preteach2);
@@ -33,23 +40,25 @@ public class PreteachingActivity extends AppCompatActivity {
         sound3 = MediaPlayer.create(this, R.raw.preteach3);
 
 
-        final FloatingActionButton playSound = (FloatingActionButton) this.findViewById(R.id.replayButton);
+        final FloatingActionButton playSound = (FloatingActionButton) this.findViewById(R.id.soundFAB);
         final ImageButton imageButton = (ImageButton) this.findViewById(R.id.imageButton);
 
         playSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                sound1.start();
-                sound2.start();
-                sound3.start();
+//                sound1.start();
+//                sound2.start();
+//                sound3.start();
+//
+//                if (sound1.isPlaying() || sound2.isPlaying() || sound3.isPlaying()){
+//                    stopGeluid();
+//                }
+//                else {
+//                    startGeluid();
+//                }
 
-                if (sound1.isPlaying() || sound2.isPlaying() || sound3.isPlaying()){
-                    stopGeluid();
-                }
-                else {
-                    startGeluid();
-                }
+                startGeluid();
             }
         });
 
@@ -61,6 +70,7 @@ public class PreteachingActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
     public void startGeluid(){

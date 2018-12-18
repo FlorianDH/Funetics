@@ -48,25 +48,25 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewWoord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.10"
         android:gravity="center"
-        android:text="Duikbril"
+        android:text="Woord"
         android:textAppearance="@style/title.dark"
         android:textSize="50sp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewUitleg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.10"
         android:gravity="center"
-        android:text="Wat is duikbril een leuk woord. Kan jij het ook zeggen, duikbril? Doe maar! ." />
+        android:text="Defenitie" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewAfbeelding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.80"
@@ -78,14 +78,18 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonReplay"
-            android:layout_width="800dp"
-            android:layout_height="wrap_content"
+            android:layout_width="500dp"
+            android:layout_height="80dp"
             android:gravity="center"
             android:layout_margin="15dp"
-            android:padding="25dp"
-            android:text="Opnieuw afspelen"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="speaker icon"
+            app:srcCompat="@drawable/speaker_icon"
             android:onClick="playButton_onClick"/>
 
         <LinearLayout
@@ -100,9 +104,11 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_margin="15dp"
-                android:padding="50dp"
+                android:padding="30dp"
                 android:text="Fout"
-                android:onClick="volgendeButton_onClick"/>
+                android:textSize="40dp"
+                android:background="#ff0000"
+                android:onClick="foutButton_onClick"/>
 
             <Button
                 android:id="@+id/button2"
@@ -110,9 +116,11 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_margin="15dp"
-                android:padding="50dp"
+                android:padding="30dp"
                 android:text="Goed"
-                android:onClick="volgendeButton_onClick"/>
+                android:textSize="40dp"
+                android:background="#44ff00"
+                android:onClick="goedButton_onClick"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

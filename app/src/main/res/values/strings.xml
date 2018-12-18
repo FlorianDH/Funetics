@@ -67,21 +67,16 @@
 
     <string-array name="multi_select_list_preference_default_value" />
 
-    <string name="pref_title_system_sync_settings">System sync settings</string>
 
     <!-- Example settings for Notifications -->
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
     <string name="pref_header_notifications">Notifications</string>
-
     <string name="pref_title_new_message_notifications">New message notifications</string>
-
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
-
     <string name="pref_title_vibrate">Vibrate</string>
-    <string name="title_activity_beheren">beherenActivity</string>
-    <string name="title_activity_detail_kind">DetailKindActivity</string>
-    <string name="title_activity_preteaching">PreteachingActivity</string>
-    <string name="title_activity_test">TestActivity</string>
+
     <string name="duikbril">DUIKBRIL</string>
     <string name="opnieuw">Opnieuw</string>
 
@@ -93,6 +88,7 @@
     <string name="homeImage">Home afbeelding</string>
 
     <!-- Content_beheren -->
+    <string name="title_activity_beheren">Beheren</string>
     <string name="groepTitle">Groepen</string>
     <string name="kinderenTitle">Kinderen</string>
     <string name="detailTitle">Details</string>
@@ -108,9 +104,16 @@
     <string name="verwijderbtn">Verwijderen</string>
 
     <!-- Content_detail_kind -->
+    <string name="title_activity_detail_kind">Details</string>
     <string name="testen">Vorige testen</string>
     <string name="fout">Fout bij laden van gegevens</string>
     <string name="startTest">Start nieuwe test</string>
+
+    <!-- Content_test -->
+    <string name="title_activity_test">Voormeting</string>
+
+    <!-- Content_preteaching -->
+    <string name="title_activity_preteaching">Preteaching</string>
 
     <!-- Content_oef1 -->
     <string name="title_activity_oef1">Oefening 1 : Definitie van het woord</string>
@@ -129,4 +132,5 @@
 
     <!-- Content_oef6 -->
     <string name="title_activity_oef6">Oefening 6 : Conditie training</string>
+    <string name="title_activity_tobedeletete">tobedeletete</string>
 </resources>

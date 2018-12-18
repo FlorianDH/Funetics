@@ -23,22 +23,23 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
         setContentView(R.layout.activity_oef3);
 
         setAudioPlayer();
-        playAudioPlayer();
         setContextPlayer();
+        playAudioPlayer();
+
     }
 
     public void volgendeButton_onClick(View view) {
-        if(audioPlayer.isPlaying())
-        {
-            audioPlayer.pause();
-            audioPlayer.release();
-        }
-
-        if( contextPlayer.isPlaying())
-        {
-            contextPlayer.pause();
-            contextPlayer.release();
-        }
+//        if(audioPlayer.isPlaying())
+//        {
+//            audioPlayer.pause();
+//            audioPlayer.release();
+//        }
+//
+//        if( contextPlayer.isPlaying())
+//        {
+//            contextPlayer.pause();
+//            contextPlayer.release();
+//        }
         Intent returnIntent = new Intent();
         setResult(Activity.RESULT_OK,returnIntent);
         finish();

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -30,19 +32,37 @@ public class TestActivity extends AppCompatActivity {
     private ImageButton ImageButton3;
     private ImageButton ImageButton4;
 
+    private Kind huidigKind;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+
         Bundle bundle = getIntent().getExtras();
         Long doelwoordId = bundle.getLong("doelwoordId");
+        Long kindId = bundle.getLong("kindId");
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.soundFAB);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playSound();
+            }
+        });
+
 
         db = new DatabaseHelper(this);
 
         huidigDoelwoord = db.getDoelwoordById(doelwoordId);
         huidigDoelwoordUpper = huidigDoelwoord.getNaam().toUpperCase();
         huidigDoelwoordLower = huidigDoelwoord.getNaam().toLowerCase();
+
+        huidigKind = db.getKindById(kindId);
+
+        TextView textNaamKind = (TextView) findViewById(R.id.textViewNaam);
+        textNaamKind.setText(huidigKind.toString());
 
         textViewWoord = (TextView) this.findViewById(R.id.textViewWoord);
         textViewWoord.setText(huidigDoelwoord.getNaam());
@@ -97,6 +117,8 @@ public class TestActivity extends AppCompatActivity {
                 woordPlayer.start();
             }
         });
+
+        playSound();
     }
 
     //Wanneer er op een van de afbeeldingen gedrukt wordt
@@ -119,5 +141,9 @@ public class TestActivity extends AppCompatActivity {
             aantalPogingen++;
             foutPlayer.start();
         }
+    }
+
+    public void playSound(){
+        woordPlayer.start();
     }
 }

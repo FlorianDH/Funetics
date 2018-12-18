@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
 
@@ -14,10 +15,32 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
     int[] tracks = new int[4];
     int currentTrack = 0;
 
+    private DatabaseHelper db;
+    private Doelwoord huidigDoelwoord;
+    private Kind huidigKind;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef1);
+
+        Bundle bundle = getIntent().getExtras();
+        Long doelwoordId = bundle.getLong("doelwoordId");
+        Long kindId = bundle.getLong("kindId");
+
+        db = new DatabaseHelper(this);
+
+        huidigDoelwoord = db.getDoelwoordById(doelwoordId);
+        huidigKind = db.getKindById(kindId);
+
+        TextView textNaamKind = (TextView) findViewById(R.id.textViewNaam);
+        textNaamKind.setText(huidigKind.toString());
+
+        TextView textWoord = (TextView) findViewById(R.id.textViewWoord);
+        textWoord.setText(huidigDoelwoord.getNaam());
+
+        TextView textDefenitie = (TextView) findViewById(R.id.textViewDefenitie);
+        textDefenitie.setText(huidigDoelwoord.getDefenitie());
 
         playAudioPlayer();
     }
