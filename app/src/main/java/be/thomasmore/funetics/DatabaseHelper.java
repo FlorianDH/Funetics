@@ -326,7 +326,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         if (cursor.moveToFirst()) {
             do {
                 Test test = new Test(cursor.getLong(0),
-                        cursor.getString(1), cursor.getInt(3), cursor.getInt(4));
+                        cursor.getString(1), cursor.getInt(2), cursor.getInt(3));
                 lijst.add(test);
             } while (cursor.moveToNext());
         }
