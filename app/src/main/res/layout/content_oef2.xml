@@ -48,25 +48,25 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewWoord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.10"
         android:gravity="center"
-        android:text="Duikbril"
+        android:text="Woord"
         android:textAppearance="@style/title.dark"
         android:textSize="50sp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewUitleg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.10"
         android:gravity="center"
-        android:text="Wat is duikbril een leuk woord. Kan jij het ook zeggen, duikbril? Doe maar! ." />
+        android:text="Defenitie" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewAfbeelding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.80"
