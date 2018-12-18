@@ -21,6 +21,7 @@ public class DetailKindActivity extends Activity {
     private Kind huidigKind;
     private Test selectedTest = null;
     private int selectedConditie = 0;
+    private List<Test> testen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class DetailKindActivity extends Activity {
 
         TextView textNaamKind = (TextView) findViewById(R.id.naamKind);
         textNaamKind.setText(huidigKind.toString());
+
+        leesTesten();
     }
 
     public void goTerug_onClick(View v) {
@@ -80,52 +83,28 @@ public class DetailKindActivity extends Activity {
         startActivity(intent);
     }
 
-    private void leesTestenWhereKind(int kindId){
+    private void leesTesten(){
+        testen = db.getTestenWhereKindId((int) huidigKind.getId());
 
-        List<Test> testenLijst;
+        TestAdapter testAdapter =
+                new TestAdapter(getApplicationContext(), testen);
 
-        testenLijst = db.getTestenWhereKindId(kindId);
+        final ListView listViewTesten =
+                (ListView) findViewById(R.id.listViewTesten);
+        listViewTesten.setAdapter(testAdapter);
 
-        final List<Test> testen = testenLijst;
-
-        final ListView listViewTesten = (ListView) findViewById(R.id.listViewTesten);
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_list_item_1, testen);
-        listViewTesten.setAdapter(aa);
-
-        listViewTesten.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parentView,
-                                            View childView, int position, long id) {
-                        selectedTest = testen.get(position);
-                        long selectedTestId = (long) selectedTest.getId();
-                        leesTestDetail(selectedTestId);
-                    }
-                });
-
+//        listViewTesten.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView parentView, View childView, int position, long id) {
+//                selectedTest = testen.get(position);
+//                long selectedTestId = selectedTest.getId();
+//                leesTestDetail(selectedTestId);
+//            }
+//        });
     }
 
     private void leesTestDetail(long testId){
 
-//        final Test huidigTest = db.getKindById(testId);
-//
-//        EditText textVoornaamKind = (EditText) findViewById(R.id.voornaamInput);
-//        textVoornaamKind.setText(huidigKind.getVoornaam());
-//
-//        EditText textNaamKind = (EditText) findViewById(R.id.naamInput);
-//        textNaamKind.setText(huidigKind.getNaam());
-//
-////        EditText textLeeftijdKind = (EditText) findViewById(R.id.leeftijdInput);
-////        textLeeftijdKind.setText(huidigKind.getLeeftijd());
-//
-//        leesGroepenInSpinner();
-//
-//        Switch switchIsActief = (Switch) findViewById(R.id.switchActief);
-//        if(huidigKind.getActief() == 1){
-//            switchIsActief.setChecked(true);
-//        }else{
-//            switchIsActief.setChecked(false);
-//        }
     }
 
 }
