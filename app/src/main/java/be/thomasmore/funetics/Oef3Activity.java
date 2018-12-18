@@ -46,12 +46,12 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     public void setAudioPlayer() {
-        tracks[1] = R.raw.duikbril_context1;
-        tracks[2] = R.raw.oef3_help_je_mij;
-        tracks[3] = R.raw.oef3_ik_zeg_een_zinnetje;
-        tracks[4] = R.raw.oef3_zin_juist;
-        tracks[5] = R.raw.oef3_zin_fout;
-        tracks[6] = R.raw.oef3_hier_gaan_we;
+        tracks[0] = R.raw.duikbril_context1;
+        tracks[1] = R.raw.oef3_help_je_mij;
+        tracks[2] = R.raw.oef3_ik_zeg_een_zinnetje;
+        tracks[3] = R.raw.oef3_zin_juist;
+        tracks[4] = R.raw.oef3_zin_fout;
+        tracks[5] = R.raw.oef3_hier_gaan_we;
         audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
         audioPlayer.setOnCompletionListener(this);
     }
@@ -66,7 +66,7 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     public void onCompletion(MediaPlayer audioPlayer) {
         audioPlayer.release();
-        if (currentTrack < tracks.length) {
+        if (currentTrack < tracks.length-1) {
             currentTrack++;
             audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
             audioPlayer.setOnCompletionListener(this);
