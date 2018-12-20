@@ -23,14 +23,6 @@ public class PreteachingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preteaching);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.soundFAB);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startGeluid();
-            }
-        });
-
 //        final MediaPlayer sound1 = MediaPlayer.create(this, R.raw.preteach1);
 //        final MediaPlayer sound2 = MediaPlayer.create(this, R.raw.preteach2);
 //        final MediaPlayer sound3 = MediaPlayer.create(this, R.raw.preteach3);
@@ -38,6 +30,14 @@ public class PreteachingActivity extends AppCompatActivity {
         sound1 = MediaPlayer.create(this, R.raw.preteach1);
         sound2 = MediaPlayer.create(this, R.raw.preteach2);
         sound3 = MediaPlayer.create(this, R.raw.preteach3);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.soundFAB);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startGeluid();
+            }
+        });
 
 
         final FloatingActionButton playSound = (FloatingActionButton) this.findViewById(R.id.soundFAB);

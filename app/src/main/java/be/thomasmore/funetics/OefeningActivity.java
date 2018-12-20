@@ -267,6 +267,7 @@ public class OefeningActivity extends Activity {
     public void startVoormeting() {
         Bundle bundle = new Bundle();
         bundle.putLong("doelwoordId", huidigDoelwoord.getId());
+        bundle.putLong("kindId", huidigKind.getId());
 
         Intent intent = new Intent(this, TestActivity.class);
         intent.putExtras(bundle);

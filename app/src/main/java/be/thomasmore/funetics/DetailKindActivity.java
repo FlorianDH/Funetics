@@ -91,14 +91,14 @@ public class DetailKindActivity extends Activity {
                 (ListView) findViewById(R.id.listViewTesten);
         listViewTesten.setAdapter(testAdapter);
 
-//        listViewTesten.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView parentView, View childView, int position, long id) {
-//                selectedTest = testen.get(position);
-//                long selectedTestId = selectedTest.getId();
-//                leesTestDetail(selectedTestId);
-//            }
-//        });
+        listViewTesten.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parentView, View childView, int position, long id) {
+                selectedTest = testen.get(position);
+                long selectedTestId = selectedTest.getId();
+                leesTestDetail(selectedTestId);
+            }
+        });
     }
 
     private void leesTestDetail(long testId){
