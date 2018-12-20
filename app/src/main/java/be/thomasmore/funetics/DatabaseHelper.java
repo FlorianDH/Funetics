@@ -12,7 +12,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     // Database Version
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     // Database Name
     private static final String DATABASE_NAME = "funatics";
 
@@ -435,7 +435,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         Doelwoord doelwoord = new Doelwoord();
 
         if (cursor.moveToFirst()) {
-            doelwoord = new Doelwoord(cursor.getLong(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+            doelwoord = new Doelwoord(cursor.getLong(0),
+                    cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getInt(6));
         }
         cursor.close();
         db.close();
@@ -454,7 +455,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         if (cursor.moveToFirst()) {
             do {
-                Doelwoord doelwoord = new Doelwoord(cursor.getLong(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6));
+                Doelwoord doelwoord = new Doelwoord(cursor.getLong(0),
+                        cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getInt(6));
                 lijst.add(doelwoord);
             } while (cursor.moveToNext());
         }

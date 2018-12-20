@@ -3,16 +3,16 @@ package be.thomasmore.funetics;
 public class Doelwoord {
     private long id;
     private String naam;
-    private int woordensetId;
     private String defenitie;
     private String juisteZin;
     private String fouteZin;
     private String keuzeWeb;
+    private int woordensetId;
 
     public Doelwoord() {
     }
 
-    public Doelwoord(long id, String naam, int woordensetId, String defenitie, String juisteZin, String fouteZin, String keuzeWeb) {
+    public Doelwoord(long id, String naam, String defenitie, String juisteZin, String fouteZin, String keuzeWeb, int woordensetId) {
         this.id = id;
         this.naam = naam;
         this.defenitie = defenitie;
@@ -36,14 +36,6 @@ public class Doelwoord {
 
     public void setNaam(String naam) {
         this.naam = naam;
-    }
-
-    public int getWoordensetId() {
-        return woordensetId;
-    }
-
-    public void setWoordensetId(int woordensetId) {
-        this.woordensetId = woordensetId;
     }
 
     public String getDefenitie() {
@@ -76,6 +68,14 @@ public class Doelwoord {
 
     public void setKeuzeWeb(String keuzeWeb) {
         this.keuzeWeb = keuzeWeb;
+    }
+
+    public int getWoordensetId() {
+        return woordensetId;
+    }
+
+    public void setWoordensetId(int woordensetId) {
+        this.woordensetId = woordensetId;
     }
 
     @Override

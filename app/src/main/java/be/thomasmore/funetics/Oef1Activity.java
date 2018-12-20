@@ -40,8 +40,10 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
         textWoord.setText(huidigDoelwoord.getNaam());
 
         TextView textDefenitie = (TextView) findViewById(R.id.textViewDefenitie);
+        String def = huidigDoelwoord.getDefenitie();
         textDefenitie.setText(huidigDoelwoord.getDefenitie());
 
+        setAudioPlayer();
         playAudioPlayer();
     }
 
@@ -55,7 +57,6 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     public void playAudioPlayer(){
-        setAudioPlayer();
         audioPlayer.start();
     }
 
