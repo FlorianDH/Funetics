@@ -68,6 +68,7 @@
             android:name=".Oef6Activity"
             android:label="@string/title_activity_oef6"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".DetailTestActivity"></activity>
     </application>
 
 </manifest>

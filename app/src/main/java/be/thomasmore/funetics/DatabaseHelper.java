@@ -507,5 +507,30 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.close();
         return id;
     }
+
+    // query-methode
+    public Test getTestById(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "test",      // tabelnaam
+                new String[] { "id", "datumTijd", "conditieId", "kindId" }, // kolommen
+                "id = ?",  // selectie
+                new String[] { String.valueOf(id) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+
+        Test test = new Test();
+
+        if (cursor.moveToFirst()) {
+            test = new Test(cursor.getLong(0),
+                    cursor.getString(1), cursor.getInt(2), cursor.getInt(3));
+        }
+        cursor.close();
+        db.close();
+        return test;
+    }
 }
 

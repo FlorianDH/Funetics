@@ -34,17 +34,17 @@
             android:textSize="15sp"
             android:textColor="#555555" />
     </LinearLayout>
-    <ImageButton
-        android:layout_alignParentRight="true"
-        android:id="@+id/buttonDelete"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:adjustViewBounds="true"
-        android:cropToPadding="false"
-        android:padding="0dp"
-        android:scaleType="fitCenter"
-        android:contentDescription="delete icon"
-        app:srcCompat="@drawable/delete_icon"
-        android:onClick="deleteButton_onClick"/>
+    <!--<ImageButton-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:id="@+id/buttonDelete"-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:gravity="center"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:cropToPadding="false"-->
+        <!--android:padding="0dp"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:contentDescription="delete icon"-->
+        <!--app:srcCompat="@drawable/delete_icon"-->
+        <!--android:onClick="deleteButton_onClick"/>-->
 </RelativeLayout>

@@ -46,8 +46,8 @@ public class DetailKindActivity extends Activity {
     }
 
     public void goStartTest_onClick(View v){
+        //Vragen welke conditie er getest moet worden
         showConditieDialog();
-        //tot hier
     }
 
     private void showConditieDialog() {
@@ -102,7 +102,16 @@ public class DetailKindActivity extends Activity {
     }
 
     private void leesTestDetail(long testId){
+        Bundle bundle = new Bundle();
+        bundle.putLong("testId", testId);
 
+        Intent intent = new Intent(this, DetailTestActivity.class);
+        intent.putExtras(bundle);
+
+        startActivity(intent);
     }
 
+    public void deleteButton_onClick(View v) {
+        //Verwijder een specifieke test
+    }
 }
