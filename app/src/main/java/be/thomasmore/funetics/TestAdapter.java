@@ -29,12 +29,18 @@ public class TestAdapter extends ArrayAdapter<Test> {
 
         final TextView textViewConditie = (TextView) rowView.findViewById(R.id.textViewConditie);
         final TextView textViewDatum = (TextView) rowView.findViewById(R.id.textViewDatum);
+        final TextView textViewTijd = (TextView) rowView.findViewById(R.id.textViewTijd);
 
         db = new DatabaseHelper(context);
         Conditie conditie = db.getConditieById(values.get(position).getConditieId());
 
         textViewConditie.setText(conditie.getNaam());
-        textViewDatum.setText(values.get(position).getDatumTijd());
+
+        String datumTijd = values.get(position).getDatumTijd();
+        String[] values = datumTijd.split(" ");
+
+        textViewDatum.setText(values[0]);
+        textViewTijd.setText(values[1]);
 
         return rowView;
     }
