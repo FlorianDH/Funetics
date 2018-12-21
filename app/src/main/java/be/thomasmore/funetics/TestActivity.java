@@ -24,6 +24,7 @@ public class TestActivity extends AppCompatActivity {
     private TextView textViewWoord;
 
     private MediaPlayer foutPlayer;
+    private MediaPlayer juistPlayer;
     private MediaPlayer woordPlayer;
     private ImageButton playSound;
 
@@ -68,6 +69,8 @@ public class TestActivity extends AppCompatActivity {
         textViewWoord.setText(huidigDoelwoord.getNaam());
 
         foutPlayer = MediaPlayer.create(this, R.raw.fout);
+        juistPlayer = MediaPlayer.create(this, R.raw.juist);
+
         if (huidigDoelwoord.getId() == 0){
             woordPlayer = MediaPlayer.create(this, R.raw.duikbril);
         }
@@ -124,10 +127,14 @@ public class TestActivity extends AppCompatActivity {
     //Wanneer er op een van de afbeeldingen gedrukt wordt
     public void imageButton_onClick(View view) {
         String waarde = (String) view.getContentDescription();
+
         //Controleren op welke knop er gedrukt is
         if(waarde.equals("juist")){
+            juistPlayer.start();
             aantalPogingen++;
             score++;
+
+            while (juistPlayer.isPlaying()){}
 
             //Terug naar oefening activity
             Intent returnIntent = new Intent();

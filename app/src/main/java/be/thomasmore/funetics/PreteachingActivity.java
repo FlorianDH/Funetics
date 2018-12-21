@@ -12,83 +12,80 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class PreteachingActivity extends AppCompatActivity {
+public class PreteachingActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
 
-    private MediaPlayer sound1;
-    private MediaPlayer sound2;
-    private MediaPlayer sound3;
+    private MediaPlayer audioPlayer = null;
+    private int[] tracks = new int[3];
+    private int currentTrack = 0;
+    private boolean isPlaying = false; //false by default
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preteaching);
 
-//        final MediaPlayer sound1 = MediaPlayer.create(this, R.raw.preteach1);
-//        final MediaPlayer sound2 = MediaPlayer.create(this, R.raw.preteach2);
-//        final MediaPlayer sound3 = MediaPlayer.create(this, R.raw.preteach3);
+        setAudioPlayer();
+        playAudioPlayer();
 
-        sound1 = MediaPlayer.create(this, R.raw.preteach1);
-        sound2 = MediaPlayer.create(this, R.raw.preteach2);
-        sound3 = MediaPlayer.create(this, R.raw.preteach3);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.soundFAB);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton soundFab = (FloatingActionButton) findViewById(R.id.soundFAB);
+        soundFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startGeluid();
+                playButton_onClick(view);
             }
         });
 
-
-        final FloatingActionButton playSound = (FloatingActionButton) this.findViewById(R.id.soundFAB);
         final ImageButton imageButton = (ImageButton) this.findViewById(R.id.imageButton);
-
-        playSound.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                sound1.start();
-//                sound2.start();
-//                sound3.start();
-//
-//                if (sound1.isPlaying() || sound2.isPlaying() || sound3.isPlaying()){
-//                    stopGeluid();
-//                }
-//                else {
-//                    startGeluid();
-//                }
-
-                startGeluid();
-            }
-        });
-
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent returnIntent = new Intent();
-                setResult(Activity.RESULT_OK, returnIntent);
-                finish();
+                if(isPlaying){
+                    audioPlayer.stop();
+                    Intent returnIntent = new Intent();
+                    setResult(Activity.RESULT_OK, returnIntent);
+                    finish();
+                }
+                else{
+                    Intent returnIntent = new Intent();
+                    setResult(Activity.RESULT_OK, returnIntent);
+                    finish();
+                }
             }
         });
-
     }
 
-    public void startGeluid(){
-        sound1.start();
-        while (sound1.isPlaying()){
-        }
-        sound2.start();
-        while (sound2.isPlaying()){
-        }
-        sound3.start();
-        while (sound3.isPlaying()){
+    public void setAudioPlayer() {
+        tracks[0] = R.raw.preteach1;
+        tracks[1] = R.raw.preteach2;                     // Oefenwoord
+        tracks[2] = R.raw.preteach3;
+    }
+
+    public void playAudioPlayer(){
+        isPlaying = true;
+        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+        audioPlayer.setOnCompletionListener(this);
+        audioPlayer.start();
+    }
+
+    public void onCompletion(MediaPlayer audioPlayer2) {
+        audioPlayer2.release();
+        if (currentTrack < tracks.length-1) {
+            isPlaying = true;
+            currentTrack++;
+            audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+            audioPlayer.setOnCompletionListener(this);
+            audioPlayer.start();
+        }else {
+            isPlaying = false;
         }
     }
 
-    public void stopGeluid(){
-        sound1.stop();
-        sound2.stop();
-        sound3.stop();
+    public void playButton_onClick(View view) {
+        if(isPlaying){
+            audioPlayer.stop();
+        }
+        currentTrack = 0;
+        playAudioPlayer();
     }
 
 }

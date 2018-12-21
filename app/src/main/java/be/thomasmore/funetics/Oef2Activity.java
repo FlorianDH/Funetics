@@ -12,8 +12,8 @@ import android.widget.TextView;
 public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
 
     private MediaPlayer audioPlayer = null;
-    int[] tracks = new int[3];
-    int currentTrack = 0;
+    private int[] tracks = new int[3];
+    private int currentTrack = 0;
 
     public int score = 0;
     public int aantalPogingen = 0;
@@ -22,10 +22,15 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
     private Doelwoord huidigDoelwoord;
     private Kind huidigKind;
 
+    private boolean isPlaying = false; //false by default
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef2);
+
+        setAudioPlayer();
+        playAudioPlayer();
 
         Bundle bundle = getIntent().getExtras();
         Long doelwoordId = bundle.getLong("doelwoordId");
@@ -42,13 +47,6 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
         TextView textWoord = (TextView) findViewById(R.id.textViewWoord);
         textWoord.setText(huidigDoelwoord.getNaam());
 
-//        TextView textUitleg = (TextView) findViewById(R.id.textViewUitleg);
-//        String uitleg = "Wat is " + huidigDoelwoord.getNaam().toLowerCase() + " een leuk woord. Kan jij het ook zeggen, " + huidigDoelwoord.getNaam().toLowerCase() + "? Doe maar!";
-//        textUitleg.setText(uitleg);
-
-        setAudioPlayer();
-        playAudioPlayer();
-
         FloatingActionButton soundFab = (FloatingActionButton) findViewById(R.id.soundFAB);
         soundFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +58,10 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     public void foutButton_onClick(View view) {
         aantalPogingen++;
+
+        if (isPlaying){
+            audioPlayer.stop();
+        }
 
         //Terug naar oefening activity
         Intent returnIntent = new Intent();
@@ -73,6 +75,10 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
         aantalPogingen++;
         score++;
 
+        if (isPlaying){
+            audioPlayer.stop();
+        }
+
         //Terug naar oefening activity
         Intent returnIntent = new Intent();
         returnIntent.putExtra("score", String.valueOf(score));
@@ -85,48 +91,44 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
         tracks[0] = R.raw.duikbril_herhaal;
         tracks[1] = R.raw.duikbril;                     // Oefenwoord
         tracks[2] = R.raw.oef2_doe_maar;
-        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
-        audioPlayer.setOnCompletionListener(this);
     }
 
     public void playAudioPlayer(){
-
+        isPlaying = true;
         audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
         audioPlayer.setOnCompletionListener(this);
-
         audioPlayer.start();
     }
 
-    public void onCompletion(MediaPlayer audioPlayer) {
-        audioPlayer.release();
+    public void onCompletion(MediaPlayer audioPlayer2) {
+        audioPlayer2.release();
         if (currentTrack < tracks.length-1) {
+            isPlaying = true;
             currentTrack++;
             audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
             audioPlayer.setOnCompletionListener(this);
             audioPlayer.start();
+        }else {
+            isPlaying = false;
         }
     }
 
     public void playButton_onClick(View view) {
+        if (isPlaying){
+            audioPlayer.stop();
+        }
+
+        isPlaying = true;
         currentTrack = 0;
         playAudioPlayer();
     }
 
     public void volgendeButton_onClick(View view) {
-//        if(audioPlayer.isPlaying())
-//        {
-//            audioPlayer.pause();
-//            audioPlayer.release();
-//        }
+        if(isPlaying){
+            audioPlayer.stop();
+        }
         Intent returnIntent = new Intent();
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
     }
-
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        audioPlayer.release();
-//    }
-
 }

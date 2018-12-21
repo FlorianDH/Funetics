@@ -15,8 +15,10 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     private MediaPlayer audioPlayer = null;
     private MediaPlayer contextPlayer = null;
-    int[] tracks = new int[6];
-    int currentTrack = 0;
+    private MediaPlayer juistPlayer = null;
+    private MediaPlayer foutPlayer = null;
+    private int[] tracks = new int[7];
+    private int currentTrack = 0;
 
     public int score = 0;
     public int aantalPogingen = 0;
@@ -24,6 +26,9 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
     private DatabaseHelper db;
     private Doelwoord huidigDoelwoord;
     private Kind huidigKind;
+
+    private boolean isPlaying = false; //false by default
+    private boolean isContextPlaying = false; //false by default
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,17 +63,33 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
     public void foutButton_onClick(View view) {
         aantalPogingen++;
 
+        if (isPlaying){
+            audioPlayer.stop();
+            isPlaying = false;
+        }
+
+        foutPlayer.start();
+        while (foutPlayer.isPlaying()){}
+
         //Terug naar oefening activity
-        Intent returnIntent = new Intent();
-        returnIntent.putExtra("score", String.valueOf(score));
-        returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
-        setResult(Activity.RESULT_OK,returnIntent);
-        finish();
+//        Intent returnIntent = new Intent();
+//        returnIntent.putExtra("score", String.valueOf(score));
+//        returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
+//        setResult(Activity.RESULT_OK,returnIntent);
+//        finish();
     }
 
     public void goedButton_onClick(View view) {
         aantalPogingen++;
         score++;
+
+        if (isPlaying){
+            audioPlayer.stop();
+            isPlaying = false;
+        }
+
+        juistPlayer.start();
+        while (juistPlayer.isPlaying()){}
 
         //Terug naar oefening activity
         Intent returnIntent = new Intent();
@@ -86,29 +107,43 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
         tracks[3] = R.raw.oef3_zin_juist;
         tracks[4] = R.raw.oef3_zin_fout;
         tracks[5] = R.raw.oef3_hier_gaan_we;
-        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
-        audioPlayer.setOnCompletionListener(this);
+        tracks[6] = R.raw.duikbril_context2;
     }
 
     public void setContextPlayer() {
         contextPlayer = MediaPlayer.create(getApplicationContext(), R.raw.duikbril_context2);
+        juistPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef3_goede_zin);
+        foutPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef3_oeps);
     }
 
     public void playAudioPlayer(){
+        isPlaying = true;
+        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+        audioPlayer.setOnCompletionListener(this);
         audioPlayer.start();
     }
 
-    public void onCompletion(MediaPlayer audioPlayer) {
-        audioPlayer.release();
+    public void onCompletion(MediaPlayer audioPlayer2) {
+        audioPlayer2.release();
         if (currentTrack < tracks.length-1) {
+            isPlaying = true;
             currentTrack++;
             audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
             audioPlayer.setOnCompletionListener(this);
             audioPlayer.start();
+        }else {
+            isPlaying = false;
         }
     }
 
     public void playButton_onClick(View view) {
+        if (isPlaying){
+            audioPlayer.stop();
+        }
+        isPlaying = false;
+
+        currentTrack = 0;
+
         contextPlayer.start();
     }
 
