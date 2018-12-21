@@ -39,7 +39,7 @@
             <LinearLayout
                 android:id="@+id/testenTitle"
                 android:layout_width="0dp"
-                android:layout_weight="0.43"
+                android:layout_weight="0.30"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="15dp">
@@ -53,14 +53,16 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/kindDetailfTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.20"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:gravity="end|center_vertical"
                 android:padding="0dp">
 
                 <Button
                     android:id="@+id/buttonTerug"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/beherenTerugBtn"
                     android:onClick="goTerug_onClick"/>
@@ -87,7 +89,7 @@
                         android:id="@+id/naamKind"
                         android:layout_height="wrap_content"
                         android:text="@string/fout"
-                        android:textSize="60sp"/>
+                        android:textSize="40sp"/>
 
                     <Button
                         android:id="@+id/buttonVolgende"

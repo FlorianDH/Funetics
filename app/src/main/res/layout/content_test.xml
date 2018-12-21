@@ -58,24 +58,12 @@
             <TextView
                 android:id="@+id/textViewWoord"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:lineSpacingExtra="30sp"
+                android:padding="10dp"
                 android:text="DUIKBRIL"
                 android:textAlignment="center"
                 android:textSize="40sp"/>
-
-            <ImageButton
-                android:id="@+id/replayButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:cropToPadding="false"
-                android:padding="0dp"
-                android:scaleType="fitCenter"
-                android:contentDescription="speaker icon"
-                app:srcCompat="@drawable/speaker_icon" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -94,7 +82,8 @@
                 <ImageButton
                     android:id="@+id/imageButton1"
                     android:layout_width="wrap_content"
-                    android:layout_height="270dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.50"
                     tools:srcCompat="@tools:sample/avatars[11]"
                     android:contentDescription="fout"
                     android:onClick="imageButton_onClick" />
@@ -102,8 +91,9 @@
                 <ImageButton
                     android:id="@+id/imageButton3"
                     android:layout_width="wrap_content"
-                    android:layout_height="270dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.50"
+                    android:layout_marginTop="5dp"
                     tools:srcCompat="@tools:sample/avatars[5]"
                     android:contentDescription="juist"
                     android:onClick="imageButton_onClick" />
@@ -119,15 +109,17 @@
                 <ImageButton
                     android:id="@+id/imageButton2"
                     android:layout_width="wrap_content"
-                    android:layout_height="270dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.50"
                     android:contentDescription="fout"
                     android:onClick="imageButton_onClick"
                     tools:srcCompat="@tools:sample/avatars" />
                 <ImageButton
                     android:id="@+id/imageButton4"
                     android:layout_width="wrap_content"
-                    android:layout_height="270dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.50"
+                    android:layout_marginTop="5dp"
                     tools:srcCompat="@tools:sample/avatars[3]"
                     android:contentDescription="fout"
                     android:onClick="imageButton_onClick" />

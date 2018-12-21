@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -40,11 +41,26 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
         textWoord.setText(huidigDoelwoord.getNaam());
 
         TextView textDefenitie = (TextView) findViewById(R.id.textViewDefenitie);
-        String def = huidigDoelwoord.getDefenitie();
         textDefenitie.setText(huidigDoelwoord.getDefenitie());
 
         setAudioPlayer();
         playAudioPlayer();
+
+        FloatingActionButton soundFab = (FloatingActionButton) findViewById(R.id.soundFAB);
+        soundFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playButton_onClick(view);
+            }
+        });
+
+        FloatingActionButton nextFab = (FloatingActionButton) findViewById(R.id.nextFAB);
+        nextFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                volgendeButton_onClick(view);
+            }
+        });
     }
 
     public void setAudioPlayer() {
@@ -57,6 +73,9 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     public void playAudioPlayer(){
+        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+        audioPlayer.setOnCompletionListener(this);
+
         audioPlayer.start();
     }
 
@@ -64,9 +83,9 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
         audioPlayer2.release();
         if (currentTrack < tracks.length-1) {
             currentTrack++;
-            audioPlayer2 = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
-            audioPlayer2.setOnCompletionListener(this);
-            audioPlayer2.start();
+            audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+            audioPlayer.setOnCompletionListener(this);
+            audioPlayer.start();
         }
     }
 

@@ -99,7 +99,7 @@ public class TestActivity extends AppCompatActivity {
             woordPlayer = MediaPlayer.create(this, R.raw.zaklamp);
         }
 
-        playSound = (ImageButton) this.findViewById(R.id.replayButton);
+        //playSound = (ImageButton) this.findViewById(R.id.replayButton);
 
         ImageButton1 = (ImageButton) this.findViewById(R.id.imageButton1);
         ImageButton2 = (ImageButton) this.findViewById(R.id.imageButton2);
@@ -111,12 +111,12 @@ public class TestActivity extends AppCompatActivity {
         ImageButton3.setImageResource(R.drawable.duikbril);
         ImageButton4.setImageResource(R.drawable.klimtouw);
 
-        playSound.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                woordPlayer.start();
-            }
-        });
+//        playSound.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                woordPlayer.start();
+//            }
+//        });
 
         playSound();
     }

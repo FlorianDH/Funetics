@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -41,12 +42,20 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
         TextView textWoord = (TextView) findViewById(R.id.textViewWoord);
         textWoord.setText(huidigDoelwoord.getNaam());
 
-        TextView textUitleg = (TextView) findViewById(R.id.textViewUitleg);
-        String uitleg = "Wat is " + huidigDoelwoord.getNaam().toLowerCase() + " een leuk woord. Kan jij het ook zeggen, " + huidigDoelwoord.getNaam().toLowerCase() + "? Doe maar!";
-        textUitleg.setText(uitleg);
+//        TextView textUitleg = (TextView) findViewById(R.id.textViewUitleg);
+//        String uitleg = "Wat is " + huidigDoelwoord.getNaam().toLowerCase() + " een leuk woord. Kan jij het ook zeggen, " + huidigDoelwoord.getNaam().toLowerCase() + "? Doe maar!";
+//        textUitleg.setText(uitleg);
 
         setAudioPlayer();
         playAudioPlayer();
+
+        FloatingActionButton soundFab = (FloatingActionButton) findViewById(R.id.soundFAB);
+        soundFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playButton_onClick(view);
+            }
+        });
     }
 
     public void foutButton_onClick(View view) {

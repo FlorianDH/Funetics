@@ -98,7 +98,7 @@
     <string name="leeftijd">Leeftijd</string>
     <string name="groep">Groep</string>
     <string name="actief">Is actief</string>
-    <string name="actiefExplain">Zet een persoon inactief als diegene geen tests meer zal doen maar je wel de gegevens nog wilt bewaren van deze persoon</string>
+    <string name="actiefExplain">Zet een persoon inactief als diegene geen tests meer zal doen maar waarvan je de gegevens nog wilt bewaren</string>
     <string name="wijzigbtn">Wijzigen</string>
     <string name="toevoegenbtn">Toevoegen</string>
     <string name="verwijderbtn">Verwijderen</string>
@@ -116,10 +116,10 @@
     <string name="title_activity_preteaching">Preteaching</string>
 
     <!-- Content_oef1 -->
-    <string name="title_activity_oef1">Oefening 1 : Definitie van het woord</string>
+    <string name="title_activity_oef1">Oefening 1 : Definitie</string>
 
     <!-- Content_oef2 -->
-    <string name="title_activity_oef2">Oefening 2 : Herhalen van het woord</string>
+    <string name="title_activity_oef2">Oefening 2 : Herhalen</string>
 
     <!-- Content_oef3 -->
     <string name="title_activity_oef3">Oefening 3 : Context</string>

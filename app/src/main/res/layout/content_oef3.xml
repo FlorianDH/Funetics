@@ -43,14 +43,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.50"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:text="Naam kind" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.50"
             android:orientation="horizontal"
             android:gravity="center">
             <TextView
@@ -68,16 +69,42 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <Button
-                android:id="@+id/buttonReplay"
-                android:layout_width="800dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="15dp"
-                android:padding="25dp"
-                android:text="Opnieuw afspelen"
-                android:onClick="playButton_onClick"/>
+            <!--<Button-->
+                <!--android:id="@+id/buttonReplay"-->
+                <!--android:layout_width="800dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_margin="15dp"-->
+                <!--android:padding="25dp"-->
+                <!--android:text="Opnieuw afspelen"-->
+                <!--android:onClick="playButton_onClick"/>-->
 
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:gravity="center">-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/button1"-->
+                    <!--android:layout_width="385dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_margin="15dp"-->
+                    <!--android:padding="50dp"-->
+                    <!--android:text="Fout"-->
+                    <!--android:onClick="volgendeButton_onClick"/>-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/button2"-->
+                    <!--android:layout_width="385dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_margin="15dp"-->
+                    <!--android:padding="50dp"-->
+                    <!--android:text="Goed"-->
+                    <!--android:onClick="volgendeButton_onClick"/>-->
+            <!--</LinearLayout>-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,24 +113,40 @@
 
                 <Button
                     android:id="@+id/button1"
-                    android:layout_width="385dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:gravity="center"
                     android:layout_margin="15dp"
-                    android:padding="50dp"
-                    android:text="Fout"
-                    android:onClick="volgendeButton_onClick"/>
-
+                    android:background="@drawable/thumb_down"
+                    android:onClick="foutButton_onClick"/>
                 <Button
                     android:id="@+id/button2"
-                    android:layout_width="385dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+
                     android:gravity="center"
                     android:layout_margin="15dp"
-                    android:padding="50dp"
-                    android:text="Goed"
-                    android:onClick="volgendeButton_onClick"/>
+                    android:background="@drawable/thumb_up"
+                    android:onClick="goedButton_onClick"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/soundFAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="25dp"
+            android:clickable="true"
+            android:padding="25dp"
+            app:fabCustomSize="80dp"
+            app:srcCompat="@drawable/speaker_icon"
+            android:focusable="true"/>
+
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

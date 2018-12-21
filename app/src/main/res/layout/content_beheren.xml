@@ -19,14 +19,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp"
-            android:background="@color/color_primary_dark">
+            android:background="@color/color_primary_dark"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:id="@+id/groepenTitle"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.30"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp">
 
@@ -41,8 +42,10 @@
 
             <LinearLayout
                 android:id="@+id/kinderenTitle"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.50"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp">
 
@@ -56,8 +59,10 @@
 
             <LinearLayout
                 android:id="@+id/kindDetailTitle"
-                android:layout_width="580dp"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.50"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp">
 
@@ -70,14 +75,18 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/kindDetailfTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.20"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="end|center_vertical"
                 android:padding="0dp">
 
                 <Button
                     android:id="@+id/buttonTerug"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/beherenTerugBtn"
                     android:onClick="goTerug_onClick"/>
@@ -92,11 +101,13 @@
             android:orientation="horizontal"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
+            tools:layout_editor_absoluteY="8dp"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:id="@+id/groepenLijst"
-                android:layout_width="300dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.30"
                 android:layout_height="match_parent"
                 android:background="@color/color_orange"
                 android:orientation="vertical">
@@ -116,7 +127,8 @@
 
             <LinearLayout
                 android:id="@+id/kinderenLijst"
-                android:layout_width="300dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.50"
                 android:layout_height="match_parent"
                 android:background="@color/color_primary_light"
                 android:orientation="vertical">
@@ -133,13 +145,20 @@
 
             </LinearLayout>
 
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_weight="0.70"
+                android:layout_height="match_parent"
+                android:background="@color/color_grey">
+
+
+
             <LinearLayout
                 android:id="@+id/kindDetailVenster"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color_grey"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="32dp">
+                android:padding="15dp">
 
                 <TextView
                     android:id="@+id/voornaamLabel"
@@ -156,7 +175,7 @@
                     android:ems="10"
                     android:hint="@string/voornaam"
                     android:inputType="textPersonName"
-                    android:importantForAutofill="no" />
+                    tools:ignore="Autofill" />
 
                 <TextView
                     android:id="@+id/naamLabel"
@@ -173,24 +192,7 @@
                     android:ems="10"
                     android:hint="@string/naam"
                     android:inputType="textPersonName"
-                    android:importantForAutofill="no" />
-
-                <TextView
-                    android:id="@+id/leeftijdLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="@string/leeftijd" />
-
-                <EditText
-                    android:id="@+id/leeftijdInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:ems="10"
-                    android:hint="@string/leeftijd"
-                    android:inputType="number"
-                    android:importantForAutofill="no" />
+                    tools:ignore="Autofill" />
 
                 <TextView
                     android:id="@+id/groepLabel"
@@ -217,6 +219,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="35dp"
+                    android:checked="true"
                     android:text="@string/actief" />
 
                 <Button
@@ -244,6 +247,7 @@
                     android:text="@string/verwijderbtn" />
 
             </LinearLayout>
+            </ScrollView>
         </LinearLayout>
     </LinearLayout>
 

@@ -32,7 +32,8 @@
         <activity
             android:name=".DetailKindActivity"
             android:label="@string/title_activity_detail_kind"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PreteachingActivity"
             android:label="@string/title_activity_preteaching"
@@ -43,32 +44,47 @@
             android:label="@string/title_activity_test"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".OefeningActivity" />
+        <activity
+            android:name=".OefeningActivity"
+            android:label="Oefening"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Oef1Activity"
             android:label="@string/title_activity_oef1"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Oef2Activity"
             android:label="@string/title_activity_oef2"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Oef3Activity"
             android:label="@string/title_activity_oef3"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Oef4Activity"
             android:label="@string/title_activity_oef4"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Oef5Activity"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_oef5"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Oef6Activity"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_oef6"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".DetailTestActivity"></activity>
+        <activity
+            android:name=".DetailTestActivity"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_detail_kind"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
