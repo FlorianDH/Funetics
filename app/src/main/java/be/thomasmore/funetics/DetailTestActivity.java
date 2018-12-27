@@ -45,4 +45,8 @@ public class DetailTestActivity extends AppCompatActivity {
     public void goTerug_onClick(View v) {
         finish();
     }
+
+    public void buttonDelete_onClick(View v) {
+        finish();
+    }
 }
