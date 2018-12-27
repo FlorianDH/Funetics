@@ -12,7 +12,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     // Database Version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     // Database Name
     private static final String DATABASE_NAME = "funatics";
 
@@ -516,7 +516,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         Cursor cursor = db.query(
                 "test",      // tabelnaam
-                new String[] { "id", "datumTijd", "conditieId", "kindId" }, // kolommen
+                new String[] { "id", "datumTijd", "kindId", "conditieId" }, // kolommen
                 "id = ?",  // selectie
                 new String[] { String.valueOf(id) }, // selectieparameters
                 null,           // groupby

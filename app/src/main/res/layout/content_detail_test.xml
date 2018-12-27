@@ -8,4 +8,143 @@
     tools:context=".DetailTestActivity"
     tools:showIn="@layout/activity_detail_test">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/detailTopBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
+            android:background="@color/color_primary_dark">
+
+            <LinearLayout
+                android:id="@+id/detailTitle"
+                android:layout_width="0dp"
+                android:layout_weight="0.50"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/textViewDetailTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/detailTitle"
+                    style="@style/title_white"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/overzichtTitle"
+                android:layout_width="0dp"
+                android:layout_weight="0.30"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/textViewOverzichtTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Overzicht"
+                    style="@style/title_white"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.20"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="end|center_vertical"
+                android:padding="0dp">
+
+                <Button
+                    android:id="@+id/buttonTerug"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/beherenTerugBtn"
+                    android:onClick="goTerug_onClick"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.50"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="25dp"
+                android:background="@color/color_orange">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Kind:"
+                    android:textSize="30sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/kindTest"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fout"
+                    android:textSize="25sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Datum:"
+                    android:textSize="30sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/datumTest"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fout"
+                    android:textSize="25sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Uur:"
+                    android:textSize="30sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/uurTest"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fout"
+                    android:textSize="25sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Conditie:"
+                    android:textSize="30sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/conditieTest"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fout"
+                    android:textSize="25sp"/>
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/listViewWoorden"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.50"
+                android:background="@color/color_primary_light"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

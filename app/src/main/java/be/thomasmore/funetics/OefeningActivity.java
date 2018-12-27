@@ -39,12 +39,12 @@ public class OefeningActivity extends Activity {
 
         Bundle bundle = getIntent().getExtras();
         Long kindId = bundle.getLong("kindId");
-        Long conditie = bundle.getLong("conditie");
+        Long conditieId = bundle.getLong("conditie");
 
         db = new DatabaseHelper(this);
 
         huidigKind = db.getKindById(kindId);
-        huidigeConditie = db.getConditieById(conditie);
+        huidigeConditie = db.getConditieById(conditieId);
 
         //Groep 1
         if (huidigKind.getGroepId() == 1){
@@ -112,9 +112,10 @@ public class OefeningActivity extends Activity {
 
         String huidigeDateTime = getDateTime();
 
-        nieuweTest.setConditieId((int) huidigeConditie.getId());
-        nieuweTest.setKindId((int) huidigKind.getId());
         nieuweTest.setDatumTijd(huidigeDateTime);
+        nieuweTest.setKindId((int) huidigKind.getId());
+        nieuweTest.setConditieId((int) huidigeConditie.getId());
+
 
         db.insertTest(nieuweTest);
 

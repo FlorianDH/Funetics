@@ -107,7 +107,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.50"
                 android:layout_height="match_parent"
-                android:background="@color/color_primary_light"/>
+                android:background="@color/color_primary_light"
+                android:scrollbars="vertical"/>
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
