@@ -19,6 +19,7 @@ public class OefeningActivity extends Activity {
     private List<Doelwoord> doelwoorden = new ArrayList<Doelwoord>();
     private Doelwoord huidigDoelwoord;
     private long huidigGetestWoordId;
+    private long huidigeTestId;
 
     //Requestcodes
     final int requestVoormeting = 1;
@@ -117,7 +118,7 @@ public class OefeningActivity extends Activity {
         nieuweTest.setConditieId((int) huidigeConditie.getId());
 
 
-        db.insertTest(nieuweTest);
+        huidigeTestId = db.insertTest(nieuweTest);
 
         //Voormeting opstarten
         startVoormeting();
@@ -137,6 +138,7 @@ public class OefeningActivity extends Activity {
                 //Eerst een nieuw getest woord aanmaken
                 GetestWoord nieuwGetestWoord = new GetestWoord();
                 nieuwGetestWoord.setDoelwoordId((int) huidigDoelwoord.getId());
+                nieuwGetestWoord.setTestId((int) huidigeTestId);
                 huidigGetestWoordId = db.insertGetestWoord(nieuwGetestWoord);
                 //Nu een nieuwe geteste oefening maken
                 GetesteOefening nieuweGetesteOefening = new GetesteOefening();

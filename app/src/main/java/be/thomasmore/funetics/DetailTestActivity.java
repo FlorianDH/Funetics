@@ -47,6 +47,7 @@ public class DetailTestActivity extends AppCompatActivity {
     }
 
     public void buttonDelete_onClick(View v) {
+        db.deleteTest(huidigeTest.getId());
         finish();
     }
 }

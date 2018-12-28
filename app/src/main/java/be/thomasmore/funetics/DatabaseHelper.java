@@ -12,7 +12,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     // Database Version
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
     // Database Name
     private static final String DATABASE_NAME = "funatics";
 
@@ -61,7 +61,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         String CREATE_TABLE_GETESTWOORD = "CREATE TABLE getestWoord (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 "doelwoordId INTEGER NOT NULL, " +
-                "FOREIGN KEY (doelwoordId) REFERENCES doelwoord(id))";
+                "testId INTEGER NOT NULL, " +
+                "FOREIGN KEY (doelwoordId) REFERENCES doelwoord(id), " +
+                "FOREIGN KEY (testId) REFERENCES test(id))";
         db.execSQL(CREATE_TABLE_GETESTWOORD);
 
         String CREATE_TABLE_DOELWOORD = "CREATE TABLE doelwoord (" +
@@ -533,6 +535,19 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         cursor.close();
         db.close();
         return test;
+    }
+
+    // delete-methode
+    public boolean deleteTest(long id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int numrows = db.delete(
+                "test",
+                "id = ?",
+                new String[] { String.valueOf(id) });
+
+        db.close();
+        return numrows > 0;
     }
 }
 
