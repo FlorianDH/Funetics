@@ -1,6 +1,9 @@
 package be.thomasmore.funetics;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -47,7 +50,20 @@ public class DetailTestActivity extends AppCompatActivity {
     }
 
     public void buttonDelete_onClick(View v) {
-        db.deleteTest(huidigeTest.getId());
-        finish();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Ben je zeker dat je deze test definitief wilt verwijderen?")
+
+                .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        db.deleteTest(huidigeTest.getId());
+                        finish();
+                    }
+                })
+                .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
