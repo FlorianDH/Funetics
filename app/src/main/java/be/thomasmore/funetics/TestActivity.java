@@ -109,6 +109,7 @@ public class TestActivity extends AppCompatActivity {
         ImageButton3 = (ImageButton) this.findViewById(R.id.imageButton3);
         ImageButton4 = (ImageButton) this.findViewById(R.id.imageButton4);
 
+        //TODO Laad dynamisch de afbeeldingen
         ImageButton1.setImageResource(R.drawable.kompas);
         ImageButton2.setImageResource(R.drawable.kroos);
         ImageButton3.setImageResource(R.drawable.duikbril);

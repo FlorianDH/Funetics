@@ -56,7 +56,6 @@ public class BeherenActivity extends AppCompatActivity {
     }
 
     private void leesGroepen(){
-        // todo duid geselecteerde groep aan
         final List<Groep> groepen = db.getGroepen();
 
         ArrayAdapter<Groep> adapter =
@@ -106,9 +105,6 @@ public class BeherenActivity extends AppCompatActivity {
     }
 
     private void leesKinderenWhereGroep(int groepId){
-
-        //todo duid geselecteerd kind aan
-
         List<Kind> kinderenLijst;
 
         if(groepId == 0){

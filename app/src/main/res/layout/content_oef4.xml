@@ -53,14 +53,40 @@
             android:orientation="horizontal"
             android:gravity="center">
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="400dp"
+            <TextView
+                android:id="@+id/textViewWoord"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_margin="15dp"
-                android:text="Volgende oefening"
-                android:onClick="volgendeButton_onClick"/>
+                android:text="Woord"
+                android:textAppearance="@style/title.dark"
+                android:textSize="40sp" />
+
+            <!--<Button-->
+                <!--android:id="@+id/button2"-->
+                <!--android:layout_width="400dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_margin="15dp"-->
+                <!--android:text="Volgende oefening"-->
+                <!--android:onClick="volgendeButton_onClick"/>-->
         </LinearLayout>
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/nextFAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="25dp"
+            android:clickable="true"
+            android:padding="25dp"
+            app:fabCustomSize="80dp"
+            app:srcCompat="@drawable/arrow_right_icon"
+            android:focusable="true"/>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
