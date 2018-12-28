@@ -45,6 +45,10 @@ public class DetailKindActivity extends Activity {
         startActivity(intent);
     }
 
+    public void buttonSync_onClick(View v) {
+        leesTesten();
+    }
+
     public void goStartTest_onClick(View v){
         //Vragen welke conditie er getest moet worden
         showConditieDialog();

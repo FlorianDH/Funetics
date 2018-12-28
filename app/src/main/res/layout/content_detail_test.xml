@@ -152,6 +152,7 @@
                 android:background="@color/color_primary_light"
                 android:scrollbars="vertical" />
         </LinearLayout>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
