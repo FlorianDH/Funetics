@@ -35,6 +35,13 @@ public class Oef4Activity extends AppCompatActivity {
 
         TextView textWoord = (TextView) findViewById(R.id.textViewWoord);
         textWoord.setText(huidigDoelwoord.getNaam());
+
+        FloatingActionButton nextFAB = (FloatingActionButton) findViewById(R.id.nextFAB);
+        nextFAB.setVisibility(View.INVISIBLE); //Maak de volgende-knop onzichtbaar tot er 3 woorden zijn aangeduid
+    }
+
+    public void nextFAB_onClick(View view) {
+
     }
 
     public void volgendeButton_onClick(View view) {

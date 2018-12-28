@@ -85,6 +85,7 @@
             android:layout_margin="25dp"
             android:clickable="true"
             android:padding="25dp"
+            android:onClick="nextFAB_onClick"
             app:fabCustomSize="80dp"
             app:srcCompat="@drawable/arrow_right_icon"
             android:focusable="true"/>
