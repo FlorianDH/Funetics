@@ -55,7 +55,7 @@
             android:orientation="horizontal"
             android:gravity="center">
             <TextView
-                android:id="@+id/textViewZin"
+                android:id="@+id/textViewContext"
                 android:layout_width="match_parent"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
@@ -63,7 +63,7 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="22sp"
-                android:text="‘De jongen kan onder water kijken naar zijn vriendje, want hij heeft een duikbril op.’"/>
+                android:text="Context"/>
         </LinearLayout>
 
 
@@ -78,7 +78,7 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <Button
+                <ImageButton
                     android:id="@+id/buttonFout"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -86,8 +86,8 @@
                     android:layout_margin="15dp"
                     android:background="@drawable/thumb_down"
                     android:onClick="foutButton_onClick"/>
-                <Button
-                    android:id="@+id/buttonJuist"
+                <ImageButton
+                    android:id="@+id/buttonGoed"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:gravity="center"

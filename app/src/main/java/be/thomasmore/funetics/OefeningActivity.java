@@ -341,5 +341,4 @@ public class OefeningActivity extends Activity {
         intent.putExtras(bundle);
         startActivityForResult(intent, requestNameting);
     }
-
 }

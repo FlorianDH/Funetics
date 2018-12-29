@@ -60,10 +60,10 @@ public class VoormetingActivity extends AppCompatActivity {
             }
         });
 
+        playWoordPlayer();
+
         foutPlayer = MediaPlayer.create(this, R.raw.oef0_fout);
         juistPlayer = MediaPlayer.create(this, R.raw.oef0_juist);
-
-        playWoordPlayer();
     }
 
     public void imageButton_onClick(View view) {
