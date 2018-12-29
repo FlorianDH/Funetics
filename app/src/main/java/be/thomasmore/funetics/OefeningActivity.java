@@ -271,8 +271,9 @@ public class OefeningActivity extends Activity {
         Bundle bundle = new Bundle();
         bundle.putLong("doelwoordId", huidigDoelwoord.getId());
         bundle.putLong("kindId", huidigKind.getId());
+        bundle.putLong("woordensetId", huidigeWoordenset.getId());
 
-        Intent intent = new Intent(this, TestActivity.class);
+        Intent intent = new Intent(this, VoormetingActivity.class);
         intent.putExtras(bundle);
         startActivityForResult(intent, requestVoormeting);
     }
@@ -327,7 +328,7 @@ public class OefeningActivity extends Activity {
     }
 
     public void startNameting(){
-        Intent intent = new Intent(this, TestActivity.class);
+        Intent intent = new Intent(this, NametingActivity.class);
         startActivityForResult(intent, requestNameting);
     }
 

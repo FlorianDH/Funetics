@@ -7,16 +7,30 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class TestActivity extends AppCompatActivity {
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+public class VoormetingActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
+    private Kind huidigKind;
+
+    private List<Doelwoord> woordenLijst;
+
+    // 0 = woordId, 1 = pogingen
+    private long[][] voormeting = new long[10][];
+
     private Doelwoord huidigDoelwoord;
     private String huidigDoelwoordUpper;
     private String huidigDoelwoordLower;
+
+
 
     public int score = 0;
     public int aantalPogingen = 0;
@@ -33,15 +47,15 @@ public class TestActivity extends AppCompatActivity {
     private ImageButton ImageButton3;
     private ImageButton ImageButton4;
 
-    private Kind huidigKind;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
-
+        setContentView(R.layout.activity_voormeting);
 
         Bundle bundle = getIntent().getExtras();
+        int woordensetId = (int) bundle.getLong("woordensetId");
         Long doelwoordId = bundle.getLong("doelwoordId");
         Long kindId = bundle.getLong("kindId");
 
@@ -59,8 +73,12 @@ public class TestActivity extends AppCompatActivity {
         huidigDoelwoord = db.getDoelwoordById(doelwoordId);
         huidigDoelwoordUpper = huidigDoelwoord.getNaam().toUpperCase();
         huidigDoelwoordLower = huidigDoelwoord.getNaam().toLowerCase();
-
+        woordenLijst = db.getDoelwoordenWhereWoordensetId(woordensetId);
         huidigKind = db.getKindById(kindId);
+
+setVoormeting();
+
+
 
         TextView textNaamKind = (TextView) findViewById(R.id.textViewNaam);
         textNaamKind.setText(huidigKind.toString());
@@ -152,5 +170,12 @@ public class TestActivity extends AppCompatActivity {
 
     public void playSound(){
         woordPlayer.start();
+    }
+
+    public void setVoormeting(){
+        for(int i = 1; i < woordenLijst.size(); i++){
+            voormeting[i][0] = db.getDoelwoordById(i);
+            voormeting[i][1] = 0;
+        }
     }
 }
