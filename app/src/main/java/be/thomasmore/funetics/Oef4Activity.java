@@ -21,15 +21,30 @@ public class Oef4Activity extends AppCompatActivity {
     private Doelwoord huidigDoelwoord;
     private Kind huidigKind;
 
+    private int score = 0;
+    private int aantalPogingen = 0;
+
     private Button buttonWoord1;
     private Button buttonWoord2;
     private Button buttonWoord3;
     private Button buttonWoord4;
 
+    private FloatingActionButton nextFAB;
+
+    private boolean woord1Selected;
+    private boolean woord2Selected;
+    private boolean woord3Selected;
+    private boolean woord4Selected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef4);
+
+        woord1Selected = false;
+        woord2Selected = false;
+        woord3Selected = false;
+        woord4Selected = false;
 
         Bundle bundle = getIntent().getExtras();
         Long doelwoordId = bundle.getLong("doelwoordId");
@@ -46,7 +61,7 @@ public class Oef4Activity extends AppCompatActivity {
         TextView textWoord = (TextView) findViewById(R.id.textViewWoord);
         textWoord.setText(huidigDoelwoord.getNaam());
 
-        FloatingActionButton nextFAB = (FloatingActionButton) findViewById(R.id.nextFAB);
+        nextFAB = (FloatingActionButton) findViewById(R.id.nextFAB);
         nextFAB.setVisibility(View.INVISIBLE); //Maak de volgende-knop onzichtbaar tot er 3 woorden zijn aangeduid
 
         //Alle woorden in een array zetten (laatste woord is altijd fout)
@@ -65,7 +80,20 @@ public class Oef4Activity extends AppCompatActivity {
     }
 
     public void nextFAB_onClick(View view) {
+        if (woord1Selected && woord2Selected && woord3Selected){
+            score++;
+            aantalPogingen++;
 
+            //Terug naar oefening activity
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("score", String.valueOf(score));
+            returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
+            setResult(Activity.RESULT_OK,returnIntent);
+            finish();
+        }
+        else {
+            aantalPogingen++;
+        }
     }
 
 //    public void volgendeButton_onClick(View view) {
@@ -75,19 +103,70 @@ public class Oef4Activity extends AppCompatActivity {
 //    }
 
     public void webButton1_onClick(View view){
-        buttonWoord1.setBackgroundColor(getColor(R.color.web_green));
+        if (woord1Selected){
+            buttonWoord1.setBackgroundColor(getColor(R.color.web_red));
+        }
+        else {
+            buttonWoord1.setBackgroundColor(getColor(R.color.web_green));
+        }
+        woord1Selected = !woord1Selected;
+        checkFabNext();
     }
 
     public void webButton2_onClick(View view){
-        buttonWoord1.setBackgroundColor(getColor(R.color.web_green));
+        if (woord2Selected){
+            buttonWoord2.setBackgroundColor(getColor(R.color.web_red));
+        }
+        else {
+            buttonWoord2.setBackgroundColor(getColor(R.color.web_green));
+        }
+        woord2Selected = !woord2Selected;
+        checkFabNext();
     }
 
     public void webButton3_onClick(View view){
-
+        if (woord3Selected){
+            buttonWoord3.setBackgroundColor(getColor(R.color.web_red));
+        }
+        else {
+            buttonWoord3.setBackgroundColor(getColor(R.color.web_green));
+        }
+        woord3Selected = !woord3Selected;
+        checkFabNext();
     }
 
     public void webButton4_onClick(View view){
+        if (woord4Selected){
+            buttonWoord4.setBackgroundColor(getColor(R.color.web_red));
+        }
+        else {
+            buttonWoord4.setBackgroundColor(getColor(R.color.web_green));
+        }
+        woord4Selected = !woord4Selected;
+        checkFabNext();
+    }
 
+    public void checkFabNext(){
+        int aantalChecked = 0;
+        if (woord1Selected){
+            aantalChecked++;
+        }
+        if (woord2Selected){
+            aantalChecked++;
+        }
+        if (woord3Selected){
+            aantalChecked++;
+        }
+        if (woord4Selected){
+            aantalChecked++;
+        }
+
+        if (aantalChecked == 3){
+            nextFAB.setVisibility(View.VISIBLE);
+        }
+        else {
+            nextFAB.setVisibility(View.INVISIBLE);
+        }
     }
 
 }
