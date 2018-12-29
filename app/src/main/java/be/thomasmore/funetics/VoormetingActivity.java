@@ -54,9 +54,8 @@ public class VoormetingActivity extends AppCompatActivity {
         TextView textNaamKind = (TextView) findViewById(R.id.textViewNaam);
         textNaamKind.setText(huidigKind.toString());
 
-        playOpdrachtSound();
-
         setVoormeting();
+        playWoordPlayer();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.soundFAB);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +88,7 @@ public class VoormetingActivity extends AppCompatActivity {
             if (oefening < 9){
                 oefening ++;
                 setVoormeting();
+                playWoordPlayer();
             }else {
                 //Terug naar oefening activity
                 Intent returnIntent = new Intent();
@@ -112,6 +112,10 @@ public class VoormetingActivity extends AppCompatActivity {
     }
 
     public void playWoordPlayer(){
+        if(oefening == 0){
+            playOpdrachtSound();
+            while (audioPlayer.isPlaying()){}
+        }
         woordPlayer.start();
     }
 
@@ -125,9 +129,7 @@ public class VoormetingActivity extends AppCompatActivity {
         setWoordPlayer();
         setImages();
 
-        voormeting[oefening]= 0;
-
-        playWoordPlayer();
+        voormeting[oefening] = 0;
     }
 
     public void setWoordPlayer() {
