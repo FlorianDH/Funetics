@@ -181,7 +181,7 @@ public class OefeningActivity extends Activity {
                 //Write your code if there's no result
             }
         }
-        //Preteaching is beeindigd
+        //OEF2 is beeindigd
         else if (requestCode == requestOef2){
             if(resultCode == Activity.RESULT_OK){
                 //Score ophalen
@@ -203,7 +203,7 @@ public class OefeningActivity extends Activity {
                 //Write your code if there's no result
             }
         }
-        //Preteaching is beeindigd
+        //OEF3 is beeindigd
         else if (requestCode == requestOef3){
             if(resultCode == Activity.RESULT_OK){
 
@@ -214,7 +214,7 @@ public class OefeningActivity extends Activity {
                 //Write your code if there's no result
             }
         }
-        //Preteaching is beeindigd
+        //OEF4 is beeindigd
         else if (requestCode == requestOef4){
             if(resultCode == Activity.RESULT_OK){
 
@@ -225,7 +225,7 @@ public class OefeningActivity extends Activity {
                 //Write your code if there's no result
             }
         }
-        //Preteaching is beeindigd
+        //OEF5 is beeindigd
         else if (requestCode == requestOef5){
             if(resultCode == Activity.RESULT_OK){
 
@@ -236,7 +236,7 @@ public class OefeningActivity extends Activity {
                 //Write your code if there's no result
             }
         }
-        //Preteaching is beeindigd
+        //OEF6 is beeindigd
         else if (requestCode == requestOef6){
             if(resultCode == Activity.RESULT_OK){
 
@@ -247,7 +247,7 @@ public class OefeningActivity extends Activity {
                 //Write your code if there's no result
             }
         }
-        //Preteaching is beeindigd
+        //Nameting is beeindigd
         else if (requestCode == requestNameting){
             if(resultCode == Activity.RESULT_OK){
 
