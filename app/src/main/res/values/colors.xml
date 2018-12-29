@@ -8,6 +8,9 @@
     <color name="color_grey">#CBD9D6</color>
     <color name="color_white">#fff</color>
 
+    <color name="web_red">#e33d3d</color>
+    <color name="web_green">#5ecf2e</color>
+
     <color name="transparent">#00000000</color>
 
     <color name="black_overlay">#66000000</color>

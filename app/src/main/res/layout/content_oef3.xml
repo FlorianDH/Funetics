@@ -55,9 +55,13 @@
             android:orientation="horizontal"
             android:gravity="center">
             <TextView
+                android:id="@+id/textViewZin"
                 android:layout_width="match_parent"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textStyle="bold"
                 android:textSize="22sp"
                 android:text="‘De jongen kan onder water kijken naar zijn vriendje, want hij heeft een duikbril op.’"/>
         </LinearLayout>

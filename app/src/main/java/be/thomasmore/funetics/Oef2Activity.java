@@ -29,9 +29,6 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef2);
 
-        setAudioPlayer();
-        playAudioPlayer();
-
         Bundle bundle = getIntent().getExtras();
         Long doelwoordId = bundle.getLong("doelwoordId");
         Long kindId = bundle.getLong("kindId");
@@ -40,6 +37,9 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
         huidigDoelwoord = db.getDoelwoordById(doelwoordId);
         huidigKind = db.getKindById(kindId);
+
+        setAudioPlayer();
+        playAudioPlayer();
 
         TextView textNaamKind = (TextView) findViewById(R.id.textViewNaam);
         textNaamKind.setText(huidigKind.toString());
@@ -88,8 +88,8 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     public void setAudioPlayer() {
-        tracks[0] = R.raw.duikbril_herhaal;
-        tracks[1] = R.raw.duikbril;                     // Oefenwoord
+        tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_herhaal", "raw", getPackageName()); //oefenwoord_herhaal
+        tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());  // oefenwoord
         tracks[2] = R.raw.oef2_doe_maar;
     }
 

@@ -313,12 +313,20 @@ public class OefeningActivity extends Activity {
     }
 
     public void startOef4(){
+        Bundle bundle = new Bundle();
+        bundle.putLong("doelwoordId", huidigDoelwoord.getId());
+        bundle.putLong("kindId", huidigKind.getId());
         Intent intent = new Intent(this, Oef4Activity.class);
+        intent.putExtras(bundle);
         startActivityForResult(intent, requestOef4);
     }
 
     public void startOef5(){
+        Bundle bundle = new Bundle();
+        bundle.putLong("doelwoordId", huidigDoelwoord.getId());
+        bundle.putLong("kindId", huidigKind.getId());
         Intent intent = new Intent(this, Oef5Activity.class);
+        intent.putExtras(bundle);
         startActivityForResult(intent, requestOef5);
     }
 
