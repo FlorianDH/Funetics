@@ -55,7 +55,6 @@ public class VoormetingActivity extends AppCompatActivity {
         textNaamKind.setText(huidigKind.toString());
 
         setVoormeting();
-        playWoordPlayer();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.soundFAB);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -65,44 +64,40 @@ public class VoormetingActivity extends AppCompatActivity {
             }
         });
 
-        foutPlayer = MediaPlayer.create(this, R.raw.fout);
-        juistPlayer = MediaPlayer.create(this, R.raw.juist);
+        foutPlayer = MediaPlayer.create(this, R.raw.oef0_fout);
+        juistPlayer = MediaPlayer.create(this, R.raw.oef0_juist);
 
+        playWoordPlayer();
     }
 
     public void imageButton_onClick(View view) {
         String waarde = (String) view.getContentDescription();
 
-        //Controleren op welke knop er gedrukt is
+        // Juiste foto
         if(waarde.equals("juist")){
             juistPlayer.start();
-
-            if(voormeting[oefening] == 0){
-                score++;
-            }
-
             voormeting[oefening] ++;
-
             while (juistPlayer.isPlaying()){}
-
-            if (oefening < 9){
-                oefening ++;
-                setVoormeting();
-                playWoordPlayer();
-            }else {
-                //Terug naar oefening activity
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra("score", String.valueOf(score));
-                returnIntent.putExtra("voormeting", voormeting);
-                setResult(Activity.RESULT_OK,returnIntent);
-                finish();
-            }
         }
 
-        //Er is op de foute afbeelding gedrukt
+        //Foute foto
         else {
-            voormeting[oefening] ++;
             foutPlayer.start();
+            while (foutPlayer.isPlaying()){}
+        }
+
+
+        if (oefening < 9){
+            oefening ++;
+            setVoormeting();
+            playWoordPlayer();
+        }else {
+            //Terug naar oefening activity
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("score", String.valueOf(score));
+            returnIntent.putExtra("voormeting", voormeting);
+            setResult(Activity.RESULT_OK,returnIntent);
+            finish();
         }
     }
 
@@ -201,7 +196,7 @@ public class VoormetingActivity extends AppCompatActivity {
                 ImageButton2.setContentDescription("fout");
                 ImageButton3.setImageResource(R.drawable.kompas);
                 ImageButton3.setContentDescription("fout");
-                ImageButton4.setImageResource(R.drawable.riet);
+                ImageButton4.setImageResource(R.drawable.kroos);
                 ImageButton4.setContentDescription("juist");
                 break;
             case 3: //riet
@@ -221,7 +216,7 @@ public class VoormetingActivity extends AppCompatActivity {
                 ImageButton2.setContentDescription("juist");
                 ImageButton3.setImageResource(R.drawable.duikbril);
                 ImageButton3.setContentDescription("fout");
-                ImageButton4.setImageResource(R.drawable.riet);
+                ImageButton4.setImageResource(R.drawable.kroos);
                 ImageButton4.setContentDescription("fout");
                 break;
             case 5: //kompas
@@ -235,7 +230,7 @@ public class VoormetingActivity extends AppCompatActivity {
                 ImageButton4.setContentDescription("fout");
                 break;
             case 6: //steil
-                ImageButton1.setImageResource(R.drawable.riet);
+                ImageButton1.setImageResource(R.drawable.kroos);
                 ImageButton1.setContentDescription("fout");
                 ImageButton2.setImageResource(R.drawable.steil);
                 ImageButton2.setContentDescription("juist");
@@ -267,7 +262,7 @@ public class VoormetingActivity extends AppCompatActivity {
             case 9: //zaklamp
                 ImageButton1.setImageResource(R.drawable.val);
                 ImageButton1.setContentDescription("fout");
-                ImageButton2.setImageResource(R.drawable.riet);
+                ImageButton2.setImageResource(R.drawable.kroos);
                 ImageButton2.setContentDescription("fout");
                 ImageButton3.setImageResource(R.drawable.zaklamp);
                 ImageButton3.setContentDescription("juist");
