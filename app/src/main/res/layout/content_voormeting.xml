@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".TestActivity"
-    tools:showIn="@layout/activity_test">
-
+    tools:context=".VoormetingActivity"
+    tools:showIn="@layout/activity_voormeting">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Naam kind"
-                    android:gravity="right"
+                    android:gravity="end"
                     android:layout_weight="0.50"
                     style="@style/title_white"/>
             </LinearLayout>
@@ -143,5 +142,4 @@
             app:srcCompat="@drawable/speaker_icon"
             android:focusable="true"/>
     </RelativeLayout>
-
 </android.support.constraint.ConstraintLayout>

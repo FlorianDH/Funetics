@@ -40,15 +40,10 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".TestActivity"
-            android:label="@string/title_activity_test"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".OefeningActivity"
             android:label="Oefening"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Oef1Activity"
             android:label="@string/title_activity_oef1"
@@ -71,20 +66,27 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Oef5Activity"
-            android:screenOrientation="landscape"
             android:label="@string/title_activity_oef5"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Oef6Activity"
-            android:screenOrientation="landscape"
             android:label="@string/title_activity_oef6"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DetailTestActivity"
-            android:screenOrientation="landscape"
             android:label="@string/title_activity_detail_kind"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".VoormetingActivity"
+            android:label="@string/title_activity_voormeting"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NametingActivity"
+            android:label="@string/title_activity_nameting"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
