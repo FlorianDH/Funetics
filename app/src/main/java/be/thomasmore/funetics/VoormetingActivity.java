@@ -23,8 +23,6 @@ public class VoormetingActivity extends AppCompatActivity {
 
     private int oefening = 0;
 
-    public int score = 0;
-
     private TextView textViewWoord;
 
     private MediaPlayer foutPlayer;
@@ -36,8 +34,6 @@ public class VoormetingActivity extends AppCompatActivity {
     private ImageButton ImageButton2;
     private ImageButton ImageButton3;
     private ImageButton ImageButton4;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +90,6 @@ public class VoormetingActivity extends AppCompatActivity {
         }else {
             //Terug naar oefening activity
             Intent returnIntent = new Intent();
-            returnIntent.putExtra("score", String.valueOf(score));
             returnIntent.putExtra("voormeting", voormeting);
             setResult(Activity.RESULT_OK,returnIntent);
             finish();

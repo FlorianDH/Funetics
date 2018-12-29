@@ -131,9 +131,9 @@ public class OefeningActivity extends Activity {
         if (requestCode == requestVoormeting) {
             if(resultCode == Activity.RESULT_OK){
                 //Score ophalen
-                int score = Integer.parseInt(data.getStringExtra("score"));
                 int aantalPogingenVoormeting[] = data.getIntArrayExtra("voormeting");
-                int aantalPogingen = 1; // tijdelijke variabele
+                int aantalPogingen = 999; // tijdelijke variabele
+                int score = 999; // tijdelijke variabele
                 //Opslaan in database
                 //Eerst een nieuw getest woord aanmaken
                 GetestWoord nieuwGetestWoord = new GetestWoord();
@@ -334,7 +334,11 @@ public class OefeningActivity extends Activity {
     }
 
     public void startNameting(){
+        Bundle bundle = new Bundle();
+        bundle.putLong("kindId", huidigKind.getId());
+
         Intent intent = new Intent(this, NametingActivity.class);
+        intent.putExtras(bundle);
         startActivityForResult(intent, requestNameting);
     }
 
