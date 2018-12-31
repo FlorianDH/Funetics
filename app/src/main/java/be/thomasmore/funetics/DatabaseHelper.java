@@ -549,5 +549,53 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.close();
         return numrows > 0;
     }
+
+    // query-methode
+    public GetestWoord getGetestWoordById(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "getestWoord",      // tabelnaam
+                new String[] { "id", "doelwoordId", "testId"}, // kolommen
+                "id = ?",  // selectie
+                new String[] { String.valueOf(id) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+
+        GetestWoord getestWoord = new GetestWoord();
+
+        if (cursor.moveToFirst()) {
+            getestWoord = new GetestWoord(cursor.getLong(0),
+                    cursor.getInt(1), cursor.getInt(2));
+        }
+        cursor.close();
+        db.close();
+        return getestWoord;
+    }
+
+    // rawQuery-methode
+    public List<GetestWoord> getGetesteWoordenWhereTestId(int testId) {
+        List<GetestWoord> lijst = new ArrayList<GetestWoord>();
+        String selectQuery;
+
+        selectQuery = "SELECT * FROM getestWoord WHERE testId = " + testId;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                GetestWoord getestWoord = new GetestWoord(cursor.getLong(0),
+                        cursor.getInt(1), cursor.getInt(2));
+                lijst.add(getestWoord);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return lijst;
+    }
 }
 

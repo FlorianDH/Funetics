@@ -7,6 +7,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -17,6 +19,7 @@ public class DetailTestActivity extends AppCompatActivity {
     private Test huidigeTest;
     private Conditie huidigeConditie;
     private Kind huidigKind;
+    private List<GetestWoord> woorden;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,8 @@ public class DetailTestActivity extends AppCompatActivity {
         textUurTest.setText(values[1]);
         TextView textConditieTest = (TextView) findViewById(R.id.conditieTest);
         textConditieTest.setText(huidigeConditie.getNaam());
+
+        leesWoorden();
     }
 
     public void goTerug_onClick(View v) {
@@ -65,5 +70,15 @@ public class DetailTestActivity extends AppCompatActivity {
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void leesWoorden(){
+        woorden = db.getGetesteWoordenWhereTestId((int) huidigeTest.getId());
+
+        WoordAdapter woordAdapter =
+                new WoordAdapter(getApplicationContext(), woorden);
+
+        final ListView listViewWoorden = (ListView) findViewById(R.id.listViewGetesteWoorden);
+        listViewWoorden.setAdapter(woordAdapter);
     }
 }
