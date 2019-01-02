@@ -159,10 +159,10 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
         else {
             textViewOef4.setText(oefening4.getScore() + " / " + oefening4.getAantalPogingen());
             if (oefening4.getAantalPogingen() > 1){
-                textViewOef3.setTextColor(ContextCompat.getColor(context, R.color.color_orange_dark));
+                textViewOef4.setTextColor(ContextCompat.getColor(context, R.color.color_orange_dark));
             }
             else {
-                textViewOef3.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+                textViewOef4.setTextColor(ContextCompat.getColor(context, R.color.color_green));
             }
         }
 
