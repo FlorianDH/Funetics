@@ -168,8 +168,14 @@ public class OefeningActivity extends Activity {
         //OEF1 is beeindigd
         else if (requestCode == requestOef1){
             if(resultCode == Activity.RESULT_OK){
+                //Score ophalen
+                int score = Integer.parseInt(data.getStringExtra("score"));
+                int aantalPogingen = Integer.parseInt(data.getStringExtra("aantalPogingen"));
+
                 //Nieuwe geteste oefening opslaan in database
                 GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                nieuweGetesteOefening.setScore(score);
+                nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
                 nieuweGetesteOefening.setOefeningId(1); //Id van de oefening
                 nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
                 db.insertGetesteOefening(nieuweGetesteOefening);

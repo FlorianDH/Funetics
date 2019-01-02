@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WoordAdapter extends ArrayAdapter<GetestWoord> {
@@ -41,9 +42,57 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
 
         db = new DatabaseHelper(context);
         GetestWoord getestWoord = values.get(position);
-        Doelwoord doelwoord = db.getDoelwoordById(values.get(position).getDoelwoordId());
+        Doelwoord doelwoord = db.getDoelwoordById(getestWoord.getDoelwoordId());
 
         textViewWoord.setText(doelwoord.getNaam());
+
+        //Alle oefeningen bij het woord ophalen
+        List<GetesteOefening> oefeningen = new ArrayList<GetesteOefening>();
+        oefeningen = db.getGetesteOefeningenWhereGetestWoordId((int) getestWoord.getId());
+
+        //Alle resultaten bij de juiste oefening zetten
+        GetesteOefening oefening;
+        String resultaat;
+
+        //Voormeting
+        oefening = oefeningen.get(0);
+        if (oefening == null){
+            textViewVoormeting.setText("Niet voltooid");
+        }
+        else {
+            if (oefening.getScore() == 1){
+                textViewVoormeting.setText("Juist");
+            }
+            else {
+                textViewVoormeting.setText("Fout");
+            }
+        }
+
+        //Oefening 1
+        oefening = oefeningen.get(1);
+        if (oefening == null){
+            textViewOef1.setText("Niet voltooid");
+        }
+        else {
+            if (oefening.getScore() == 1){
+                textViewOef1.setText("Voltooid");
+            }
+        }
+
+        //Oefening 2
+        oefening = oefeningen.get(2);
+        if (oefening == null){
+            textViewOef2.setText("Niet voltooid");
+            //textViewOef2.setTextColor(getResources().getColor(R.color.color_red));
+        }
+        else {
+            if (oefening.getScore() == 1){
+                textViewOef2.setText("Juiste uitspraak");
+            }
+            else if (oefening.getScore() == 0 && oefening.getAantalPogingen() == 1){
+                textViewOef2.setText("Foute uitspraak");
+            }
+        }
 
         return rowView;
     }
