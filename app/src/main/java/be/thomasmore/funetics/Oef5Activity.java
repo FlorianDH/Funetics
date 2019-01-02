@@ -6,6 +6,7 @@ import android.content.ClipDescription;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,9 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
     private static final String IMAGE_VIEW3_TAG = "Image3";
     private static final String IMAGE_VIEW4_TAG = "Image4";
 
+    private boolean isPlaying = false; //false by default
+    private MediaPlayer audioPlayer = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +60,19 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
         TextView textNaamKind = (TextView) findViewById(R.id.textViewNaam);
         textNaamKind.setText(huidigKind.toString());
 
+        TextView textWoord = (TextView) findViewById(R.id.textViewWoord);
+        textWoord.setText(huidigDoelwoord.getNaam());
+
         nextFAB = (FloatingActionButton) findViewById(R.id.nextFAB);
         nextFAB.setVisibility(View.INVISIBLE); //Maak de volgende-knop onzichtbaar tot er 3 woorden zijn aangeduid
+
+        FloatingActionButton soundFab = (FloatingActionButton) findViewById(R.id.soundFAB);
+        soundFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playButton_onClick();
+            }
+        });
 
         findViews();
         implementEvents();
@@ -78,6 +93,21 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
         else {
             aantalPogingen++;
         }
+    }
+
+    public void playButton_onClick() {
+        if (isPlaying){
+            audioPlayer.stop();
+        }
+
+        isPlaying = true;
+        playAudioPlayer();
+    }
+
+    public void playAudioPlayer(){
+        isPlaying = true;
+        audioPlayer = MediaPlayer.create(getApplicationContext(), R.raw.duikbril);
+        audioPlayer.start();
     }
 
     //Find all views and set Tag to all draggable views
