@@ -111,7 +111,7 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     public void goedButton_onClick(View view) {
         String waarde = (String) view.getContentDescription();
-        aantalPogingen++;
+        pogingen++;
 
         if (isPlaying){
             audioPlayer.stop();
@@ -119,7 +119,9 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
         }
 
         if(waarde=="juist"){
-            score++;
+            if(pogingen == 1){
+                score++;
+            }
             juistPlayer.start();
             while (juistPlayer.isPlaying()){}
 
@@ -134,6 +136,7 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
                 context2Player.start();
                 while (context2Player.isPlaying()){}
                 oefening ++;
+                pogingen = 0;
                 setOefening();
                 contextPlayer.start();
             }
