@@ -46,7 +46,12 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
         GetestWoord getestWoord = values.get(position);
         Doelwoord doelwoord = db.getDoelwoordById(getestWoord.getDoelwoordId());
 
-        textViewWoord.setText(doelwoord.getNaam());
+        if (doelwoord.getId() == 0){
+            textViewWoord.setText(doelwoord.getNaam() + " (oefenwoord)");
+        }
+        else {
+            textViewWoord.setText(doelwoord.getNaam());
+        }
 
         //Alle oefeningen bij het woord ophalen
         List<GetesteOefening> oefeningen = new ArrayList<GetesteOefening>();
