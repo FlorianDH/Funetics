@@ -320,7 +320,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         List<Test> lijst = new ArrayList<Test>();
         String selectQuery;
 
-            selectQuery = "SELECT * FROM test WHERE kindId = " + kindId;
+            selectQuery = "SELECT * FROM test WHERE kindId = " + kindId + " ORDER BY datumTijd DESC";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

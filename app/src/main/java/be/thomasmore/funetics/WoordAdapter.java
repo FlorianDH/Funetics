@@ -1,6 +1,7 @@
 package be.thomasmore.funetics;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,13 +62,16 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
 
         if (oefening0 == null){
             textViewVoormeting.setText("Niet voltooid");
+            textViewVoormeting.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
         }
         else {
             if (oefening0.getScore() == 1){
                 textViewVoormeting.setText("Juist");
+                textViewVoormeting.setTextColor(ContextCompat.getColor(context, R.color.color_green));
             }
             else {
                 textViewVoormeting.setText("Fout");
+                textViewVoormeting.setTextColor(ContextCompat.getColor(context, R.color.color_orange_dark));
             }
         }
 
@@ -81,10 +85,12 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
 
         if (oefening1 == null){
             textViewOef1.setText("Niet voltooid");
+            textViewOef1.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
         }
         else {
             if (oefening1.getScore() == 1){
                 textViewOef1.setText("Voltooid");
+                textViewOef1.setTextColor(ContextCompat.getColor(context, R.color.color_green));
             }
         }
 
@@ -98,11 +104,12 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
 
         if (oefening2 == null){
             textViewOef2.setText("Niet voltooid");
-            //textViewOef2.setTextColor(getResources().getColor(R.color.color_red));
+            textViewOef2.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
         }
         else {
             if (oefening2.getScore() == 1){
                 textViewOef2.setText("Juiste uitspraak");
+                textViewOef2.setTextColor(ContextCompat.getColor(context, R.color.color_green));
             }
             else if (oefening2.getScore() == 0 && oefening2.getAantalPogingen() == 1){
                 textViewOef2.setText("Foute uitspraak");
@@ -119,10 +126,60 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
 
         if (oefening3 == null){
             textViewOef3.setText("Niet voltooid");
-            //textViewOef3.setTextColor(getResources().getColor(R.color.color_red));
+            textViewOef3.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
         }
         else {
             textViewOef3.setText(oefening3.getScore() + " / " + oefening3.getAantalPogingen());
+            if (oefening3.getScore() == 2){
+                textViewOef3.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+            }
+            else {
+                textViewOef3.setTextColor(ContextCompat.getColor(context, R.color.color_orange_dark));
+            }
+        }
+
+        //Oefening 4
+        GetesteOefening oefening4 = null;
+        try {
+            oefening4 = oefeningen.get(4);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (oefening4 == null){
+            textViewOef4.setText("Niet voltooid");
+            textViewOef4.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
+        }
+        else {
+            textViewOef4.setText(oefening4.getScore() + " / " + oefening4.getAantalPogingen());
+            if (oefening4.getAantalPogingen() > 1){
+                textViewOef3.setTextColor(ContextCompat.getColor(context, R.color.color_orange_dark));
+            }
+            else {
+                textViewOef3.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+            }
+        }
+
+        //Oefening 5
+        GetesteOefening oefening5 = null;
+        try {
+            oefening5 = oefeningen.get(5);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (oefening5 == null){
+            textViewOef5.setText("Niet voltooid");
+            textViewOef5.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
+        }
+        else {
+            textViewOef5.setText(oefening5.getScore() + " / " + oefening5.getAantalPogingen());
+            if (oefening5.getAantalPogingen() > 1){
+                textViewOef5.setTextColor(ContextCompat.getColor(context, R.color.color_orange_dark));
+            }
+            else {
+                textViewOef5.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+            }
         }
 
         return rowView;
