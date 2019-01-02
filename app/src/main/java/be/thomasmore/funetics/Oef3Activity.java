@@ -24,7 +24,8 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
     private int oefening = 1;
 
     public int score = 0;
-    public int aantalPogingen = 0;
+    public int aantalPogingen = 2;
+    public int pogingen = 0;
 
     private TextView textViewContext;
 
@@ -73,7 +74,7 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     public void foutButton_onClick(View view) {
         String waarde = (String) view.getContentDescription();
-        aantalPogingen++;
+        pogingen++;
 
         if (isPlaying){
             audioPlayer.stop();
@@ -81,7 +82,9 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
         }
 
         if(waarde=="juist"){
-            score++;
+            if(pogingen == 1){
+                score++;
+            }
             juist2Player.start();
             while (juist2Player.isPlaying()){}
 
@@ -96,6 +99,7 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
                 context2Player.start();
                 while (context2Player.isPlaying()){}
                 oefening ++;
+                pogingen = 0;
                 setOefening();
                 contextPlayer.start();
             }
@@ -107,7 +111,7 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     public void goedButton_onClick(View view) {
         String waarde = (String) view.getContentDescription();
-        aantalPogingen++;
+        pogingen++;
 
         if (isPlaying){
             audioPlayer.stop();
@@ -115,7 +119,9 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
         }
 
         if(waarde=="juist"){
-            score++;
+            if(pogingen == 1){
+                score++;
+            }
             juistPlayer.start();
             while (juistPlayer.isPlaying()){}
 
@@ -130,6 +136,7 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
                 context2Player.start();
                 while (context2Player.isPlaying()){}
                 oefening ++;
+                pogingen = 0;
                 setOefening();
                 contextPlayer.start();
             }
