@@ -24,6 +24,7 @@ public class OefeningActivity extends Activity {
     int alleScoreVoormeting[]; //Alle scores van alle woorden van de voormeting
     int getesteWoordenId[] = new int[4]; //Lijst met id's van reeds aangemaakte geteste woorden
     int getesteWoordenPositie; //Huidige positie in de lijst van doelwoorden en getesteWoordenId
+    int alleScoreNameting[]; //Alle scores van alle woorden van de nameting
 
     //Requestcodes
     final int requestVoormeting = 1;
@@ -334,7 +335,23 @@ public class OefeningActivity extends Activity {
         //Nameting is beeindigd
         else if (requestCode == requestNameting){
             if(resultCode == Activity.RESULT_OK){
-                //TODO resultaat nameting opslaan in db
+                //Scores ophalen
+                alleScoreNameting = data.getIntArrayExtra("nameting");
+
+                //Scores opslaan van de woorden uit de huidige lijst
+                int tempPositie = 0;
+                for (Doelwoord d: doelwoorden){
+                    int tempScore = alleScoreNameting[(int) d.getId()];
+                    //Nieuwe geteste oefening maken
+                    GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                    nieuweGetesteOefening.setScore(tempScore);
+                    nieuweGetesteOefening.setAantalPogingen(1);
+                    nieuweGetesteOefening.setOefeningId(9); //Id van de oefening
+                    nieuweGetesteOefening.setGetestWoordId(getesteWoordenId[tempPositie]);
+                    db.insertGetesteOefening(nieuweGetesteOefening);
+                    tempPositie++;
+                }
+
                 finish();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
