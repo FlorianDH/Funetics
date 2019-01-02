@@ -51,16 +51,19 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
         oefeningen = db.getGetesteOefeningenWhereGetestWoordId((int) getestWoord.getId());
 
         //Alle resultaten bij de juiste oefening zetten
-        GetesteOefening oefening;
-        String resultaat;
-
         //Voormeting
-        oefening = oefeningen.get(0);
-        if (oefening == null){
+        GetesteOefening oefening0 = null;
+        try {
+            oefening0 = oefeningen.get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (oefening0 == null){
             textViewVoormeting.setText("Niet voltooid");
         }
         else {
-            if (oefening.getScore() == 1){
+            if (oefening0.getScore() == 1){
                 textViewVoormeting.setText("Juist");
             }
             else {
@@ -69,29 +72,57 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
         }
 
         //Oefening 1
-        oefening = oefeningen.get(1);
-        if (oefening == null){
+        GetesteOefening oefening1 = null;
+        try {
+            oefening1 = oefeningen.get(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (oefening1 == null){
             textViewOef1.setText("Niet voltooid");
         }
         else {
-            if (oefening.getScore() == 1){
+            if (oefening1.getScore() == 1){
                 textViewOef1.setText("Voltooid");
             }
         }
 
         //Oefening 2
-        oefening = oefeningen.get(2);
-        if (oefening == null){
+        GetesteOefening oefening2 = null;
+        try {
+            oefening2 = oefeningen.get(2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (oefening2 == null){
             textViewOef2.setText("Niet voltooid");
             //textViewOef2.setTextColor(getResources().getColor(R.color.color_red));
         }
         else {
-            if (oefening.getScore() == 1){
+            if (oefening2.getScore() == 1){
                 textViewOef2.setText("Juiste uitspraak");
             }
-            else if (oefening.getScore() == 0 && oefening.getAantalPogingen() == 1){
+            else if (oefening2.getScore() == 0 && oefening2.getAantalPogingen() == 1){
                 textViewOef2.setText("Foute uitspraak");
             }
+        }
+
+        //Oefening 3
+        GetesteOefening oefening3 = null;
+        try {
+            oefening3 = oefeningen.get(3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (oefening3 == null){
+            textViewOef3.setText("Niet voltooid");
+            //textViewOef3.setTextColor(getResources().getColor(R.color.color_red));
+        }
+        else {
+            textViewOef3.setText(oefening3.getScore() + " / " + oefening3.getAantalPogingen());
         }
 
         return rowView;
