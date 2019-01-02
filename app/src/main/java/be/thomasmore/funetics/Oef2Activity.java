@@ -2,11 +2,13 @@ package be.thomasmore.funetics;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
@@ -46,6 +48,9 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
         TextView textWoord = (TextView) findViewById(R.id.textViewWoord);
         textWoord.setText(huidigDoelwoord.getNaam());
+
+        ImageView afbeelding = (ImageView) findViewById(R.id.imageViewAfbeelding);
+        afbeelding.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "drawable", getPackageName()));
 
         FloatingActionButton soundFab = (FloatingActionButton) findViewById(R.id.soundFAB);
         soundFab.setOnClickListener(new View.OnClickListener() {

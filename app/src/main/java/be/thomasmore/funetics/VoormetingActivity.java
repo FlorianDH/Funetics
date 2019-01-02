@@ -260,7 +260,7 @@ public class VoormetingActivity extends AppCompatActivity {
                 ImageButton2.setImageResource(R.drawable.kroos);
                 ImageButton2.setContentDescription("fout");
                 ImageButton3.setImageResource(R.drawable.zaklamp);
-                ImageButton3.setContentDescription("juist");
+//                ImageButton3.setContentDescription("juist");
                 ImageButton4.setImageResource(R.drawable.steil);
                 ImageButton4.setContentDescription("fout");
                 break;
@@ -268,8 +268,11 @@ public class VoormetingActivity extends AppCompatActivity {
     }
 
     public void oef5_onClick(View view) {
+        Bundle bundle = new Bundle();
+        bundle.putLong("doelwoordId", huidigDoelwoord.getId());
+        bundle.putLong("kindId", huidigKind.getId());
         Intent intent = new Intent(this, Oef5Activity.class);
-
+        intent.putExtras(bundle);
         startActivity(intent);
         finish();
     }

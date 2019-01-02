@@ -49,8 +49,8 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
         TextView textDefenitie = (TextView) findViewById(R.id.textViewDefenitie);
         textDefenitie.setText(huidigDoelwoord.getDefenitie());
 
-        ImageView imageAfbeelding = (ImageView) findViewById(R.id.imageViewAfbeelding);
-        imageAfbeelding.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "drawable", getPackageName()));
+        ImageView afbeelding = (ImageView) findViewById(R.id.imageViewAfbeelding);
+        afbeelding.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "drawable", getPackageName()));
 
         FloatingActionButton soundFab = (FloatingActionButton) findViewById(R.id.soundFAB);
         soundFab.setOnClickListener(new View.OnClickListener() {

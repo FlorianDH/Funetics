@@ -14,10 +14,15 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.sql.Array;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Oef5Activity extends AppCompatActivity implements View.OnDragListener, View.OnLongClickListener{
 
@@ -35,13 +40,19 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
     private ImageView imageView3;
     private ImageView imageView4;
 
+    private LinearLayout juistLayout;
+    private LinearLayout foutLayout;
+
     private static final String IMAGE_VIEW1_TAG = "Image1";
     private static final String IMAGE_VIEW2_TAG = "Image2";
     private static final String IMAGE_VIEW3_TAG = "Image3";
     private static final String IMAGE_VIEW4_TAG = "Image4";
 
-    private boolean isPlaying = false; //false by default
     private MediaPlayer audioPlayer = null;
+    private MediaPlayer juistPlayer = null;
+    private MediaPlayer foutPlayer = null;
+
+    private boolean isPlaying = false; //false by default
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +74,11 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
         TextView textWoord = (TextView) findViewById(R.id.textViewWoord);
         textWoord.setText(huidigDoelwoord.getNaam());
 
+        juistLayout = (LinearLayout) findViewById(R.id.juist_layout);
+        foutLayout = (LinearLayout) findViewById(R.id.fout_layout);
+
         nextFAB = (FloatingActionButton) findViewById(R.id.nextFAB);
-        nextFAB.setVisibility(View.INVISIBLE); //Maak de volgende-knop onzichtbaar tot er 3 woorden zijn aangeduid
+        nextFAB.setVisibility(View.VISIBLE); //Maak de volgende-knop onzichtbaar tot er 3 woorden zijn aangeduid
 
         FloatingActionButton soundFab = (FloatingActionButton) findViewById(R.id.soundFAB);
         soundFab.setOnClickListener(new View.OnClickListener() {
@@ -74,14 +88,43 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
             }
         });
 
+        setAudioPlayer();
+
         findViews();
+        setImages();
         implementEvents();
+        playAudioPlayer();
     }
 
     public void nextFAB_onClick(View view) {
-        if (true){
-            score++;
-            aantalPogingen++;
+        juistLayout = (LinearLayout) findViewById(R.id.juist_layout);
+        foutLayout = (LinearLayout) findViewById(R.id.fout_layout);
+
+        int juisteAfbeeldingen = 0;
+
+        for(int i=0;i<juistLayout.getChildCount();i++)
+        {
+            ImageView image =  (ImageView) juistLayout.getChildAt(i);
+            if (image.getContentDescription().equals("juist")){
+                juisteAfbeeldingen ++;
+            }
+        }
+
+        for(int i=0;i<foutLayout.getChildCount();i++)
+        {
+            ImageView image =  (ImageView) foutLayout.getChildAt(i);
+            if (image.getContentDescription().equals("fout")){
+                juisteAfbeeldingen ++;
+            }
+        }
+
+        aantalPogingen++;
+
+        if(juisteAfbeeldingen == 4){
+            score ++;
+
+            juistPlayer.start();
+            while (juistPlayer.isPlaying());
 
             //Terug naar oefening activity
             Intent returnIntent = new Intent();
@@ -89,9 +132,9 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
             returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
             setResult(Activity.RESULT_OK,returnIntent);
             finish();
-        }
-        else {
-            aantalPogingen++;
+        }else{
+            foutPlayer.start();
+
         }
     }
 
@@ -106,13 +149,18 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
 
     public void playAudioPlayer(){
         isPlaying = true;
-        audioPlayer = MediaPlayer.create(getApplicationContext(), R.raw.duikbril);
+        audioPlayer =  MediaPlayer.create(getApplicationContext(),getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_5", "raw", getPackageName()));
         audioPlayer.start();
+    }
+
+    public void setAudioPlayer() {
+        juistPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef5_1);
+        foutPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef5_2);
     }
 
     //Find all views and set Tag to all draggable views
     private void findViews() {
-        imageView1 = (ImageView) findViewById(R.id.imageView);
+        imageView1 = (ImageView) findViewById(R.id.imageView1);
         imageView1.setTag(IMAGE_VIEW1_TAG);
         imageView1.setImageResource(R.drawable.duikbril);
         imageView2 = (ImageView) findViewById(R.id.imageView2);
@@ -125,6 +173,25 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
         imageView4.setTag(IMAGE_VIEW4_TAG);
         imageView4.setImageResource(R.drawable.riet);
     }
+
+    private void setImages(){
+        String shuffleArray[][] = new String [][] {
+                { "_5_1", "juist"},
+                { "_5_2", "juist"},
+                { "_5_3", "juist"},
+                { "_5_4", "fout"}};
+        Collections.shuffle(Arrays.asList(shuffleArray));
+
+        imageView1.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + shuffleArray[0][0], "drawable", getPackageName()));
+        imageView1.setContentDescription(shuffleArray[0][1]);
+        imageView2.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + shuffleArray[1][0], "drawable", getPackageName()));
+        imageView2.setContentDescription(shuffleArray[1][1]);
+        imageView3.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + shuffleArray[2][0], "drawable", getPackageName()));
+        imageView3.setContentDescription(shuffleArray[2][1]);
+        imageView4.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + shuffleArray[3][0], "drawable", getPackageName()));
+        imageView4.setContentDescription(shuffleArray[3][1]);
+    }
+
 
 
     //Implement long click and drag listener
