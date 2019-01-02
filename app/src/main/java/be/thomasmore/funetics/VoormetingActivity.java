@@ -266,4 +266,11 @@ public class VoormetingActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    public void oef5_onClick(View view) {
+        Intent intent = new Intent(this, Oef5Activity.class);
+
+        startActivity(intent);
+        finish();
+    }
 }

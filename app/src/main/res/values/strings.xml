@@ -135,4 +135,8 @@
     <string name="title_activity_tobedeletete">tobedeletete</string>
     <string name="title_activity_voormeting">VoormetingActivity</string>
     <string name="title_activity_nameting">NametingActivity</string>
+
+
+    <string name="draggable_text">Draggable Text</string>
+    <string name="draggable_button">Draggable Button</string>
 </resources>

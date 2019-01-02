@@ -46,6 +46,11 @@
                     android:gravity="end"
                     android:layout_weight="0.50"
                     style="@style/title_white"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Naar Oef 5"
+                    android:onClick="oef5_onClick"/>
             </LinearLayout>
         </LinearLayout>
 
