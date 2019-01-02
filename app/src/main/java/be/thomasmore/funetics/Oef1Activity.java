@@ -111,6 +111,8 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
             audioPlayer.stop();
         }
         Intent returnIntent = new Intent();
+        returnIntent.putExtra("score", "1");
+        returnIntent.putExtra("aantalPogingen", "1");
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
     }

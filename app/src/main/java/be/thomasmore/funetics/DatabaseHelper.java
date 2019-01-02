@@ -598,5 +598,28 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.close();
         return lijst;
     }
+
+    // rawQuery-methode
+    public List<GetesteOefening> getGetesteOefeningenWhereGetestWoordId(int getestWoordId) {
+        List<GetesteOefening> lijst = new ArrayList<GetesteOefening>();
+        String selectQuery;
+
+        selectQuery = "SELECT * FROM getesteOefening WHERE getestWoordId = " + getestWoordId + " ORDER BY id";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                GetesteOefening getesteOefening = new GetesteOefening(cursor.getLong(0),
+                        cursor.getInt(1), cursor.getInt(2), cursor.getInt(3), cursor.getInt(4));
+                lijst.add(getesteOefening);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return lijst;
+    }
 }
 
