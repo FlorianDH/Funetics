@@ -311,6 +311,18 @@ public class OefeningActivity extends Activity {
         //OEF6 is beeindigd
         else if (requestCode == requestOef6){
             if(resultCode == Activity.RESULT_OK){
+                //Score ophalen
+                int score = Integer.parseInt(data.getStringExtra("score"));
+                int aantalPogingen = Integer.parseInt(data.getStringExtra("aantalPogingen"));
+
+                //Nieuwe geteste oefening opslaan in database
+                GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                nieuweGetesteOefening.setScore(score);
+                nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
+                nieuweGetesteOefening.setOefeningId(6); //Id van de oefening
+                nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
+                db.insertGetesteOefening(nieuweGetesteOefening);
+
                 if (getesteWoordenPositie < 4){
                     //Getest woord verhogen
                     getesteWoordenPositie++;
