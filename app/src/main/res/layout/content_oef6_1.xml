@@ -5,7 +5,111 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Oef6_1Activity"
+    tools:context=".Oef2Activity"
     tools:showIn="@layout/activity_oef6_1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/detailTopBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/color_primary_dark">
+
+            <LinearLayout
+                android:id="@+id/detailTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/textViewDetailTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_activity_oef6_1"
+                    android:layout_weight="0.50"
+                    style="@style/title_white"/>
+
+                <TextView
+                    android:id="@+id/textViewNaam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Naam kind"
+                    android:gravity="right"
+                    android:layout_weight="0.50"
+                    style="@style/title_white"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewWoord"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Woord"
+                android:textAppearance="@style/title.dark"
+                android:textSize="40sp" />
+            <ImageView
+                android:id="@+id/imageViewAfbeelding"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                app:srcCompat="@drawable/duikbril" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+
+                    android:gravity="center"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/happy"
+                    android:onClick="blijButton_onClick"/>
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+
+                    android:gravity="center"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/unhappy"
+                    android:onClick="droevigButton_onClick"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/soundFAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="25dp"
+            android:clickable="true"
+            android:padding="25dp"
+            app:fabCustomSize="80dp"
+            app:srcCompat="@drawable/speaker_icon"
+            android:focusable="true"/>
+
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
