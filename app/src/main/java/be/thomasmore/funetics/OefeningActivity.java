@@ -13,17 +13,17 @@ import java.util.Locale;
 
 public class OefeningActivity extends Activity {
     private DatabaseHelper db;
-    private Kind huidigKind;
-    private Conditie huidigeConditie;
-    private Woordenset huidigeWoordenset;
+    private Kind huidigKind; //Huidig kind waarmee gewerkt wordt
+    private Conditie huidigeConditie; //Huidige gekozen conditie
+    private Woordenset huidigeWoordenset; //Huidige woordenset
     private List<Doelwoord> doelwoorden = new ArrayList<Doelwoord>();
     private Doelwoord huidigDoelwoord;
     private long huidigGetestWoordId;
     private long huidigeTestId;
 
-    int alleScoreVoormeting[];
-    int getesteWoordenId[] = new int[4];
-    int getesteWoordenPositie;
+    int alleScoreVoormeting[]; //Alle scores van alle woorden van de voormeting
+    int getesteWoordenId[] = new int[4]; //Lijst met id's van reeds aangemaakte geteste woorden
+    int getesteWoordenPositie; //Huidige positie in de lijst van doelwoorden en getesteWoordenId
 
     //Requestcodes
     final int requestVoormeting = 1;
@@ -292,7 +292,15 @@ public class OefeningActivity extends Activity {
                 db.insertGetesteOefening(nieuweGetesteOefening);
 
                 //Volgende activity starten
-                startOef6();
+                if (huidigeConditie.getId() == 1){
+                    startOef6_1();
+                }
+                else if (huidigeConditie.getId() == 2){
+                    startOef6_2();
+                }
+                else {
+                    startOef6_3();
+                }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -302,9 +310,21 @@ public class OefeningActivity extends Activity {
         //OEF6 is beeindigd
         else if (requestCode == requestOef6){
             if(resultCode == Activity.RESULT_OK){
+                if (getesteWoordenPositie < 4){
+                    //Getest woord verhogen
+                    getesteWoordenPositie++;
+                    huidigGetestWoordId = getesteWoordenId[getesteWoordenPositie];
 
-                //Volgende activity starten
-                startNameting();
+                    //Huidig getest woord verhogen
+                    huidigDoelwoord = doelwoorden.get(getesteWoordenPositie);
+
+                    //Start oefening 1
+                    startOef1();
+                }
+                else {
+                    //Nameting starten
+                    startNameting();
+                }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -314,17 +334,8 @@ public class OefeningActivity extends Activity {
         //Nameting is beeindigd
         else if (requestCode == requestNameting){
             if(resultCode == Activity.RESULT_OK){
-                if (getesteWoordenPositie < 5){
-                    //Getest woord verhogen
-                    getesteWoordenPositie++;
-                    huidigGetestWoordId = getesteWoordenId[getesteWoordenPositie];
-
-                    //Huidig getest woord aanpassen
-                    //TODO het huidige doelwoord aanpassen
-                }
-                else {
-                    finish();
-                }
+                //TODO resultaat nameting opslaan in db
+                finish();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -401,8 +412,30 @@ public class OefeningActivity extends Activity {
         startActivityForResult(intent, requestOef5);
     }
 
-    public void startOef6(){
-        Intent intent = new Intent(this, Oef6Activity.class);
+    public void startOef6_1(){
+        Bundle bundle = new Bundle();
+        bundle.putLong("doelwoordId", huidigDoelwoord.getId());
+        bundle.putLong("kindId", huidigKind.getId());
+        Intent intent = new Intent(this, Oef6_1Activity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, requestOef6);
+    }
+
+    public void startOef6_2(){
+        Bundle bundle = new Bundle();
+        bundle.putLong("doelwoordId", huidigDoelwoord.getId());
+        bundle.putLong("kindId", huidigKind.getId());
+        Intent intent = new Intent(this, Oef6_2Activity.class);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, requestOef6);
+    }
+
+    public void startOef6_3(){
+        Bundle bundle = new Bundle();
+        bundle.putLong("doelwoordId", huidigDoelwoord.getId());
+        bundle.putLong("kindId", huidigKind.getId());
+        Intent intent = new Intent(this, Oef6_3Activity.class);
+        intent.putExtras(bundle);
         startActivityForResult(intent, requestOef6);
     }
 
