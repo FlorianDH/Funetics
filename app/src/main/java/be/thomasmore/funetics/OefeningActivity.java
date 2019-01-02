@@ -21,6 +21,10 @@ public class OefeningActivity extends Activity {
     private long huidigGetestWoordId;
     private long huidigeTestId;
 
+    int alleScoreVoormeting[];
+    int getesteWoordenId[] = new int[4];
+    int getesteWoordenPositie;
+
     //Requestcodes
     final int requestVoormeting = 1;
     final int requestPreteaching = 2;
@@ -120,6 +124,20 @@ public class OefeningActivity extends Activity {
 
         huidigeTestId = db.insertTest(nieuweTest);
 
+        //Nieuwe geteste woorden aanmaken
+        int tempPositie = 0;
+        for (Doelwoord d: doelwoorden){
+            GetestWoord nieuwGetestWoord = new GetestWoord();
+            nieuwGetestWoord.setDoelwoordId((int) d.getId());
+            nieuwGetestWoord.setTestId((int) huidigeTestId);
+            huidigGetestWoordId = db.insertGetestWoord(nieuwGetestWoord);
+            getesteWoordenId[tempPositie] = (int) huidigGetestWoordId;
+            tempPositie++;
+        }
+
+        getesteWoordenPositie = 0;
+        huidigGetestWoordId = getesteWoordenId[getesteWoordenPositie];
+
         //Voormeting opstarten
         startVoormeting();
     }
@@ -130,29 +148,29 @@ public class OefeningActivity extends Activity {
         //Voormeting is beeindigd
         if (requestCode == requestVoormeting) {
             if(resultCode == Activity.RESULT_OK){
-                //Score ophalen
-                int aantalPogingenVoormeting[] = data.getIntArrayExtra("voormeting");
-                int aantalPogingen = 999; // tijdelijke variabele
-                int score = 999; // tijdelijke variabele
-                //Opslaan in database
-                //Eerst een nieuw getest woord aanmaken
-                GetestWoord nieuwGetestWoord = new GetestWoord();
-                nieuwGetestWoord.setDoelwoordId((int) huidigDoelwoord.getId());
-                nieuwGetestWoord.setTestId((int) huidigeTestId);
-                huidigGetestWoordId = db.insertGetestWoord(nieuwGetestWoord);
-                //Nu een nieuwe geteste oefening maken
-                GetesteOefening nieuweGetesteOefening = new GetesteOefening();
-                nieuweGetesteOefening.setScore(score);
-                nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
-                nieuweGetesteOefening.setOefeningId(0); //Id van de oefening
-                nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
-                db.insertGetesteOefening(nieuweGetesteOefening);
+                //Scores ophalen
+                alleScoreVoormeting = data.getIntArrayExtra("voormeting");
+
+                //Scores opslaan van de woorden uit de huidige lijst
+                int tempPositie = 0;
+                for (Doelwoord d: doelwoorden){
+                    int tempScore = alleScoreVoormeting[(int) d.getId()];
+                    //Nieuwe geteste oefening maken
+                    GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                    nieuweGetesteOefening.setScore(tempScore);
+                    nieuweGetesteOefening.setAantalPogingen(1);
+                    nieuweGetesteOefening.setOefeningId(0); //Id van de oefening
+                    nieuweGetesteOefening.setGetestWoordId(getesteWoordenId[tempPositie]);
+                    db.insertGetesteOefening(nieuweGetesteOefening);
+                    tempPositie++;
+                }
 
                 //Volgende activity starten
                 startPreteaching();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
+                finish();
             }
         }
         //Preteaching is beeindigd
@@ -163,6 +181,7 @@ public class OefeningActivity extends Activity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
+                finish();
             }
         }
         //OEF1 is beeindigd
@@ -185,6 +204,7 @@ public class OefeningActivity extends Activity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
+                finish();
             }
         }
         //OEF2 is beeindigd
@@ -207,39 +227,76 @@ public class OefeningActivity extends Activity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
+                finish();
             }
         }
         //OEF3 is beeindigd
         else if (requestCode == requestOef3){
             if(resultCode == Activity.RESULT_OK){
+                //Score ophalen
+                int score = Integer.parseInt(data.getStringExtra("score"));
+                int aantalPogingen = Integer.parseInt(data.getStringExtra("aantalPogingen"));
+
+                //Nieuwe geteste oefening opslaan in database
+                GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                nieuweGetesteOefening.setScore(score);
+                nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
+                nieuweGetesteOefening.setOefeningId(3); //Id van de oefening
+                nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
+                db.insertGetesteOefening(nieuweGetesteOefening);
 
                 //Volgende activity starten
                 startOef4();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
+                finish();
             }
         }
         //OEF4 is beeindigd
         else if (requestCode == requestOef4){
             if(resultCode == Activity.RESULT_OK){
+                //Score ophalen
+                int score = Integer.parseInt(data.getStringExtra("score"));
+                int aantalPogingen = Integer.parseInt(data.getStringExtra("aantalPogingen"));
+
+                //Nieuwe geteste oefening opslaan in database
+                GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                nieuweGetesteOefening.setScore(score);
+                nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
+                nieuweGetesteOefening.setOefeningId(4); //Id van de oefening
+                nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
+                db.insertGetesteOefening(nieuweGetesteOefening);
 
                 //Volgende activity starten
                 startOef5();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
+                finish();
             }
         }
         //OEF5 is beeindigd
         else if (requestCode == requestOef5){
             if(resultCode == Activity.RESULT_OK){
+                //Score ophalen
+                int score = Integer.parseInt(data.getStringExtra("score"));
+                int aantalPogingen = Integer.parseInt(data.getStringExtra("aantalPogingen"));
+
+                //Nieuwe geteste oefening opslaan in database
+                GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                nieuweGetesteOefening.setScore(score);
+                nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
+                nieuweGetesteOefening.setOefeningId(5); //Id van de oefening
+                nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
+                db.insertGetesteOefening(nieuweGetesteOefening);
 
                 //Volgende activity starten
                 startOef6();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
+                finish();
             }
         }
         //OEF6 is beeindigd
@@ -251,17 +308,27 @@ public class OefeningActivity extends Activity {
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
+                finish();
             }
         }
         //Nameting is beeindigd
         else if (requestCode == requestNameting){
             if(resultCode == Activity.RESULT_OK){
+                if (getesteWoordenPositie < 5){
+                    //Getest woord verhogen
+                    getesteWoordenPositie++;
+                    huidigGetestWoordId = getesteWoordenId[getesteWoordenPositie];
 
-                //Volgende activity starten
-//                startOef3();
+                    //Huidig getest woord aanpassen
+                    //TODO het huidige doelwoord aanpassen
+                }
+                else {
+                    finish();
+                }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
+                finish();
             }
         }
     }

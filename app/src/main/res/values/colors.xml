@@ -7,6 +7,9 @@
     <color name="color_black">#323635</color>
     <color name="color_grey">#CBD9D6</color>
     <color name="color_white">#fff</color>
+    <color name="color_green">#3f9418</color>
+    <color name="color_orange_dark">#de6d0b</color>
+    <color name="color_red_dark">#ce2424</color>
 
     <color name="web_red">#e33d3d</color>
     <color name="web_green">#5ecf2e</color>
