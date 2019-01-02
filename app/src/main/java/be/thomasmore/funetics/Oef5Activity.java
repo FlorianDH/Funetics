@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.DragEvent;
@@ -14,11 +15,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Oef5Activity extends AppCompatActivity implements View.OnDragListener, View.OnLongClickListener{
 
-    private static final String TAG = Oef5Activity.class.getSimpleName();
+    private DatabaseHelper db;
+    private Doelwoord huidigDoelwoord;
+    private Kind huidigKind;
+
+    private int score = 0;
+    private int aantalPogingen = 0;
+
+    private FloatingActionButton nextFAB;
 
     private ImageView imageView1;
     private ImageView imageView2;
@@ -35,8 +44,40 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef5);
 
+        Bundle bundle = getIntent().getExtras();
+        Long doelwoordId = bundle.getLong("doelwoordId");
+        Long kindId = bundle.getLong("kindId");
+
+        db = new DatabaseHelper(this);
+
+        huidigDoelwoord = db.getDoelwoordById(doelwoordId);
+        huidigKind = db.getKindById(kindId);
+
+        TextView textNaamKind = (TextView) findViewById(R.id.textViewNaam);
+        textNaamKind.setText(huidigKind.toString());
+
+        nextFAB = (FloatingActionButton) findViewById(R.id.nextFAB);
+        nextFAB.setVisibility(View.INVISIBLE); //Maak de volgende-knop onzichtbaar tot er 3 woorden zijn aangeduid
+
         findViews();
         implementEvents();
+    }
+
+    public void nextFAB_onClick(View view) {
+        if (true){
+            score++;
+            aantalPogingen++;
+
+            //Terug naar oefening activity
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("score", String.valueOf(score));
+            returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
+            setResult(Activity.RESULT_OK,returnIntent);
+            finish();
+        }
+        else {
+            aantalPogingen++;
+        }
     }
 
     //Find all views and set Tag to all draggable views
@@ -187,12 +228,12 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
                 view.invalidate();
 
                 // Does a getResult(), and displays what happened.
-                if (event.getResult())
-                    Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-
-                else
-                    Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_SHORT).show();
-
+//                if (event.getResult())
+//                    Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+//
+//                else
+//                    Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_SHORT).show();
+//
 
                 // returns true; the value is ignored.
                 return true;
