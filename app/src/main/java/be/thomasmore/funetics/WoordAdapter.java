@@ -39,6 +39,7 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
         final TextView textViewOef4 = (TextView) rowView.findViewById(R.id.textViewOef4Resultaat);
         final TextView textViewOef5 = (TextView) rowView.findViewById(R.id.textViewOef5Resultaat);
         final TextView textViewOef6 = (TextView) rowView.findViewById(R.id.textViewOef6Resultaat);
+        final TextView textViewOef6Naam = (TextView) rowView.findViewById(R.id.textViewOef6);
         final TextView textViewOefNameting = (TextView) rowView.findViewById(R.id.textViewNametingResultaat);
 
         db = new DatabaseHelper(context);
@@ -179,6 +180,68 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
             }
             else {
                 textViewOef5.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+            }
+        }
+
+        //Oefening 6
+        GetesteOefening oefening6 = null;
+        try {
+            oefening6 = oefeningen.get(6);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (oefening6 == null){
+            textViewOef6.setText("Niet voltooid");
+            textViewOef6.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
+        }
+        else {
+            //Oefening 6.1
+            if (oefening6.getOefeningId() == 6){
+                textViewOef6Naam.setText("Oefening 6.1: ");
+                if (oefening6.getScore() == 1){
+                    textViewOef6.setText("Goed gevoel");
+                    textViewOef6.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+                }
+                else {
+                    textViewOef6.setText("Slecht gevoel");
+                    textViewOef6.setTextColor(ContextCompat.getColor(context, R.color.color_orange_dark));
+                }
+            }
+            //Oefening 6.2
+            else if (oefening6.getOefeningId() == 7){
+                textViewOef6Naam.setText("Oefening 6.2: ");
+                textViewOef6.setText("Voltooid");
+                textViewOef6.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+            }
+            //Oefening 6.3
+            else if (oefening6.getOefeningId() == 8){
+                textViewOef6Naam.setText("Oefening 6.3: ");
+                textViewOef6.setText("Voltooid");
+                textViewOef6.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+            }
+        }
+
+        //Nameting
+        GetesteOefening oefening7 = null;
+        try {
+            oefening7 = oefeningen.get(7);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (oefening7 == null){
+            textViewOefNameting.setText("Niet voltooid");
+            textViewOefNameting.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
+        }
+        else {
+            if (oefening7.getScore() == 1){
+                textViewOefNameting.setText("Juist");
+                textViewOefNameting.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+            }
+            else {
+                textViewOefNameting.setText("Fout");
+                textViewOefNameting.setTextColor(ContextCompat.getColor(context, R.color.color_orange_dark));
             }
         }
 
