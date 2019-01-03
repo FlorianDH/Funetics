@@ -152,18 +152,21 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
         textWoordDeel1.setText(deel1);
 
         if(lettergrepen == 2){
-            tracks = new int [4];
+            tracks = new int [6];
             textWoordDeel2.setText(" - " + deel2);
             tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_1", "raw", getPackageName());
             tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_2", "raw", getPackageName());
             tracks[2] = R.raw.oef6_3_1;
             tracks[3] = R.raw.oef6_3_2;
+            tracks[4] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_1", "raw", getPackageName());
+            tracks[5] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_2", "raw", getPackageName());
         }else{
-            tracks = new int [3];
+            tracks = new int [4];
             woordPlayer = MediaPlayer.create(this, getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName()));
             tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());
             tracks[1] = R.raw.oef6_3_1;
             tracks[2] = R.raw.oef6_3_2;
+            tracks[3] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());
             textWoordDeel2.setText("");
             lijn2.setAlpha(0.0f);
         }
@@ -181,17 +184,24 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
     public void onCompletion(MediaPlayer audioPlayer2) {
         audioPlayer2.release();
 
-        if(lettergrepen == 2){
-            if (currentTrack == 1){
-                konijnAnimation1.start();
-                konijnAnimation2.start();
-            }
-        }
+
 
         if (currentTrack < tracks.length-1) {
             isPlaying = true;
             currentTrack++;
             audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+            if(lettergrepen == 2){
+                if (currentTrack == 1 || currentTrack == 4 ||currentTrack == 5 ){
+                    konijnAnimation1.start();
+                    konijnAnimation2.start();
+                }
+            }else{
+                if (currentTrack == 3){
+                    konijnAnimation1.start();
+                    konijnAnimation2.start();
+                }
+            }
+
             audioPlayer.setOnCompletionListener(this);
             audioPlayer.start();
         }else {
