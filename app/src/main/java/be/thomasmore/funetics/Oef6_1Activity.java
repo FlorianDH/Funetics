@@ -126,14 +126,4 @@ public class Oef6_1Activity extends AppCompatActivity implements MediaPlayer.OnC
         currentTrack = 0;
         playAudioPlayer();
     }
-
-    public void volgendeButton_onClick(View view) {
-        if(isPlaying){
-            audioPlayer.stop();
-        }
-        Intent returnIntent = new Intent();
-        setResult(Activity.RESULT_OK,returnIntent);
-        finish();
-    }
-
 }
