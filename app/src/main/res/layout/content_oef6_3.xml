@@ -110,25 +110,6 @@
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:gravity="center">
-
-                <Button
-                    android:id="@+id/button1"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-
-                    android:gravity="center"
-                    android:layout_margin="15dp"
-                    android:background="@drawable/thumb_down"
-                    android:onClick="foutButton_onClick"/>
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-
-                    android:gravity="center"
-                    android:layout_margin="15dp"
-                    android:background="@drawable/thumb_up"
-                    android:onClick="goedButton_onClick"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
