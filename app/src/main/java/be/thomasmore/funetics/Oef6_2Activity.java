@@ -9,7 +9,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class Oef6_2Activity extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
@@ -62,23 +64,32 @@ public class Oef6_2Activity extends AppCompatActivity implements MediaPlayer.OnC
             }
         });
 
-        ImageView afbeeldingBij = (ImageView) findViewById(R.id.imageViewBij);
-        bijAnimation = ObjectAnimator.ofFloat(afbeeldingBij, "translationX", 100f);
-        bijAnimation.setDuration(3000);
-        bijAnimation.start();
+        final LinearLayout layout = (LinearLayout)findViewById(R.id.layoutOef6_2);
+        ViewTreeObserver vto = layout.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                float afstand = (float) layout.getMeasuredWidth();
+
+                ImageView afbeeldingBij = (ImageView) findViewById(R.id.imageViewBij);
+                bijAnimation = ObjectAnimator.ofFloat(afbeeldingBij, "translationX", afstand);
+                bijAnimation.setDuration(3000);
+                bijAnimation.start();
+            }
+        });
     }
 
     public void setAudioPlayer() {
-//        tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_herhaal", "raw", getPackageName()); //oefenwoord_herhaal
-//        tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());  // oefenwoord
-//        tracks[2] = R.raw.oef2;
+        tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_2", "raw", getPackageName()); //oefenwoord_6_2
+        tracks[1] = R.raw.oef6_2;
+        tracks[2] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_2", "raw", getPackageName()); //oefenwoord_6_2
     }
 
     public void playAudioPlayer(){
-//        isPlaying = true;
-//        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
-//        audioPlayer.setOnCompletionListener(this);
-//        audioPlayer.start();
+        isPlaying = true;
+        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+        audioPlayer.setOnCompletionListener(this);
+        audioPlayer.start();
     }
 
     public void onCompletion(MediaPlayer audioPlayer2) {
