@@ -119,13 +119,20 @@
 
         <ImageView
             android:id="@+id/imageKonijn"
-            android:layout_width="wrap_content"
-            android:layout_height="400dp"
-            android:layout_marginBottom="100dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginRight="200dp"
+            android:layout_marginBottom="50dp"
             app:srcCompat="@drawable/konijn"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@id/centerPage"
             />
+
+        <View
+            android:id="@+id/centerPage"
+            android:layout_width="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/soundFAB"

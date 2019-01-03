@@ -18,10 +18,10 @@
             android:id="@+id/detailTopBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/color_primary_dark"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp"
-            android:background="@color/color_primary_dark">
+            tools:layout_editor_absoluteY="8dp">
 
             <LinearLayout
                 android:id="@+id/detailTitle"
@@ -32,25 +32,25 @@
 
                 <TextView
                     android:id="@+id/textViewDetailTitle"
+                    style="@style/title_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_activity_test"
                     android:layout_weight="0.50"
-                    style="@style/title_white"/>
+                    android:text="@string/title_activity_test" />
 
                 <TextView
                     android:id="@+id/textViewNaam"
+                    style="@style/title_white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Naam kind"
-                    android:gravity="end"
                     android:layout_weight="0.50"
-                    style="@style/title_white"/>
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Overslaan"
-                    android:onClick="oef5_onClick"/>
+                    android:gravity="end"
+                    android:text="Naam kind" />
+                <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Overslaan"-->
+                <!--android:onClick="oef5_onClick"/>-->
             </LinearLayout>
         </LinearLayout>
 
