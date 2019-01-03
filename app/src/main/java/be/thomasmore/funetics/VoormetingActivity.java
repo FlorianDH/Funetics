@@ -1,21 +1,23 @@
 package be.thomasmore.funetics;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.List;
-
 public class VoormetingActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
     private Kind huidigKind;
+
+    private int selectedConditie = 0;
 
     private int[] voormeting = new int[10];
 
@@ -30,10 +32,10 @@ public class VoormetingActivity extends AppCompatActivity {
     private MediaPlayer woordPlayer;
     private MediaPlayer audioPlayer;
 
-    private ImageButton ImageButton1;
-    private ImageButton ImageButton2;
-    private ImageButton ImageButton3;
-    private ImageButton ImageButton4;
+    private ImageButton imageButton1;
+    private ImageButton imageButton2;
+    private ImageButton imageButton3;
+    private ImageButton imageButton4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,12 +90,46 @@ public class VoormetingActivity extends AppCompatActivity {
             setVoormeting();
             playWoordPlayer();
         }else {
+            imageButton1.setVisibility(view.INVISIBLE);
+            imageButton2.setVisibility(view.INVISIBLE);
+            imageButton3.setVisibility(view.INVISIBLE);
+            imageButton4.setVisibility(view.INVISIBLE);
+
+            showConditieDialog();
+
             //Terug naar oefening activity
-            Intent returnIntent = new Intent();
-            returnIntent.putExtra("voormeting", voormeting);
-            setResult(Activity.RESULT_OK,returnIntent);
-            finish();
+//            Intent returnIntent = new Intent();
+//            returnIntent.putExtra("voormeting", voormeting);
+//            setResult(Activity.RESULT_OK,returnIntent);
+//            finish();
         }
+    }
+
+    private void showConditieDialog() {
+        final String[] items = { "Conditie 1", "Conditie 2", "Conditie 3" };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Selecteer de conditie die u wilt testen")
+                .setSingleChoiceItems(items, 0, null)
+                .setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        selectedConditie = ((AlertDialog)dialog).getListView().getCheckedItemPosition() + 1; //conditie 1 geeft als waarde ook 1
+
+                        //Terug naar oefeningactivity
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("voormeting", voormeting);
+                        returnIntent.putExtra("conditie", String.valueOf(selectedConditie));
+                        setResult(Activity.RESULT_OK,returnIntent);
+                        finish();
+                    }
+                })
+                .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void playOpdrachtSound(){
@@ -158,111 +194,111 @@ public class VoormetingActivity extends AppCompatActivity {
     }
 
     public void setImages() {
-        ImageButton1 = (ImageButton) this.findViewById(R.id.imageButton1);
-        ImageButton2 = (ImageButton) this.findViewById(R.id.imageButton2);
-        ImageButton3 = (ImageButton) this.findViewById(R.id.imageButton3);
-        ImageButton4 = (ImageButton) this.findViewById(R.id.imageButton4);
+        imageButton1 = (ImageButton) this.findViewById(R.id.imageButton1);
+        imageButton2 = (ImageButton) this.findViewById(R.id.imageButton2);
+        imageButton3 = (ImageButton) this.findViewById(R.id.imageButton3);
+        imageButton4 = (ImageButton) this.findViewById(R.id.imageButton4);
 
         switch (oefening){
             case 0: //duikbril
-                ImageButton1.setImageResource(R.drawable.duikbril);
-                ImageButton1.setContentDescription("juist");
-                ImageButton2.setImageResource(R.drawable.kompas);
-                ImageButton2.setContentDescription("fout");
-                ImageButton3.setImageResource(R.drawable.riet);
-                ImageButton3.setContentDescription("fout");
-                ImageButton4.setImageResource(R.drawable.klimtouw);
-                ImageButton4.setContentDescription("fout");
+                imageButton1.setImageResource(R.drawable.duikbril);
+                imageButton1.setContentDescription("juist");
+                imageButton2.setImageResource(R.drawable.kompas);
+                imageButton2.setContentDescription("fout");
+                imageButton3.setImageResource(R.drawable.riet);
+                imageButton3.setContentDescription("fout");
+                imageButton4.setImageResource(R.drawable.klimtouw);
+                imageButton4.setContentDescription("fout");
                 break;
             case 1: //klimtouw
-                ImageButton1.setImageResource(R.drawable.zaklamp);
-                ImageButton1.setContentDescription("fout");
-                ImageButton2.setImageResource(R.drawable.klimtouw);
-                ImageButton2.setContentDescription("juist");
-                ImageButton3.setImageResource(R.drawable.steil);
-                ImageButton3.setContentDescription("fout");
-                ImageButton4.setImageResource(R.drawable.duikbril);
-                ImageButton4.setContentDescription("fout");
+                imageButton1.setImageResource(R.drawable.zaklamp);
+                imageButton1.setContentDescription("fout");
+                imageButton2.setImageResource(R.drawable.klimtouw);
+                imageButton2.setContentDescription("juist");
+                imageButton3.setImageResource(R.drawable.steil);
+                imageButton3.setContentDescription("fout");
+                imageButton4.setImageResource(R.drawable.duikbril);
+                imageButton4.setContentDescription("fout");
                 break;
             case 2: //kroos
-                ImageButton1.setImageResource(R.drawable.val);
-                ImageButton1.setContentDescription("fout");
-                ImageButton2.setImageResource(R.drawable.zaklamp);
-                ImageButton2.setContentDescription("fout");
-                ImageButton3.setImageResource(R.drawable.kompas);
-                ImageButton3.setContentDescription("fout");
-                ImageButton4.setImageResource(R.drawable.kroos);
-                ImageButton4.setContentDescription("juist");
+                imageButton1.setImageResource(R.drawable.val);
+                imageButton1.setContentDescription("fout");
+                imageButton2.setImageResource(R.drawable.zaklamp);
+                imageButton2.setContentDescription("fout");
+                imageButton3.setImageResource(R.drawable.kompas);
+                imageButton3.setContentDescription("fout");
+                imageButton4.setImageResource(R.drawable.kroos);
+                imageButton4.setContentDescription("juist");
                 break;
             case 3: //riet
-                ImageButton1.setImageResource(R.drawable.klimtouw);
-                ImageButton1.setContentDescription("fout");
-                ImageButton2.setImageResource(R.drawable.riet);
-                ImageButton2.setContentDescription("juist");
-                ImageButton3.setImageResource(R.drawable.kamp);
-                ImageButton3.setContentDescription("fout");
-                ImageButton4.setImageResource(R.drawable.zwaan);
-                ImageButton4.setContentDescription("fout");
+                imageButton1.setImageResource(R.drawable.klimtouw);
+                imageButton1.setContentDescription("fout");
+                imageButton2.setImageResource(R.drawable.riet);
+                imageButton2.setContentDescription("juist");
+                imageButton3.setImageResource(R.drawable.kamp);
+                imageButton3.setContentDescription("fout");
+                imageButton4.setImageResource(R.drawable.zwaan);
+                imageButton4.setContentDescription("fout");
                 break;
             case 4: //val
-                ImageButton1.setImageResource(R.drawable.klimtouw);
-                ImageButton1.setContentDescription("fout");
-                ImageButton2.setImageResource(R.drawable.val);
-                ImageButton2.setContentDescription("juist");
-                ImageButton3.setImageResource(R.drawable.duikbril);
-                ImageButton3.setContentDescription("fout");
-                ImageButton4.setImageResource(R.drawable.kroos);
-                ImageButton4.setContentDescription("fout");
+                imageButton1.setImageResource(R.drawable.klimtouw);
+                imageButton1.setContentDescription("fout");
+                imageButton2.setImageResource(R.drawable.val);
+                imageButton2.setContentDescription("juist");
+                imageButton3.setImageResource(R.drawable.duikbril);
+                imageButton3.setContentDescription("fout");
+                imageButton4.setImageResource(R.drawable.kroos);
+                imageButton4.setContentDescription("fout");
                 break;
             case 5: //kompas
-                ImageButton1.setImageResource(R.drawable.riet);
-                ImageButton1.setContentDescription("fout");
-                ImageButton2.setImageResource(R.drawable.zwaan);
-                ImageButton2.setContentDescription("fout");
-                ImageButton3.setImageResource(R.drawable.kompas);
-                ImageButton3.setContentDescription("juist");
-                ImageButton4.setImageResource(R.drawable.duikbril);
-                ImageButton4.setContentDescription("fout");
+                imageButton1.setImageResource(R.drawable.riet);
+                imageButton1.setContentDescription("fout");
+                imageButton2.setImageResource(R.drawable.zwaan);
+                imageButton2.setContentDescription("fout");
+                imageButton3.setImageResource(R.drawable.kompas);
+                imageButton3.setContentDescription("juist");
+                imageButton4.setImageResource(R.drawable.duikbril);
+                imageButton4.setContentDescription("fout");
                 break;
             case 6: //steil
-                ImageButton1.setImageResource(R.drawable.kroos);
-                ImageButton1.setContentDescription("fout");
-                ImageButton2.setImageResource(R.drawable.steil);
-                ImageButton2.setContentDescription("juist");
-                ImageButton3.setImageResource(R.drawable.kamp);
-                ImageButton3.setContentDescription("fout");
-                ImageButton4.setImageResource(R.drawable.zaklamp);
-                ImageButton4.setContentDescription("fout");
+                imageButton1.setImageResource(R.drawable.kroos);
+                imageButton1.setContentDescription("fout");
+                imageButton2.setImageResource(R.drawable.steil);
+                imageButton2.setContentDescription("juist");
+                imageButton3.setImageResource(R.drawable.kamp);
+                imageButton3.setContentDescription("fout");
+                imageButton4.setImageResource(R.drawable.zaklamp);
+                imageButton4.setContentDescription("fout");
                 break;
             case 7: //zwaan
-                ImageButton1.setImageResource(R.drawable.val);
-                ImageButton1.setContentDescription("fout");
-                ImageButton2.setImageResource(R.drawable.riet);
-                ImageButton2.setContentDescription("fout");
-                ImageButton3.setImageResource(R.drawable.kompas);
-                ImageButton3.setContentDescription("fout");
-                ImageButton4.setImageResource(R.drawable.zwaan);
-                ImageButton4.setContentDescription("juist");
+                imageButton1.setImageResource(R.drawable.val);
+                imageButton1.setContentDescription("fout");
+                imageButton2.setImageResource(R.drawable.riet);
+                imageButton2.setContentDescription("fout");
+                imageButton3.setImageResource(R.drawable.kompas);
+                imageButton3.setContentDescription("fout");
+                imageButton4.setImageResource(R.drawable.zwaan);
+                imageButton4.setContentDescription("juist");
                 break;
             case 8: //kamp
-                ImageButton1.setImageResource(R.drawable.kamp);
-                ImageButton1.setContentDescription("juist");
-                ImageButton2.setImageResource(R.drawable.klimtouw);
-                ImageButton2.setContentDescription("fout");
-                ImageButton3.setImageResource(R.drawable.kompas);
-                ImageButton3.setContentDescription("fout");
-                ImageButton4.setImageResource(R.drawable.riet);
-                ImageButton4.setContentDescription("fout");
+                imageButton1.setImageResource(R.drawable.kamp);
+                imageButton1.setContentDescription("juist");
+                imageButton2.setImageResource(R.drawable.klimtouw);
+                imageButton2.setContentDescription("fout");
+                imageButton3.setImageResource(R.drawable.kompas);
+                imageButton3.setContentDescription("fout");
+                imageButton4.setImageResource(R.drawable.riet);
+                imageButton4.setContentDescription("fout");
                 break;
             case 9: //zaklamp
-                ImageButton1.setImageResource(R.drawable.val);
-                ImageButton1.setContentDescription("fout");
-                ImageButton2.setImageResource(R.drawable.kroos);
-                ImageButton2.setContentDescription("fout");
-                ImageButton3.setImageResource(R.drawable.zaklamp);
-//                ImageButton3.setContentDescription("juist");
-                ImageButton4.setImageResource(R.drawable.steil);
-                ImageButton4.setContentDescription("fout");
+                imageButton1.setImageResource(R.drawable.val);
+                imageButton1.setContentDescription("fout");
+                imageButton2.setImageResource(R.drawable.kroos);
+                imageButton2.setContentDescription("fout");
+                imageButton3.setImageResource(R.drawable.zaklamp);
+                imageButton3.setContentDescription("juist");
+                imageButton4.setImageResource(R.drawable.steil);
+                imageButton4.setContentDescription("fout");
                 break;
         }
     }

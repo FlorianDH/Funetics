@@ -51,33 +51,35 @@ public class DetailKindActivity extends Activity {
 
     public void goStartTest_onClick(View v){
         //Vragen welke conditie er getest moet worden
-        showConditieDialog();
+//        showConditieDialog();
+
+        beginTest();
     }
 
-    private void showConditieDialog() {
-        final String[] items = { "Conditie 1", "Conditie 2", "Conditie 3" };
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Selecteer de conditie die u wilt testen")
-                .setSingleChoiceItems(items, 0, null)
-                .setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        selectedConditie = ((AlertDialog)dialog).getListView().getCheckedItemPosition() + 1; //conditie 1 geeft als waarde ook 1
-                        beginTest();
-                    }
-                })
-                .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+//    private void showConditieDialog() {
+//        final String[] items = { "Conditie 1", "Conditie 2", "Conditie 3" };
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("Selecteer de conditie die u wilt testen")
+//                .setSingleChoiceItems(items, 0, null)
+//                .setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//                        selectedConditie = ((AlertDialog)dialog).getListView().getCheckedItemPosition() + 1; //conditie 1 geeft als waarde ook 1
+//                        beginTest();
+//                    }
+//                })
+//                .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                    }
+//                });
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
+//    }
 
     public void beginTest(){
         Bundle bundle = new Bundle();
         bundle.putLong("kindId", huidigKind.getId());
-        bundle.putLong("conditie", selectedConditie);
+//        bundle.putLong("conditie", selectedConditie);
 
         Intent intent = new Intent(this, OefeningActivity.class);
         intent.putExtras(bundle);
