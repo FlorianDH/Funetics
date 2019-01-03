@@ -137,11 +137,12 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/imageKonijn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="400dp"
             app:srcCompat="@drawable/konijn"
-            android:shadowColor="@color/color_black"
-
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
             />
 
         <android.support.design.widget.FloatingActionButton
