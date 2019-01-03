@@ -326,7 +326,7 @@ public class OefeningActivity extends Activity {
                 nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
                 db.insertGetesteOefening(nieuweGetesteOefening);
 
-                if (getesteWoordenPositie < 4){
+                if (getesteWoordenPositie != 3){
                     //Getest woord verhogen
                     getesteWoordenPositie++;
                     huidigGetestWoordId = getesteWoordenId[getesteWoordenPositie];
