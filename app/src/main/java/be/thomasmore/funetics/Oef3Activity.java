@@ -149,17 +149,17 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
 
     public void setAudioPlayer() {
-        tracks[0] = R.raw.duikbril_3_1;
+        tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_3_1", "raw", getPackageName());
         tracks[1] = R.raw.oef3_help_je_mij;
         tracks[2] = R.raw.oef3_ik_zeg_een_zinnetje;
         tracks[3] = R.raw.oef3_zin_juist;
         tracks[4] = R.raw.oef3_zin_fout;
         tracks[5] = R.raw.oef3_hier_gaan_we;
-        tracks[6] = R.raw.duikbril_3_2;
+        tracks[6] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_3_2", "raw", getPackageName());
     }
 
     public void setContextPlayer() {
-        contextPlayer = MediaPlayer.create(getApplicationContext(), R.raw.duikbril_3_2);
+        contextPlayer = MediaPlayer.create(getApplicationContext(),getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_3_2", "raw", getPackageName()));
         context2Player = MediaPlayer.create(getApplicationContext(), R.raw.oef3_4);
         juistPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef3_2);
         juist2Player = MediaPlayer.create(getApplicationContext(), R.raw.oef3_5);
@@ -205,14 +205,14 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
             case 1:
                 textViewContext = (TextView) this.findViewById(R.id.textViewContext);
                 textViewContext.setText(huidigDoelwoord.getJuisteZin());
-                contextPlayer = MediaPlayer.create(getApplicationContext(), R.raw.duikbril_3_2);
+                contextPlayer = MediaPlayer.create(getApplicationContext(), getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_3_2", "raw", getPackageName()));
                 goedButton.setContentDescription("juist");
                 foutButton.setContentDescription("fout");
                 break;
             case 2:
                 textViewContext = (TextView) this.findViewById(R.id.textViewContext);
                 textViewContext.setText(huidigDoelwoord.getFouteZin());
-                contextPlayer = MediaPlayer.create(getApplicationContext(), R.raw.duikbril_3_3);
+                contextPlayer = MediaPlayer.create(getApplicationContext(), getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_3_3", "raw", getPackageName()));
                 goedButton.setContentDescription("fout");
                 foutButton.setContentDescription("juist");
                 break;

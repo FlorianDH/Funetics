@@ -2,6 +2,7 @@ package be.thomasmore.funetics;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class Oef4Activity extends AppCompatActivity {
+public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
 
     private DatabaseHelper db;
     private Doelwoord huidigDoelwoord;
@@ -35,6 +36,16 @@ public class Oef4Activity extends AppCompatActivity {
     private boolean woord2Selected;
     private boolean woord3Selected;
     private boolean woord4Selected;
+
+    private int[] tracks = new int[2];
+    private int currentTrack = 0;
+
+    private MediaPlayer audioPlayer = null;
+    private MediaPlayer juistPlayer = null;
+    private MediaPlayer foutPlayer = null;
+
+    private boolean isPlaying = false; //false by default
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +88,15 @@ public class Oef4Activity extends AppCompatActivity {
         buttonWoord3.setText(keuzeWoorden[2]);
         buttonWoord4 = (Button) findViewById(R.id.webButton4);
         buttonWoord4.setText(keuzeWoorden[3]);
+
+        setAudioPlayer();
+
+        playAudioPlayer();
     }
 
     public void nextFAB_onClick(View view) {
         if (woord1Selected && woord2Selected && woord3Selected){
+            juistPlayer.start();
             score++;
             aantalPogingen++;
 
@@ -92,7 +108,36 @@ public class Oef4Activity extends AppCompatActivity {
             finish();
         }
         else {
+            foutPlayer.start();
             aantalPogingen++;
+        }
+    }
+
+    public void setAudioPlayer() {
+        tracks[0] = R.raw.oef4_1; //Hier zie je 4 prentjes staan
+        tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_4", "raw", getPackageName());
+
+        juistPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef4_2);
+        foutPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef4_3);
+    }
+
+    public void playAudioPlayer(){
+        isPlaying = true;
+        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+        audioPlayer.setOnCompletionListener(this);
+        audioPlayer.start();
+    }
+
+    public void onCompletion(MediaPlayer audioPlayer2) {
+        audioPlayer2.release();
+        if (currentTrack < tracks.length-1) {
+            isPlaying = true;
+            currentTrack++;
+            audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+            audioPlayer.setOnCompletionListener(this);
+            audioPlayer.start();
+        }else {
+            isPlaying = false;
         }
     }
 

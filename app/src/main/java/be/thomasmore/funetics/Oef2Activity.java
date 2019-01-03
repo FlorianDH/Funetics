@@ -2,7 +2,6 @@ package be.thomasmore.funetics;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -93,9 +92,9 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     public void setAudioPlayer() {
-        tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_herhaal", "raw", getPackageName()); //oefenwoord_herhaal
+        tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_2", "raw", getPackageName()); //oefenwoord_herhaal
         tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());  // oefenwoord
-        tracks[2] = R.raw.oef2_doe_maar;
+        tracks[2] = R.raw.oef2; //Doe maar
     }
 
     public void playAudioPlayer(){

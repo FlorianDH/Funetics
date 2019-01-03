@@ -6,7 +6,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,10 +69,10 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     public void setAudioPlayer() {
-        tracks[0] = R.raw.oef1_wat_zie_je_hier;
-        tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());  //oefenwoord
-        tracks[2] = R.raw.oef1_weet_je_wat_dat_is;
-        tracks[3] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_def", "raw", getPackageName());  //oefenwoord_def
+        tracks[0] = R.raw.oef1_1; //Wat zie je hier?
+        tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_lid", "raw", getPackageName());  //oefenwoord
+        tracks[2] = R.raw.oef1_2; //Weet je wat dat is
+        tracks[3] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_1", "raw", getPackageName());  //oefenwoord_def
     }
 
     public void playAudioPlayer(){
