@@ -92,16 +92,16 @@ public class Oef6_1Activity extends AppCompatActivity implements MediaPlayer.OnC
     }
 
     public void setAudioPlayer() {
-//        tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_herhaal", "raw", getPackageName()); //oefenwoord_herhaal
-//        tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());  // oefenwoord
-//        tracks[2] = R.raw.oef2;
+        tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_1", "raw", getPackageName()); //oefenwoord_herhaal
+        tracks[1] = R.raw.oef6_1_1;
+        tracks[2] = R.raw.oef6_1_2;
     }
 
     public void playAudioPlayer(){
-//        isPlaying = true;
-////        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
-//        audioPlayer.setOnCompletionListener(this);
-//        audioPlayer.start();
+        isPlaying = true;
+        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+        audioPlayer.setOnCompletionListener(this);
+        audioPlayer.start();
     }
 
     public void onCompletion(MediaPlayer audioPlayer2) {
