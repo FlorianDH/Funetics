@@ -24,7 +24,7 @@ import java.sql.Array;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class Oef5Activity extends AppCompatActivity implements View.OnDragListener, View.OnLongClickListener{
+public class Oef5Activity extends AppCompatActivity implements View.OnDragListener, View.OnLongClickListener, MediaPlayer.OnCompletionListener{
 
     private DatabaseHelper db;
     private Doelwoord huidigDoelwoord;
@@ -51,6 +51,9 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
     private MediaPlayer audioPlayer = null;
     private MediaPlayer juistPlayer = null;
     private MediaPlayer foutPlayer = null;
+
+    private int[] tracks = new int[2];
+    private int currentTrack = 0;
 
     private boolean isPlaying = false; //false by default
 
@@ -147,15 +150,33 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
         playAudioPlayer();
     }
 
+    public void setAudioPlayer() {
+        tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_5", "raw", getPackageName()); //oefenwoord_herhaal
+        tracks[1] = R.raw.oef5_1;
+
+
+        juistPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef5_2);
+        foutPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef5_3);
+    }
+
     public void playAudioPlayer(){
         isPlaying = true;
-        audioPlayer =  MediaPlayer.create(getApplicationContext(),getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_5", "raw", getPackageName()));
+        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+        audioPlayer.setOnCompletionListener(this);
         audioPlayer.start();
     }
 
-    public void setAudioPlayer() {
-        juistPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef5_1);
-        foutPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef5_2);
+    public void onCompletion(MediaPlayer audioPlayer2) {
+        audioPlayer2.release();
+        if (currentTrack < tracks.length-1) {
+            isPlaying = true;
+            currentTrack++;
+            audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+            audioPlayer.setOnCompletionListener(this);
+            audioPlayer.start();
+        }else {
+            isPlaying = false;
+        }
     }
 
     //Find all views and set Tag to all draggable views
