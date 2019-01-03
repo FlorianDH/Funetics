@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Oef2Activity"
+    tools:context=".Oef6_1Activity"
     tools:showIn="@layout/activity_oef6_1">
     <LinearLayout
         android:layout_width="match_parent"
