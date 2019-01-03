@@ -70,7 +70,7 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     public void setAudioPlayer() {
         tracks[0] = R.raw.oef1_1; //Wat zie je hier?
-        tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_lid", "raw", getPackageName());  //oefenwoord
+        tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());  //oefenwoord
         tracks[2] = R.raw.oef1_2; //Weet je wat dat is
         tracks[3] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_1", "raw", getPackageName());  //oefenwoord_def
     }
