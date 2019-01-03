@@ -98,7 +98,7 @@ public class Oef6_1Activity extends AppCompatActivity implements MediaPlayer.OnC
     }
 
     public void playAudioPlayer(){
-        isPlaying = false;
+        isPlaying = true;
         audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
         audioPlayer.setOnCompletionListener(this);
         audioPlayer.start();

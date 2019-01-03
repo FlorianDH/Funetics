@@ -102,6 +102,11 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
     }
 
     public void nextFAB_onClick(View view) {
+        if (isPlaying){
+            audioPlayer.stop();
+            isPlaying = false;
+        }
+
         juistLayout = (LinearLayout) findViewById(R.id.juist_layout);
         foutLayout = (LinearLayout) findViewById(R.id.fout_layout);
 
@@ -139,7 +144,6 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
             finish();
         }else{
             foutPlayer.start();
-
         }
     }
 
