@@ -41,14 +41,13 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
         huidigDoelwoord = db.getDoelwoordById(doelwoordId);
         huidigKind = db.getKindById(kindId);
 
+        checkLetterGreep();
+
         setAudioPlayer();
         playAudioPlayer();
 
         TextView textNaamKind = (TextView) findViewById(R.id.textViewNaam);
         textNaamKind.setText(huidigKind.toString());
-
-        TextView textWoord = (TextView) findViewById(R.id.textViewWoord);
-        textWoord.setText(huidigDoelwoord.getNaam());
 
         ImageView afbeelding = (ImageView) findViewById(R.id.imageViewAfbeelding);
         afbeelding.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "drawable", getPackageName()));
@@ -64,11 +63,71 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
 
     public void checkLetterGreep(){
         int lettergrepen = 0;
-        switch (huidigDoelwoord.getNaam()){
-            case "duikbril":
+        String deel1 = "";
+        String deel2 = "";
 
+        TextView textWoordDeel1 = (TextView) findViewById(R.id.textViewWoordDeel1);
+        TextView textWoordDeel2 = (TextView) findViewById(R.id.textViewWoordDeel2);
+        View lijn1 = (View) findViewById(R.id.lijn1);
+        View lijn2 = (View) findViewById(R.id.lijn2);
+
+        switch (huidigDoelwoord.getNaam().toLowerCase()){
+            case "duikbril":
+                lettergrepen = 2;
+                deel1 = "Duik";
+                deel2 = "bril";
+                break;
+            case "klimtouw":
+                lettergrepen = 2;
+                deel1 = "Klim";
+                deel2 = "touw";
+                break;
+            case "kroos":
+                lettergrepen = 1;
+                deel1 = "Kroos";
+                deel2 = "";
+                break;
+            case "riet":
+                lettergrepen = 1;
+                deel1 = "Riet";
+                deel2 = "";
+                break;
+            case "kompas":
+                lettergrepen = 2;
+                deel1 = "Kom";
+                deel2 = "pas";
+                break;
+            case "steil":
+                lettergrepen = 1;
+                deel1 = "Steil";
+                deel2 = "";
+                break;
+            case "zwaan":
+                lettergrepen = 1;
+                deel1 = "Zwaan";
+                deel2 = "";
+                break;
+            case "kamp":
+                lettergrepen = 1;
+                deel1 = "Kamp";
+                deel2 = "";
+                break;
+            case "zaklamp":
+                lettergrepen = 2;
+                deel1 = "Zak";
+                deel2 = "lamp";
                 break;
         }
+
+        textWoordDeel1.setText(deel1);
+
+        if(lettergrepen == 2){
+            textWoordDeel2.setText(" - " + deel2);
+        }else{
+            textWoordDeel2.setText("");
+            lijn2.setAlpha(0.0f);
+        }
+
     }
 
     public void foutButton_onClick(View view) {
