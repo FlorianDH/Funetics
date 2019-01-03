@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
     private boolean woord2Selected;
     private boolean woord3Selected;
     private boolean woord4Selected;
+
+    private int aantalJuistSelected = 0;
 
     private int[] tracks = new int[2];
     private int currentTrack = 0;
@@ -76,24 +79,10 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
         TextView textWoord = (TextView) findViewById(R.id.textViewWoord);
         textWoord.setText(huidigDoelwoord.getNaam());
 
+        setImages();
+
         nextFAB = (FloatingActionButton) findViewById(R.id.nextFAB);
         nextFAB.setVisibility(View.INVISIBLE); //Maak de volgende-knop onzichtbaar tot er 3 woorden zijn aangeduid
-
-        //Alle woorden in een array zetten (laatste woord is altijd fout)
-        String keuzeWeb = huidigDoelwoord.getKeuzeWeb();
-        String[] keuzeWoorden = keuzeWeb.split(",");
-
-        //De woorden uit de array in de knoppen plaatsen
-        buttonWoord1 = (Button) findViewById(R.id.webButton1);
-        buttonWoord1.setText(keuzeWoorden[0]);
-        buttonWoord2 = (Button) findViewById(R.id.webButton2);
-        buttonWoord2.setText(keuzeWoorden[1]);
-        buttonWoord3 = (Button) findViewById(R.id.webButton3);
-        buttonWoord3.setText(keuzeWoorden[2]);
-        buttonWoord4 = (Button) findViewById(R.id.webButton4);
-        buttonWoord4.setText(keuzeWoorden[3]);
-
-
 
         playAudioPlayer();
     }
@@ -109,6 +98,25 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
                 { "_4_4", "fout", keuzeWoorden[3]}};
         Collections.shuffle(Arrays.asList(shuffleArray));
 
+        //De woorden uit de array in de knoppen plaatsen
+        buttonWoord1 = (Button) findViewById(R.id.webButton1);
+        buttonWoord1.setText(shuffleArray[0][2]);
+        buttonWoord1.setContentDescription(shuffleArray[0][1]);
+        buttonWoord2 = (Button) findViewById(R.id.webButton2);
+        buttonWoord2.setText(shuffleArray[1][2]);
+        buttonWoord2.setContentDescription(shuffleArray[1][1]);
+        buttonWoord3 = (Button) findViewById(R.id.webButton3);
+        buttonWoord3.setText(shuffleArray[2][2]);
+        buttonWoord3.setContentDescription(shuffleArray[2][1]);
+        buttonWoord4 = (Button) findViewById(R.id.webButton4);
+        buttonWoord4.setText(shuffleArray[3][2]);
+        buttonWoord4.setContentDescription(shuffleArray[3][1]);
+
+        ImageView imageView1 = (ImageView) findViewById(R.id.imageView1);
+        ImageView imageView2 = (ImageView) findViewById(R.id.imageView2);
+        ImageView imageView3 = (ImageView) findViewById(R.id.imageView3);
+        ImageView imageView4 = (ImageView) findViewById(R.id.imageView4);
+
         imageView1.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + shuffleArray[0][0], "drawable", getPackageName()));
         imageView1.setContentDescription(shuffleArray[0][1]);
         imageView2.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + shuffleArray[1][0], "drawable", getPackageName()));
@@ -120,7 +128,7 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     public void nextFAB_onClick(View view) {
-        if (woord1Selected && woord2Selected && woord3Selected){
+        if (aantalJuistSelected == 3){
             juistPlayer.start();
             while (juistPlayer.isPlaying()){
 
@@ -169,12 +177,6 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
         }
     }
 
-//    public void volgendeButton_onClick(View view) {
-//        Intent returnIntent = new Intent();
-//        setResult(Activity.RESULT_OK,returnIntent);
-//        finish();
-//    }
-
     public void webButton1_onClick(View view){
         if (woord1Selected){
             buttonWoord1.setBackgroundColor(getColor(R.color.web_red));
@@ -182,6 +184,18 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
         else {
             buttonWoord1.setBackgroundColor(getColor(R.color.web_green));
         }
+
+        if (!woord1Selected){
+            if (buttonWoord1.getContentDescription().equals("juist")){
+                aantalJuistSelected++;
+            }
+        }
+        else {
+            if (buttonWoord1.getContentDescription().equals("juist")){
+                aantalJuistSelected--;
+            }
+        }
+
         woord1Selected = !woord1Selected;
         checkFabNext();
     }
@@ -193,6 +207,18 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
         else {
             buttonWoord2.setBackgroundColor(getColor(R.color.web_green));
         }
+
+        if (!woord2Selected){
+            if (buttonWoord2.getContentDescription().equals("juist")){
+                aantalJuistSelected++;
+            }
+        }
+        else {
+            if (buttonWoord2.getContentDescription().equals("juist")){
+                aantalJuistSelected--;
+            }
+        }
+
         woord2Selected = !woord2Selected;
         checkFabNext();
     }
@@ -204,6 +230,18 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
         else {
             buttonWoord3.setBackgroundColor(getColor(R.color.web_green));
         }
+
+        if (!woord3Selected){
+            if (buttonWoord3.getContentDescription().equals("juist")){
+                aantalJuistSelected++;
+            }
+        }
+        else {
+            if (buttonWoord3.getContentDescription().equals("juist")){
+                aantalJuistSelected--;
+            }
+        }
+
         woord3Selected = !woord3Selected;
         checkFabNext();
     }
@@ -215,6 +253,18 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
         else {
             buttonWoord4.setBackgroundColor(getColor(R.color.web_green));
         }
+
+        if (!woord4Selected){
+            if (buttonWoord4.getContentDescription().equals("juist")){
+                aantalJuistSelected++;
+            }
+        }
+        else {
+            if (buttonWoord4.getContentDescription().equals("juist")){
+                aantalJuistSelected--;
+            }
+        }
+
         woord4Selected = !woord4Selected;
         checkFabNext();
     }
