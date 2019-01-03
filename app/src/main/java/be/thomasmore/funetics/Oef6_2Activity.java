@@ -1,5 +1,6 @@
 package be.thomasmore.funetics;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -24,6 +25,8 @@ public class Oef6_2Activity extends AppCompatActivity implements MediaPlayer.OnC
     private Kind huidigKind;
 
     private boolean isPlaying = false; //false by default
+
+    private ObjectAnimator bijAnimation = new ObjectAnimator();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,19 +61,24 @@ public class Oef6_2Activity extends AppCompatActivity implements MediaPlayer.OnC
                 playButton_onClick(view);
             }
         });
+
+        ImageView afbeeldingBij = (ImageView) findViewById(R.id.imageViewBij);
+        bijAnimation = ObjectAnimator.ofFloat(afbeeldingBij, "translationX", 100f);
+        bijAnimation.setDuration(3000);
+        bijAnimation.start();
     }
 
     public void setAudioPlayer() {
-        tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_herhaal", "raw", getPackageName()); //oefenwoord_herhaal
-        tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());  // oefenwoord
-        tracks[2] = R.raw.oef2;
+//        tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_herhaal", "raw", getPackageName()); //oefenwoord_herhaal
+//        tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());  // oefenwoord
+//        tracks[2] = R.raw.oef2;
     }
 
     public void playAudioPlayer(){
-        isPlaying = true;
-        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
-        audioPlayer.setOnCompletionListener(this);
-        audioPlayer.start();
+//        isPlaying = true;
+//        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+//        audioPlayer.setOnCompletionListener(this);
+//        audioPlayer.start();
     }
 
     public void onCompletion(MediaPlayer audioPlayer2) {
