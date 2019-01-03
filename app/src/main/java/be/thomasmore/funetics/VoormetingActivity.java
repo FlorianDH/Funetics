@@ -304,11 +304,7 @@ public class VoormetingActivity extends AppCompatActivity {
     }
 
     public void oef5_onClick(View view) {
-        Bundle bundle = new Bundle();
-        bundle.putLong("kindId", huidigKind.getId());
-        Intent intent = new Intent(this, NametingActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        finish();
+        oefening = 10;
+        voormeting = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     }
 }
