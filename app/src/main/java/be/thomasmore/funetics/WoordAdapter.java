@@ -119,6 +119,7 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
             }
             else if (oefening2.getScore() == 0 && oefening2.getAantalPogingen() == 1){
                 textViewOef2.setText("Foute uitspraak");
+                textViewOef2.setTextColor(ContextCompat.getColor(context, R.color.color_orange_dark));
             }
         }
 
