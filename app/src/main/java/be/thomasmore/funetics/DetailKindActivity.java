@@ -40,9 +40,9 @@ public class DetailKindActivity extends Activity {
     }
 
     public void goTerug_onClick(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
+//        Intent intent = new Intent(this, MainActivity.class);
         finish();
-        startActivity(intent);
+//        startActivity(intent);
     }
 
     public void buttonSync_onClick(View v) {

@@ -57,26 +57,27 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.20"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:gravity="end|center_vertical"
-                android:padding="0dp">
-
+                android:padding="5dp">
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingActionButtonRefresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/ic_sync_black_24dp"
+                    android:onClick="buttonSync_onClick" />
                 <Button
                     android:id="@+id/buttonTerug"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/beherenTerugBtn"
                     android:onClick="goTerug_onClick"/>
+
             </LinearLayout>
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/floatingActionButtonRefresh"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:clickable="true"
-                app:srcCompat="@drawable/ic_sync_black_24dp"
-                android:onClick="buttonSync_onClick" />
+
         </LinearLayout>
 
 

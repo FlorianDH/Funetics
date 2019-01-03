@@ -305,9 +305,8 @@ public class VoormetingActivity extends AppCompatActivity {
 
     public void oef5_onClick(View view) {
         Bundle bundle = new Bundle();
-        bundle.putLong("doelwoordId", huidigDoelwoord.getId());
         bundle.putLong("kindId", huidigKind.getId());
-        Intent intent = new Intent(this, Oef5Activity.class);
+        Intent intent = new Intent(this, NametingActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();

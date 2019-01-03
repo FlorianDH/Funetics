@@ -66,6 +66,8 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
         huidigDoelwoord = db.getDoelwoordById(doelwoordId);
         huidigKind = db.getKindById(kindId);
 
+        setAudioPlayer();
+
         TextView textNaamKind = (TextView) findViewById(R.id.textViewNaam);
         textNaamKind.setText(huidigKind.toString());
 
@@ -89,7 +91,7 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
         buttonWoord4 = (Button) findViewById(R.id.webButton4);
         buttonWoord4.setText(keuzeWoorden[3]);
 
-        setAudioPlayer();
+
 
         playAudioPlayer();
     }

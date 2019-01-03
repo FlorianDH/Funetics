@@ -71,6 +71,8 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
         huidigDoelwoord = db.getDoelwoordById(doelwoordId);
         huidigKind = db.getKindById(kindId);
 
+        setAudioPlayer();
+
         TextView textNaamKind = (TextView) findViewById(R.id.textViewNaam);
         textNaamKind.setText(huidigKind.toString());
 
@@ -91,7 +93,7 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
             }
         });
 
-        setAudioPlayer();
+
 
         findViews();
         setImages();
