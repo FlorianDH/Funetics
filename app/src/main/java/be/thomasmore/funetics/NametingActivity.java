@@ -88,6 +88,12 @@ public class NametingActivity extends AppCompatActivity {
             setNameting();
             playWoordPlayer();
         }else {
+
+            audioPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef0_einde);
+            audioPlayer.start();
+
+            while(audioPlayer.isPlaying());
+
             //Terug naar oefening activity
             Intent returnIntent = new Intent();
             returnIntent.putExtra("nameting", nameting);
@@ -97,7 +103,7 @@ public class NametingActivity extends AppCompatActivity {
     }
 
     public void playOpdrachtSound(){
-        audioPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef0_voormeting);
+        audioPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef0_nameting);
         audioPlayer.start();
     }
 
