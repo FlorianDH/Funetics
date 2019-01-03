@@ -1,5 +1,6 @@
 package be.thomasmore.funetics;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -13,9 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
+    int lettergrepen = 0;
 
     private MediaPlayer audioPlayer = null;
-    private int[] tracks = new int[3];
+    private MediaPlayer woordPlayer = null;
+
+    private int[] tracks;
+    private int[] woordTracks = new int[2];
+
     private int currentTrack = 0;
 
     public int score = 0;
@@ -26,6 +32,9 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
     private Kind huidigKind;
 
     private boolean isPlaying = false; //false by default
+
+    private ObjectAnimator konijnAnimation = new ObjectAnimator();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +52,8 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
 
         checkLetterGreep();
 
-        setAudioPlayer();
-        playAudioPlayer();
+
+
 
         TextView textNaamKind = (TextView) findViewById(R.id.textViewNaam);
         textNaamKind.setText(huidigKind.toString());
@@ -59,10 +68,16 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
                 playButton_onClick(view);
             }
         });
+
+        ImageView afbeeldingBij = (ImageView) findViewById(R.id.imageViewBij);
+        konijnAnimation = ObjectAnimator.ofFloat(afbeeldingBij, "translationY", 50f);
+        konijnAnimation.setDuration(1000);
+
+
+        playAudioPlayer();
     }
 
     public void checkLetterGreep(){
-        int lettergrepen = 0;
         String deel1 = "";
         String deel2 = "";
 
@@ -122,12 +137,21 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
         textWoordDeel1.setText(deel1);
 
         if(lettergrepen == 2){
+            tracks = new int [4];
             textWoordDeel2.setText(" - " + deel2);
+            tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_1", "raw", getPackageName());
+            tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_2", "raw", getPackageName());
+            tracks[2] = R.raw.oef6_3_1;
+            tracks[3] = R.raw.oef6_3_2;
         }else{
+            tracks = new int [3];
+            woordPlayer = MediaPlayer.create(this, getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName()));
+            tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());
+            tracks[1] = R.raw.oef6_3_1;
+            tracks[2] = R.raw.oef6_3_2;
             textWoordDeel2.setText("");
             lijn2.setAlpha(0.0f);
         }
-
     }
 
     public void foutButton_onClick(View view) {
@@ -161,14 +185,9 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
         finish();
     }
 
-    public void setAudioPlayer() {
-        tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_1", "raw", getPackageName()); //oefenwoord_herhaal
-        tracks[1] = R.raw.oef6_1_1;
-        tracks[2] = R.raw.oef6_1_2;
-    }
 
     public void playAudioPlayer(){
-        isPlaying = false;
+        isPlaying = true;
         audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
         audioPlayer.setOnCompletionListener(this);
         audioPlayer.start();
@@ -176,6 +195,17 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
 
     public void onCompletion(MediaPlayer audioPlayer2) {
         audioPlayer2.release();
+
+        if(lettergrepen == 2){
+            if (currentTrack == 1 || currentTrack == 2){
+                konijnAnimation.start();
+            }
+        }else{
+            if (currentTrack == 1){
+                konijnAnimation.start();
+            }
+        }
+
         if (currentTrack < tracks.length-1) {
             isPlaying = true;
             currentTrack++;
