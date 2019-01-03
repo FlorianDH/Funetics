@@ -70,6 +70,19 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
             }
         });
 
+        FloatingActionButton nextFab = (FloatingActionButton) findViewById(R.id.nextFAB);
+        nextFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Terug naar oefening activity
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("score", String.valueOf(1));
+                returnIntent.putExtra("aantalPogingen", String.valueOf(1));
+                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
+            }
+        });
+
         ImageView afbeeldingKonijn = (ImageView) findViewById(R.id.imageKonijn);
         konijnAnimation1 = ObjectAnimator.ofFloat(afbeeldingKonijn, "translationY", -200f);
         konijnAnimation1.setDuration(500);
