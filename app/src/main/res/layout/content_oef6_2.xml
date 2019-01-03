@@ -62,7 +62,7 @@
 
                 <ImageView
                     android:id="@+id/imageViewBij"
-                    android:layout_width="50dp"
+                    android:layout_width="60dp"
                     android:layout_weight="0.5"
                     android:layout_height="1dp"
                     app:srcCompat="@drawable/bij" />
@@ -70,6 +70,8 @@
                     android:id="@+id/textViewWoord"
                     android:layout_width="wrap_content"
                     android:layout_weight="0.5"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
                     android:layout_height="1dp"
                     android:textScaleX="2"
                     android:text="Woord"
