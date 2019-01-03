@@ -30,6 +30,27 @@ public class Oef6_2Activity extends AppCompatActivity implements MediaPlayer.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef6_2);
 
+        Bundle bundle = getIntent().getExtras();
+        Long doelwoordId = bundle.getLong("doelwoordId");
+        Long kindId = bundle.getLong("kindId");
+
+        db = new DatabaseHelper(this);
+
+        huidigDoelwoord = db.getDoelwoordById(doelwoordId);
+        huidigKind = db.getKindById(kindId);
+
+        setAudioPlayer();
+        playAudioPlayer();
+
+        TextView textNaamKind = (TextView) findViewById(R.id.textViewNaam);
+        textNaamKind.setText(huidigKind.toString());
+
+        TextView textWoord = (TextView) findViewById(R.id.textViewWoord);
+        textWoord.setText(huidigDoelwoord.getNaam());
+
+        ImageView afbeelding = (ImageView) findViewById(R.id.imageViewAfbeelding);
+        afbeelding.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "drawable", getPackageName()));
+
         FloatingActionButton soundFab = (FloatingActionButton) findViewById(R.id.soundFAB);
         soundFab.setOnClickListener(new View.OnClickListener() {
             @Override
