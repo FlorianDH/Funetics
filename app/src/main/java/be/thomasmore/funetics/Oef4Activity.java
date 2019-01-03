@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
 
@@ -96,9 +98,33 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
         playAudioPlayer();
     }
 
+    private void setImages(){
+        String keuzeWeb = huidigDoelwoord.getKeuzeWeb();
+        String[] keuzeWoorden = keuzeWeb.split(",");
+
+        String shuffleArray[][] = new String [][] {
+                { "_4_1", "juist", keuzeWoorden[0]},
+                { "_4_2", "juist", keuzeWoorden[1]},
+                { "_4_3", "juist", keuzeWoorden[2]},
+                { "_4_4", "fout", keuzeWoorden[3]}};
+        Collections.shuffle(Arrays.asList(shuffleArray));
+
+//        imageView1.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + shuffleArray[0][0], "drawable", getPackageName()));
+//        imageView1.setContentDescription(shuffleArray[0][1]);
+//        imageView2.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + shuffleArray[1][0], "drawable", getPackageName()));
+//        imageView2.setContentDescription(shuffleArray[1][1]);
+//        imageView3.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + shuffleArray[2][0], "drawable", getPackageName()));
+//        imageView3.setContentDescription(shuffleArray[2][1]);
+//        imageView4.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + shuffleArray[3][0], "drawable", getPackageName()));
+//        imageView4.setContentDescription(shuffleArray[3][1]);
+    }
+
     public void nextFAB_onClick(View view) {
         if (woord1Selected && woord2Selected && woord3Selected){
             juistPlayer.start();
+            while (juistPlayer.isPlaying()){
+
+            }
             score++;
             aantalPogingen++;
 
