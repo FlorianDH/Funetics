@@ -322,7 +322,15 @@ public class OefeningActivity extends Activity {
                 GetesteOefening nieuweGetesteOefening = new GetesteOefening();
                 nieuweGetesteOefening.setScore(score);
                 nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
-                nieuweGetesteOefening.setOefeningId(6); //Id van de oefening
+                if (huidigeConditie.getId() == 1){
+                    nieuweGetesteOefening.setOefeningId(6); //Id van de oefening
+                }
+                else if (huidigeConditie.getId() == 2){
+                    nieuweGetesteOefening.setOefeningId(7); //Id van de oefening
+                }
+                else {
+                    nieuweGetesteOefening.setOefeningId(8); //Id van de oefening
+                }
                 nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
                 db.insertGetesteOefening(nieuweGetesteOefening);
 
