@@ -33,7 +33,8 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
 
     private boolean isPlaying = false; //false by default
 
-    private ObjectAnimator konijnAnimation = new ObjectAnimator();
+    private ObjectAnimator konijnAnimation1 = new ObjectAnimator();
+    private ObjectAnimator konijnAnimation2 = new ObjectAnimator();
 
 
     @Override
@@ -69,10 +70,11 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
             }
         });
 
-        ImageView afbeeldingBij = (ImageView) findViewById(R.id.imageViewBij);
-        konijnAnimation = ObjectAnimator.ofFloat(afbeeldingBij, "translationY", 50f);
-        konijnAnimation.setDuration(1000);
-
+        ImageView afbeeldingKonijn = (ImageView) findViewById(R.id.imageKonijn);
+        konijnAnimation1 = ObjectAnimator.ofFloat(afbeeldingKonijn, "translationY", -200f);
+        konijnAnimation1.setDuration(500);
+        konijnAnimation2 = ObjectAnimator.ofFloat(afbeeldingKonijn, "translationY", 200f);
+        konijnAnimation2.setDuration(500);
 
         playAudioPlayer();
     }
@@ -154,39 +156,9 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
         }
     }
 
-    public void foutButton_onClick(View view) {
-        aantalPogingen++;
-
-        if (isPlaying){
-            audioPlayer.stop();
-        }
-
-        //Terug naar oefening activity
-        Intent returnIntent = new Intent();
-        returnIntent.putExtra("score", String.valueOf(score));
-        returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
-        setResult(Activity.RESULT_OK,returnIntent);
-        finish();
-    }
-
-    public void goedButton_onClick(View view) {
-        aantalPogingen++;
-        score++;
-
-        if (isPlaying){
-            audioPlayer.stop();
-        }
-
-        //Terug naar oefening activity
-        Intent returnIntent = new Intent();
-        returnIntent.putExtra("score", String.valueOf(score));
-        returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
-        setResult(Activity.RESULT_OK,returnIntent);
-        finish();
-    }
-
-
     public void playAudioPlayer(){
+        konijnAnimation1.start();
+        konijnAnimation2.start();
         isPlaying = true;
         audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
         audioPlayer.setOnCompletionListener(this);
@@ -197,12 +169,9 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
         audioPlayer2.release();
 
         if(lettergrepen == 2){
-            if (currentTrack == 1 || currentTrack == 2){
-                konijnAnimation.start();
-            }
-        }else{
             if (currentTrack == 1){
-                konijnAnimation.start();
+                konijnAnimation1.start();
+                konijnAnimation2.start();
             }
         }
 
