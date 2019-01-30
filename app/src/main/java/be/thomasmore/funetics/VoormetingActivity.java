@@ -27,8 +27,6 @@ public class VoormetingActivity extends AppCompatActivity {
 
     private TextView textViewWoord;
 
-    private MediaPlayer foutPlayer;
-    private MediaPlayer juistPlayer;
     private MediaPlayer woordPlayer;
     private MediaPlayer audioPlayer;
 
@@ -63,9 +61,6 @@ public class VoormetingActivity extends AppCompatActivity {
         });
 
         playWoordPlayer();
-
-        foutPlayer = MediaPlayer.create(this, R.raw.oef0_fout);
-        juistPlayer = MediaPlayer.create(this, R.raw.oef0_juist);
     }
 
     public void imageButton_onClick(View view) {
@@ -73,16 +68,13 @@ public class VoormetingActivity extends AppCompatActivity {
 
         // Juiste foto
         if(waarde.equals("juist")){
-            juistPlayer.start();
             voormeting[oefening] ++;
-            while (juistPlayer.isPlaying()){}
         }
 
         //Foute foto
-        else {
-            foutPlayer.start();
-            while (foutPlayer.isPlaying()){}
-        }
+//        else {
+//
+//        }
 
 
         if (oefening < 9){
@@ -96,12 +88,6 @@ public class VoormetingActivity extends AppCompatActivity {
             imageButton4.setVisibility(view.INVISIBLE);
 
             showConditieDialog();
-
-            //Terug naar oefening activity
-//            Intent returnIntent = new Intent();
-//            returnIntent.putExtra("voormeting", voormeting);
-//            setResult(Activity.RESULT_OK,returnIntent);
-//            finish();
         }
     }
 
@@ -301,10 +287,5 @@ public class VoormetingActivity extends AppCompatActivity {
                 imageButton4.setContentDescription("fout");
                 break;
         }
-    }
-
-    public void oef5_onClick(View view) {
-        oefening = 10;
-        voormeting = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     }
 }

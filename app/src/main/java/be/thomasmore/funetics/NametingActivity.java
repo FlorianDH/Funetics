@@ -25,8 +25,6 @@ public class NametingActivity extends AppCompatActivity {
 
     private TextView textViewWoord;
 
-    private MediaPlayer foutPlayer;
-    private MediaPlayer juistPlayer;
     private MediaPlayer woordPlayer;
     private MediaPlayer audioPlayer;
 
@@ -60,9 +58,6 @@ public class NametingActivity extends AppCompatActivity {
             }
         });
 
-        foutPlayer = MediaPlayer.create(this, R.raw.oef0_fout);
-        juistPlayer = MediaPlayer.create(this, R.raw.oef0_juist);
-
         playWoordPlayer();
     }
 
@@ -71,16 +66,12 @@ public class NametingActivity extends AppCompatActivity {
 
         // Juiste foto
         if(waarde.equals("juist")){
-            juistPlayer.start();
             nameting[oefening] ++;
-            while (juistPlayer.isPlaying()){}
         }
 
         //Foute foto
-        else {
-            foutPlayer.start();
-            while (foutPlayer.isPlaying()){}
-        }
+//        else {
+//        }
 
 
         if (oefening < 9){
