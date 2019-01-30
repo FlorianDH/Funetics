@@ -70,7 +70,15 @@
             android:textAppearance="@style/title.dark"
 
             android:textSize="60sp" />
+        <TextView
+            android:id="@+id/textViewWoordStreep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=" - "
+            android:textAppearance="@style/title.dark"
 
+            android:textSize="60sp" />
         <TextView
             android:id="@+id/textViewWoordDeel2"
             android:layout_width="match_parent"
@@ -81,20 +89,6 @@
             android:textSize="60sp" />
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/lijn1"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/color_black"/>
-
-    <View
-        android:id="@+id/lijn2"
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/color_black" />
-
 </LinearLayout>
 
             <ImageView

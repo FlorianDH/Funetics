@@ -3,6 +3,7 @@ package be.thomasmore.funetics;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -53,9 +54,6 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
 
         checkLetterGreep();
 
-
-
-
         TextView textNaamKind = (TextView) findViewById(R.id.textViewNaam);
         textNaamKind.setText(huidigKind.toString());
 
@@ -97,9 +95,11 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
         String deel2 = "";
 
         TextView textWoordDeel1 = (TextView) findViewById(R.id.textViewWoordDeel1);
+        TextView textWoordStreep = (TextView) findViewById(R.id.textViewWoordStreep);
         TextView textWoordDeel2 = (TextView) findViewById(R.id.textViewWoordDeel2);
-        View lijn1 = (View) findViewById(R.id.lijn1);
-        View lijn2 = (View) findViewById(R.id.lijn2);
+
+        textWoordDeel1.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        textWoordDeel2.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         switch (huidigDoelwoord.getNaam().toLowerCase()){
             case "duikbril":
@@ -153,7 +153,8 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
 
         if(lettergrepen == 2){
             tracks = new int [6];
-            textWoordDeel2.setText(" - " + deel2);
+            textWoordStreep.setText(" - ");
+            textWoordDeel2.setText(deel2);
             tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_1", "raw", getPackageName());
             tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_2", "raw", getPackageName());
             tracks[2] = R.raw.oef6_3_1;
@@ -167,8 +168,8 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
             tracks[1] = R.raw.oef6_3_1;
             tracks[2] = R.raw.oef6_3_2;
             tracks[3] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());
+            textWoordStreep.setText("");
             textWoordDeel2.setText("");
-            lijn2.setAlpha(0.0f);
         }
     }
 
@@ -183,8 +184,6 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
 
     public void onCompletion(MediaPlayer audioPlayer2) {
         audioPlayer2.release();
-
-
 
         if (currentTrack < tracks.length-1) {
             isPlaying = true;
