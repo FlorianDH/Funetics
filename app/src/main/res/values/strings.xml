@@ -83,6 +83,7 @@
     <!-- Content_main -->
     <string name="volgende">Volgende</string>
     <string name="beheren">Beheren</string>
+    <string name="selectKlas">Selecteer klas</string>
     <string name="selectGroep">Selecteer groep</string>
     <string name="selectKind">Selecteer kind</string>
     <string name="homeImage">Home afbeelding</string>

@@ -54,10 +54,22 @@
             <TextView
                 android:id="@+id/titel"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:text="@string/app_name"
                 android:textSize="80sp" />
+            <TextView
+                android:id="@+id/labelKlas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/selectKlas"/>
 
+            <Spinner
+                android:id="@+id/spinnerKlas"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_white" />
             <TextView
                 android:id="@+id/labelGroep"
                 android:layout_width="match_parent"
@@ -76,7 +88,7 @@
                 android:id="@+id/labelKind"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/selectKind" />
 
             <Spinner

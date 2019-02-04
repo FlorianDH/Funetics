@@ -12,9 +12,9 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     // Database Version
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
     // Database Name
-    private static final String DATABASE_NAME = "funatics";
+    private static final String DATABASE_NAME = "funetics";
 
     // uitgevoerd bij instantiatie van DatabaseHelper
     // -> als database nog niet bestaat, dan creëren (call onCreate)
@@ -29,6 +29,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     // hierin de tables creëren
     @Override
     public void onCreate(SQLiteDatabase db) {
+        String CREATE_TABLE_KLAS = "CREATE TABLE klas (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                "naam TEXT NOT NULL)";
+        db.execSQL(CREATE_TABLE_KLAS);
+
         String CREATE_TABLE_GROEP = "CREATE TABLE groep (" +
                 "id INTEGER PRIMARY KEY NOT NULL," +
                 "naam TEXT NOT NULL)";
@@ -38,11 +43,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 "voornaam TEXT NOT NULL," +
                 "naam TEXT NOT NULL, " +
-                "leeftijd INTEGER," +
                 "actief INTEGER, " +
+                "klasId INTEGER NOT NULL, " +
                 "groepId INTEGER NOT NULL, " +
-                "FOREIGN KEY (groepId) REFERENCES party(id))";
-        db.execSQL(CREATE_TABLE_KIND);
+                "FOREIGN KEY (klasId) REFERENCES klas(id)," +
+                "FOREIGN KEY (groepId) REFERENCES groep(id))";
+
+                db.execSQL(CREATE_TABLE_KIND);
 
         String CREATE_TABLE_TEST = "CREATE TABLE test (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
@@ -97,12 +104,18 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "naam TEXT NOT NULL)";
         db.execSQL(CREATE_TABLE_OEFENING);
 
+        insertKlassen(db);
         insertGroepen(db);
         insertKinderen(db);
         insertCondities(db);
         insertWoordensets(db);
         insertDoelwoorden(db);
         insertOefeningen(db);
+    }
+
+    private void insertKlassen(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO klas (id, naam) VALUES (1, 'Antwerpse klas');");
+        db.execSQL("INSERT INTO klas (id, naam) VALUES (2, 'Limburgse klas');");
     }
 
     private void insertGroepen(SQLiteDatabase db) {
@@ -112,12 +125,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     private void insertKinderen(SQLiteDatabase db) {
-        db.execSQL("INSERT INTO kind (voornaam, naam, leeftijd, actief, groepId) VALUES ('Henk', 'Destoute', 12, 1, 1);");
-        db.execSQL("INSERT INTO kind (voornaam, naam, leeftijd, actief, groepId) VALUES ('Joske', 'Deflinke', 11, 1, 1);");
-        db.execSQL("INSERT INTO kind (voornaam, naam, actief, groepId) VALUES ('Jefke', 'Devervelende', 1, 2);");
-        db.execSQL("INSERT INTO kind (voornaam, naam, actief, groepId) VALUES ('Jeanneke', 'Debrave', 1, 2);");
-        db.execSQL("INSERT INTO kind (voornaam, naam, leeftijd, actief, groepId) VALUES ('Evert', 'Deslaper', 9, 0, 3);");
-        db.execSQL("INSERT INTO kind (voornaam, naam, leeftijd, actief, groepId) VALUES ('Marianne', 'Destrever', 7, 0, 3);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Henk', 'Destoute', 1, 1, 1);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Joske', 'Deflinke', 1, 1, 1);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Louisa', 'Depennensteler', 1, 2, 1);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Jefke', 'Devervelende', 1, 1, 2);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Jeanneke', 'Debrave', 1, 1, 2);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Koen', 'Degrave', 1, 2, 2);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Evert', 'Deslaper', 1, 1, 3);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Marianne', 'Destrever', 1, 1, 3);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Sven', 'Despieker', 1, 2, 3);");
     }
 
     private void insertCondities(SQLiteDatabase db) {
@@ -165,6 +181,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     // hierin de vorige tabellen wegdoen en opnieuw creëren
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS klas");
         db.execSQL("DROP TABLE IF EXISTS groep");
         db.execSQL("DROP TABLE IF EXISTS kind");
         db.execSQL("DROP TABLE IF EXISTS test");
@@ -184,15 +201,106 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     //-------------------------------------------------------------------------------------------------
 
     // insert-methode met ContentValues
+    public long insertKlas(Klas klas) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("naam", klas.getNaam());
+
+        long id = db.insert("klas", null, values);
+
+        db.close();
+        return id;
+    }
+
+    // update-methode met ContentValues
+    public boolean updateKlas(Klas klas) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("naam", klas.getNaam());
+
+        int numrows = db.update(
+                "klas",
+                values,
+                "id = ?",
+                new String[] { String.valueOf(klas.getId()) });
+
+        db.close();
+        return numrows > 0;
+    }
+
+    // delete-methode
+    public boolean deleteKlas(long id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int numrows = db.delete(
+                "klas",
+                "id = ?",
+                new String[] { String.valueOf(id) });
+
+        db.close();
+        return numrows > 0;
+    }
+
+    // query-methode
+    public Klas getKlasById(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "klas",      // tabelnaam
+                new String[] { "id", "naam" }, // kolommen
+                "id = ?",  // selectie
+                new String[] { String.valueOf(id) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+
+        Klas klas = new Klas();
+
+        if (cursor.moveToFirst()) {
+            klas = new Klas(cursor.getLong(0),
+                    cursor.getString(1));
+        }
+        cursor.close();
+        db.close();
+        return klas;
+    }
+
+    // rawQuery-methode
+    public List<Klas> getKlassen() {
+        List<Klas> lijst = new ArrayList<Klas>();
+        String selectQuery;
+
+        selectQuery = "SELECT  * FROM klas ORDER BY naam";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Klas klas = new Klas(cursor.getLong(0),
+                        cursor.getString(1));
+                lijst.add(klas);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return lijst;
+    }
+
+    // insert-methode met ContentValues
     public long insertKind(Kind kind) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put("voornaam", kind.getVoornaam());
         values.put("naam", kind.getNaam());
-        values.put("leeftijd", kind.getLeeftijd());
         values.put("actief", kind.getActief());
         values.put("groepId", kind.getGroepId());
+        values.put("klasId", kind.getKlasId());
 
         long id = db.insert("kind", null, values);
 
@@ -207,9 +315,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put("voornaam", kind.getVoornaam());
         values.put("naam", kind.getNaam());
-        values.put("leeftijd", kind.getLeeftijd());
         values.put("actief", kind.getActief());
         values.put("groepId", kind.getGroepId());
+        values.put("klasId", kind.getKlasId());
 
         int numrows = db.update(
                 "kind",
@@ -240,7 +348,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         Cursor cursor = db.query(
                 "kind",      // tabelnaam
-                new String[] { "id", "voornaam", "naam", "leeftijd", "actief", "groepId" }, // kolommen
+                new String[] { "id", "voornaam", "naam", "actief", "klasId", "groepId" }, // kolommen
                 "id = ?",  // selectie
                 new String[] { String.valueOf(id) }, // selectieparameters
                 null,           // groupby
@@ -297,6 +405,34 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
         else {
             selectQuery = "SELECT * FROM kind WHERE groepId = " + groepId + " AND actief = 1 ORDER BY voornaam";
+        }
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Kind kind = new Kind(cursor.getLong(0),
+                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5));
+                lijst.add(kind);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return lijst;
+    }
+
+    // rawQuery-methode
+    public List<Kind> getKinderenWhereKlasIdAndGroepId(int klasId, int groepId, int actief) {
+        List<Kind> lijst = new ArrayList<Kind>();
+        String selectQuery;
+
+        if (actief == 0){
+            selectQuery = "SELECT * FROM kind WHERE groepId = " + groepId + " AND klasId = " + klasId + " ORDER BY voornaam";
+        }
+        else {
+            selectQuery = "SELECT * FROM kind WHERE groepId = " + groepId + " AND klasId = " + klasId + " AND actief = 1 ORDER BY voornaam";
         }
 
         SQLiteDatabase db = this.getReadableDatabase();

@@ -4,28 +4,20 @@ public class Kind {
     private long id;
     private String voornaam;
     private String naam;
-    private int leeftijd;
     private int actief;
     private int groepId;
+    private int klasId;
 
     public Kind() {
     }
 
-    public Kind(long id, String voornaam, String naam, int leeftijd, int actief, int groepId) {
-        this.id = id;
-        this.voornaam = voornaam;
-        this.naam = naam;
-        this.leeftijd = leeftijd;
-        this.actief = actief;
-        this.groepId = groepId;
-    }
-
-    public Kind(long id, String voornaam, String naam, int actief, int groepId) {
+    public Kind(long id, String voornaam, String naam, int actief, int groepId, int klasId) {
         this.id = id;
         this.voornaam = voornaam;
         this.naam = naam;
         this.actief = actief;
         this.groepId = groepId;
+        this.klasId = klasId;
     }
 
     public long getId() {
@@ -52,14 +44,6 @@ public class Kind {
         this.naam = naam;
     }
 
-    public int getLeeftijd() {
-        return leeftijd;
-    }
-
-    public void setLeeftijd(int leeftijd) {
-        this.leeftijd = leeftijd;
-    }
-
     public int getActief() {
         return actief;
     }
@@ -74,6 +58,15 @@ public class Kind {
 
     public void setGroepId(int groepId) {
         this.groepId = groepId;
+    }
+
+
+    public int getKlasId() {
+        return klasId;
+    }
+
+    public void setKlasId(int klasId) {
+        this.klasId = klasId;
     }
 
     @Override
