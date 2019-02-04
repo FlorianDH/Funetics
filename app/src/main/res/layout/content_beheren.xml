@@ -35,7 +35,7 @@
                     android:id="@+id/textViewGroepenTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/groepTitle"
+                    android:text="@string/klasTitle"
                     style="@style/title_white"/>
             </LinearLayout>
 
@@ -105,7 +105,7 @@
             android:baselineAligned="false">
 
             <LinearLayout
-                android:id="@+id/groepenLijst"
+                android:id="@+id/klassenLijst"
                 android:layout_width="0dp"
                 android:layout_weight="0.30"
                 android:layout_height="match_parent"
@@ -113,7 +113,7 @@
                 android:orientation="vertical">
 
                 <ListView
-                    android:id="@+id/listViewGroepen"
+                    android:id="@+id/listViewKlassen"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:dividerHeight="1dp"

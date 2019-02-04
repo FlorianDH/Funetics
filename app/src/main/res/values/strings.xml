@@ -90,13 +90,14 @@
 
     <!-- Content_beheren -->
     <string name="title_activity_beheren">Beheren</string>
+    <string name="klasTitle">Klassen</string>
     <string name="groepTitle">Groepen</string>
     <string name="kinderenTitle">Kinderen</string>
     <string name="detailTitle">Details</string>
     <string name="beherenTerugBtn">Terug</string>
     <string name="voornaam">Voornaam</string>
     <string name="naam">Naam</string>
-    <string name="leeftijd">Leeftijd</string>
+    <string name="klas">Klas</string>
     <string name="groep">Groep</string>
     <string name="actief">Is actief</string>
     <string name="actiefExplain">Zet een persoon inactief als diegene geen tests meer zal doen maar waarvan je de gegevens nog wilt bewaren</string>

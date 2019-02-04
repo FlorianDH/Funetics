@@ -23,6 +23,7 @@ import java.util.List;
 public class BeherenActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
+    private Klas selectedKlas = null;
     private Groep selectedGroep = null;
     private Kind selectedKind = null;
 
@@ -34,7 +35,7 @@ public class BeherenActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
         final List<Groep> groepen = db.getGroepen();
 
-        leesGroepen();
+        leesKlassen();
         leesKinderenWhereGroep(0);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinnerGroep);
@@ -55,28 +56,51 @@ public class BeherenActivity extends AppCompatActivity {
         spinner.setAdapter(aa);
     }
 
-    private void leesGroepen(){
-        final List<Groep> groepen = db.getGroepen();
+    private void leesKlassen(){
+        final List<Klas> klassen = db.getKlassen();
 
-        ArrayAdapter<Groep> adapter =
-                new ArrayAdapter<Groep>(this,
-                        android.R.layout.simple_list_item_1, groepen);
+        ArrayAdapter<Klas> adapter =
+                new ArrayAdapter<Klas>(this,
+                        android.R.layout.simple_list_item_1, klassen);
 
-        final ListView listViewGroepen =
-                (ListView) findViewById(R.id.listViewGroepen);
-        listViewGroepen.setAdapter(adapter);
+        final ListView listViewKlassen =
+                (ListView) findViewById(R.id.listViewKlassen);
+        listViewKlassen.setAdapter(adapter);
 
-        listViewGroepen.setOnItemClickListener(
+        listViewKlassen.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parentView,
                                             View childView, int position, long id) {
-                        selectedGroep = groepen.get(position);
-                        int selectedGroepId = (int) selectedGroep.getId();
-                        leesKinderenWhereGroep(selectedGroepId);
+                        selectedKlas = klassen.get(position);
+                        int selectedKlasId = (int) selectedKlas.getId();
+//                        leesKinderenWhereGroep(selectedGroepId);
                     }
                 });
     }
+
+//    private void leesGroepen(){
+//        final List<Groep> groepen = db.getGroepen();
+//
+//        ArrayAdapter<Groep> adapter =
+//                new ArrayAdapter<Groep>(this,
+//                        android.R.layout.simple_list_item_1, groepen);
+//
+//        final ListView listViewGroepen =
+//                (ListView) findViewById(R.id.listViewGroepen);
+//        listViewGroepen.setAdapter(adapter);
+//
+//        listViewGroepen.setOnItemClickListener(
+//                new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parentView,
+//                                            View childView, int position, long id) {
+//                        selectedGroep = groepen.get(position);
+//                        int selectedGroepId = (int) selectedGroep.getId();
+//                        leesKinderenWhereGroep(selectedGroepId);
+//                    }
+//                });
+//    }
 
     private void leesGroepenInSpinner(){
         final List<Groep> groepen = db.getGroepen();

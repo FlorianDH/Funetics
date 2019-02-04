@@ -93,12 +93,26 @@
                 android:padding="25dp"
                 android:background="@color/color_orange">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:id="@+id/naamKind"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fout"
-                        android:textSize="40sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/naamKind"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fout"
+                    android:textSize="40sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/naamKlas"
+                    android:layout_height="wrap_content"
+                    android:text="@string/klas"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/naamGroep"
+                    android:layout_height="wrap_content"
+                    android:text="@string/groep"
+                    android:textSize="30sp"/>
 
                     <Button
                         android:id="@+id/buttonVolgende"

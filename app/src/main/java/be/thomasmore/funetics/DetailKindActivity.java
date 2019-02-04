@@ -35,6 +35,10 @@ public class DetailKindActivity extends Activity {
 
         TextView textNaamKind = (TextView) findViewById(R.id.naamKind);
         textNaamKind.setText(huidigKind.toString());
+        TextView textNaamKlas = (TextView) findViewById(R.id.naamKlas);
+        textNaamKlas.setText(db.getKlasById(huidigKind.getKlasId()).getNaam());
+        TextView textNaamGroep = (TextView) findViewById(R.id.naamGroep);
+        textNaamGroep.setText(db.getGroepById(huidigKind.getGroepId()).getNaam());
 
         leesTesten();
     }
