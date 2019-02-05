@@ -102,6 +102,20 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="Groep:"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/groepTest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fout"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="Datum:"
                         android:textSize="30sp"
                         android:textStyle="bold" />
@@ -142,13 +156,24 @@
                         android:textSize="25sp" />
 
                     <Button
-                        android:id="@+id/buttonDelete"
+                        android:id="@+id/buttonHervat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
                         android:padding="25dp"
                         android:onClick="buttonDelete_onClick"
+                        android:text="Test Hervatten" />
+
+                    <Button
+                        android:id="@+id/buttonDelete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:padding="25dp"
+                        android:onClick="buttonDelete_onClick"
                         android:text="Verwijder deze test" />
+
+
 
 
                 </LinearLayout>
