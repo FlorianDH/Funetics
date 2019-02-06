@@ -43,6 +43,13 @@ public class DetailKindActivity extends Activity {
         leesTesten();
     }
 
+    //Lees testen opnieuw in wanneer activity hervat wordt
+    @Override
+    public void onResume(){
+        super.onResume();
+        leesTesten();
+    }
+
     public void goTerug_onClick(View v) {
 //        Intent intent = new Intent(this, MainActivity.class);
         finish();
