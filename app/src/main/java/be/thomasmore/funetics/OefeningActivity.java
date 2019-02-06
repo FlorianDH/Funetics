@@ -345,9 +345,13 @@ public class OefeningActivity extends Activity {
                     //Start oefening 1
                     startOef1();
                 }
-                else {
+                //nameting enkel starten na conditie 3
+                else if (huidigeConditie.getId() == 3) {
                     //Nameting starten
                     startNameting();
+                }
+                else {
+                    finish();
                 }
             }
             if (resultCode == Activity.RESULT_CANCELED) {

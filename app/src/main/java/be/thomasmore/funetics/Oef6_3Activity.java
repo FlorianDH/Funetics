@@ -95,7 +95,7 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
         String deel2 = "";
 
         TextView textWoordDeel1 = (TextView) findViewById(R.id.textViewWoordDeel1);
-        TextView textWoordStreep = (TextView) findViewById(R.id.textViewWoordStreep);
+        //TextView textWoordStreep = (TextView) findViewById(R.id.textViewWoordStreep);
         TextView textWoordDeel2 = (TextView) findViewById(R.id.textViewWoordDeel2);
 
         textWoordDeel1.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -153,7 +153,7 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
 
         if(lettergrepen == 2){
             tracks = new int [6];
-            textWoordStreep.setText(" - ");
+            //textWoordStreep.setText(" - ");
             textWoordDeel2.setText(deel2);
             tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_1", "raw", getPackageName());
             tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_2", "raw", getPackageName());
@@ -168,7 +168,7 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
             tracks[1] = R.raw.oef6_3_1;
             tracks[2] = R.raw.oef6_3_2;
             tracks[3] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());
-            textWoordStreep.setText("");
+            //textWoordStreep.setText("");
             textWoordDeel2.setText("");
         }
     }
