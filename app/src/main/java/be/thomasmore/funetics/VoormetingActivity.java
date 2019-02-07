@@ -93,7 +93,6 @@ public class VoormetingActivity extends AppCompatActivity {
 
     private void showConditieDialog() {
         final String[] items = { "Conditie 1", "Conditie 2", "Conditie 3" };
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Selecteer de conditie die u wilt testen")
                 .setSingleChoiceItems(items, 0, null)
@@ -117,6 +116,7 @@ public class VoormetingActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
 
     public void playOpdrachtSound(){
         audioPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef0_voormeting);
