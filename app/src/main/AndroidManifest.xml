@@ -11,8 +11,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:screenOrientation="landscape"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
@@ -82,13 +82,13 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NametingActivity"
-            android:screenOrientation="landscape"
             android:label="@string/title_activity_nameting"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Oef6_1Activity"
-            android:screenOrientation="landscape"
             android:label="@string/title_activity_oef6_1"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Oef6_2Activity"
@@ -99,6 +99,10 @@
             android:name=".Oef6_3Activity"
             android:label="@string/title_activity_oef6_3"
             android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BeherenKlassenActivity"
+            android:label="@string/title_activity_beheren_klassen"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

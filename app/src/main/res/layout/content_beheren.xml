@@ -105,7 +105,7 @@
             android:baselineAligned="false">
 
             <LinearLayout
-                android:id="@+id/klassenLijst"
+                android:id="@+id/groepenLijst"
                 android:layout_width="0dp"
                 android:layout_weight="0.30"
                 android:layout_height="match_parent"
@@ -113,7 +113,7 @@
                 android:orientation="vertical">
 
                 <ListView
-                    android:id="@+id/listViewKlassen"
+                    android:id="@+id/listViewGroepen"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:dividerHeight="1dp"

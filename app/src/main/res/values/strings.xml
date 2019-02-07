@@ -144,4 +144,5 @@
     <string name="title_activity_oef6_1">Oef6.1: Gevoel bij woord</string>
     <string name="title_activity_oef6_2">Oef6.2: Woord zoemen</string>
     <string name="title_activity_oef6_3">Oef6.3: Lettergrepen</string>
+    <string name="title_activity_beheren_klassen">BeherenKlassenActivity</string>
 </resources>
