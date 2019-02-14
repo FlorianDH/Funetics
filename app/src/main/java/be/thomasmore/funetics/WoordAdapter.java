@@ -46,6 +46,10 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
         GetestWoord getestWoord = values.get(position);
         Doelwoord doelwoord = db.getDoelwoordById(getestWoord.getDoelwoordId());
 
+//        Test test = db.getTestById(getestWoord.getTestId());
+//        int conditieId = test.getConditieId();
+
+        //Oefenwoord zetten achter duibril
         if (doelwoord.getId() == 0){
             textViewWoord.setText(doelwoord.getNaam() + " (oefenwoord)");
         }
