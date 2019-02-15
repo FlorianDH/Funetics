@@ -169,7 +169,7 @@
                         android:id="@+id/verwijderButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:enabled="true"
+                        android:enabled="false"
                         android:layout_marginBottom="5dp"
                         android:onClick="klasVerwijderen_onClick"
                         android:text="@string/verwijderbtn" />

@@ -12,7 +12,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     // Database Version
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 10;
     // Database Name
     private static final String DATABASE_NAME = "funetics";
 
@@ -114,8 +114,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     private void insertKlassen(SQLiteDatabase db) {
-        db.execSQL("INSERT INTO klas (id, naam) VALUES (1, 'Antwerpse klas');");
-        db.execSQL("INSERT INTO klas (id, naam) VALUES (2, 'Limburgse klas');");
+        db.execSQL("INSERT INTO klas (naam) VALUES ('Antwerpse klas');");
+        db.execSQL("INSERT INTO klas (naam) VALUES ('Limburgse klas');");
     }
 
     private void insertGroepen(SQLiteDatabase db) {

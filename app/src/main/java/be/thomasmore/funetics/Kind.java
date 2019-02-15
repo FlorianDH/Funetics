@@ -5,19 +5,19 @@ public class Kind {
     private String voornaam;
     private String naam;
     private int actief;
-    private int groepId;
     private int klasId;
+    private int groepId;
 
     public Kind() {
     }
 
-    public Kind(long id, String voornaam, String naam, int actief, int groepId, int klasId) {
+    public Kind(long id, String voornaam, String naam, int actief, int klasId, int groepId) {
         this.id = id;
         this.voornaam = voornaam;
         this.naam = naam;
         this.actief = actief;
-        this.groepId = groepId;
         this.klasId = klasId;
+        this.groepId = groepId;
     }
 
     public long getId() {
