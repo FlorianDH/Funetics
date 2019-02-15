@@ -18,7 +18,7 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
     private MediaPlayer juistPlayer = null;
     private MediaPlayer juist2Player = null;
     private MediaPlayer foutPlayer = null;
-    private int[] tracks = new int[7];
+    private int[] tracks = new int[3];
     private int currentTrack = 0;
 
     private int oefening = 1;
@@ -150,12 +150,8 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     public void setAudioPlayer() {
         tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_3_1", "raw", getPackageName());
-        tracks[1] = R.raw.oef3_help_je_mij;
-        tracks[2] = R.raw.oef3_ik_zeg_een_zinnetje;
-        tracks[3] = R.raw.oef3_zin_juist;
-        tracks[4] = R.raw.oef3_zin_fout;
-        tracks[5] = R.raw.oef3_hier_gaan_we;
-        tracks[6] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_3_2", "raw", getPackageName());
+        tracks[1] = R.raw.oef3_1;
+        tracks[2] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_3_2", "raw", getPackageName());
     }
 
     public void setContextPlayer() {

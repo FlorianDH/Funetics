@@ -1,5 +1,6 @@
 package be.thomasmore.funetics;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,8 +24,9 @@ import java.util.List;
 public class BeherenActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
-    private Klas selectedKlas = null;
+    private Klas huidigKlas = null;
     private Groep selectedGroep = null;
+    private Klas selectedKlas = null;
     private Kind selectedKind = null;
 
     @Override
@@ -32,14 +34,21 @@ public class BeherenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beheren);
 
+        Bundle bundle = getIntent().getExtras();
+        Long klasId = bundle.getLong("klasId");
+
         db = new DatabaseHelper(this);
+
+        huidigKlas = db.getKlasById(klasId);
+
         final List<Groep> groepen = db.getGroepen();
+        final List<Klas> klassen = db.getKlassen();
 
-        leesKlassen();
-        leesKinderenWhereGroep(0);
+        leesGroepen();
+//        leesKinderenWhereGroep(0);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerGroep);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Spinner spinnerGroep = (Spinner) findViewById(R.id.spinnerGroep);
+        spinnerGroep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View childView, int position, long id) {
                 selectedGroep = groepen.get(position);
@@ -50,10 +59,28 @@ public class BeherenActivity extends AppCompatActivity {
                 selectedGroep = null;
             }
         });
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, groepen);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        Spinner spinnerKlas = (Spinner) findViewById(R.id.spinnerKlas);
+        spinnerKlas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View childView, int position, long id) {
+                selectedKlas = klassen.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                selectedKlas = null;
+            }
+        });
+
+
+        ArrayAdapter aaGroep = new ArrayAdapter(this,android.R.layout.simple_spinner_item, groepen);
+        ArrayAdapter aaKlas = new ArrayAdapter(this,android.R.layout.simple_spinner_item, klassen);
+        aaGroep.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaKlas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
-        spinner.setAdapter(aa);
+        spinnerGroep.setAdapter(aaGroep);
+        spinnerKlas.setAdapter(aaKlas);
     }
 
     private void leesKlassen(){
@@ -79,28 +106,28 @@ public class BeherenActivity extends AppCompatActivity {
                 });
     }
 
-//    private void leesGroepen(){
-//        final List<Groep> groepen = db.getGroepen();
-//
-//        ArrayAdapter<Groep> adapter =
-//                new ArrayAdapter<Groep>(this,
-//                        android.R.layout.simple_list_item_1, groepen);
-//
-//        final ListView listViewGroepen =
-//                (ListView) findViewById(R.id.listViewGroepen);
-//        listViewGroepen.setAdapter(adapter);
-//
-//        listViewGroepen.setOnItemClickListener(
-//                new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parentView,
-//                                            View childView, int position, long id) {
-//                        selectedGroep = groepen.get(position);
-//                        int selectedGroepId = (int) selectedGroep.getId();
-//                        leesKinderenWhereGroep(selectedGroepId);
-//                    }
-//                });
-//    }
+    private void leesGroepen(){
+        final List<Groep> groepen = db.getGroepen();
+
+        ArrayAdapter<Groep> adapter =
+                new ArrayAdapter<Groep>(this,
+                        android.R.layout.simple_list_item_1, groepen);
+
+        final ListView listViewGroepen =
+                (ListView) findViewById(R.id.listViewGroepen);
+        listViewGroepen.setAdapter(adapter);
+
+        listViewGroepen.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parentView,
+                                            View childView, int position, long id) {
+                        selectedGroep = groepen.get(position);
+                        int selectedGroepId = (int) selectedGroep.getId();
+                        leesKinderenWhereKlasEnGroep( (int) huidigKlas.getId(),  selectedGroepId);
+                    }
+                });
+    }
 
     private void leesGroepenInSpinner(){
         final List<Groep> groepen = db.getGroepen();
@@ -112,7 +139,7 @@ public class BeherenActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View childView, int position, long id) {
                 selectedGroep = groepen.get(position);
                 int selectedGroepId = (int) selectedGroep.getId();
-                leesKinderenWhereGroep(selectedGroepId);
+                leesKinderenWhereKlasEnGroep((int) huidigKlas.getId(), selectedGroepId);
             }
 
             @Override
@@ -128,14 +155,70 @@ public class BeherenActivity extends AppCompatActivity {
         spinner.setSelection(groepId-1);
     }
 
-    private void leesKinderenWhereGroep(int groepId){
+    private void leesKlassenInSpinner(){
+        final List<Klas> klassen = db.getKlassen();
+        int klasId = selectedKind.getKlasId();
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerKlas);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View childView, int position, long id) {
+                selectedKlas = klassen.get(position);
+                int selectedKlasId = (int) selectedKlas.getId();
+//               leesKinderenWhereGroep(selectedGroepId);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                selectedKlas = null;
+            }
+        });
+
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, klassen);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        spinner.setAdapter(aa);
+        spinner.setSelection(klasId-1);
+    }
+
+//    private void leesKinderenWhereGroep(int groepId){
+//        List<Kind> kinderenLijst;
+//
+//        if(groepId == 0){
+//            kinderenLijst = db.getKinderen(0);
+//
+//        }else{
+//            kinderenLijst = db.getKinderenWhereGroepId(groepId, 0);
+//        }
+//
+//        final List<Kind> kinderen = kinderenLijst;
+//
+//        final ListView listViewKinderen = (ListView) findViewById(R.id.listViewKinderen);
+//        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_list_item_1, kinderen);
+//        listViewKinderen.setAdapter(aa);
+//
+//        listViewKinderen.setOnItemClickListener(
+//                new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parentView,
+//                                            View childView, int position, long id) {
+//                        selectedKind = kinderen.get(position);
+//                        long selectedKindId = (long) selectedKind.getId();
+//                        leesKindDetail(selectedKindId);
+//                    }
+//                });
+//
+//    }
+
+    private void leesKinderenWhereKlasEnGroep(int klasId, int groepId){
         List<Kind> kinderenLijst;
 
         if(groepId == 0){
             kinderenLijst = db.getKinderen(0);
 
         }else{
-            kinderenLijst = db.getKinderenWhereGroepId(groepId, 0);
+//            kinderenLijst = db.getKinderenWhereGroepId(groepId, 0);
+            kinderenLijst = db.getKinderenWhereKlasIdAndGroepId(klasId, groepId, 0);
         }
 
         final List<Kind> kinderen = kinderenLijst;
@@ -157,6 +240,7 @@ public class BeherenActivity extends AppCompatActivity {
 
     }
 
+
     private void leesKindDetail(long kindId){
 
         final Kind huidigKind = db.getKindById(kindId);
@@ -171,6 +255,7 @@ public class BeherenActivity extends AppCompatActivity {
 //        textLeeftijdKind.setText(huidigKind.getLeeftijd());
 
         leesGroepenInSpinner();
+        leesKlassenInSpinner();
 
         Switch switchIsActief = (Switch) findViewById(R.id.switchActief);
         if(huidigKind.getActief() == 1){
@@ -190,6 +275,9 @@ public class BeherenActivity extends AppCompatActivity {
         EditText textNaamKind = (EditText) findViewById(R.id.naamInput);
         final String naam = textNaamKind.getText().toString();
 
+        Spinner klasSpinner = (Spinner) findViewById(R.id.spinnerKlas);
+        String klas = klasSpinner.getSelectedItem().toString();
+
         Spinner groepSpinner = (Spinner) findViewById(R.id.spinnerGroep);
         String groep = groepSpinner.getSelectedItem().toString();
 
@@ -202,7 +290,7 @@ public class BeherenActivity extends AppCompatActivity {
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Wil je '" + voornaam + " " + naam + "' toevoegen aan " + groep + "?")
+        builder.setTitle("Wil je '" + voornaam + " " + naam + "' toevoegen aan " + klas + ", " + groep + "?")
 
                 .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -210,6 +298,7 @@ public class BeherenActivity extends AppCompatActivity {
                         newKind.setVoornaam(voornaam);
                         newKind.setNaam(naam);
                         newKind.setActief(isActief);
+                        newKind.setKlasId((int)selectedKlas.getId());
                         newKind.setGroepId((int)selectedGroep.getId());
 
                         db.insertKind(newKind);
@@ -260,6 +349,7 @@ public class BeherenActivity extends AppCompatActivity {
                         newKind.setNaam(naam);
                         newKind.setActief(isActief);
                         newKind.setGroepId((int)selectedGroep.getId());
+                        newKind.setKlasId((int)selectedKlas.getId());
 
                         db.updateKind(newKind);
 
@@ -308,7 +398,7 @@ public class BeherenActivity extends AppCompatActivity {
     }
 
     public void goTerug_onClick(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, BeherenKlassenActivity.class);
         finish();
         startActivity(intent);
     }

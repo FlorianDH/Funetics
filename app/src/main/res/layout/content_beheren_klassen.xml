@@ -26,7 +26,7 @@
             <LinearLayout
                 android:id="@+id/klassenTitle"
                 android:layout_width="0dp"
-                android:layout_weight="0.30"
+                android:layout_weight="0.50"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -71,6 +71,7 @@
                     android:id="@+id/buttonTerug"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="goTerug_onClick"
                     android:text="@string/beherenTerugBtn"/>
 
             </LinearLayout>
@@ -89,7 +90,7 @@
             <LinearLayout
                 android:id="@+id/klassenLijst"
                 android:layout_width="0dp"
-                android:layout_weight="0.30"
+                android:layout_weight="0.50"
                 android:layout_height="match_parent"
                 android:background="@color/color_orange"
                 android:orientation="vertical">
@@ -115,28 +116,11 @@
 
 
                 <LinearLayout
-                    android:id="@+id/kindDetailVenster"
+                    android:id="@+id/klasDetailVenster"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="15dp">
-
-                    <TextView
-                        android:id="@+id/voornaamLabel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:text="@string/voornaam" />
-
-                    <EditText
-                        android:id="@+id/voornaamInput"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:ems="10"
-                        android:hint="@string/voornaam"
-                        android:inputType="textPersonName"
-                        tools:ignore="Autofill" />
 
                     <TextView
                         android:id="@+id/naamLabel"
@@ -155,39 +139,22 @@
                         android:inputType="textPersonName"
                         tools:ignore="Autofill" />
 
-                    <TextView
-                        android:id="@+id/groepLabel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:text="@string/groep" />
 
-                    <Spinner
-                        android:id="@+id/spinnerGroep"
+                    <Button
+                        android:id="@+id/kinderenBeherenButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp" />
+                        android:layout_height="100dp"
+                        android:layout_marginBottom="20dp"
+                        android:onClick="kinderenBeheren_onClick"
+                        android:text="Kinderen beheren" />
 
-                    <TextView
-                        android:id="@+id/actiefLabel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:text="@string/actiefExplain" />
-
-                    <Switch
-                        android:id="@+id/switchActief"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="35dp"
-                        android:checked="true"
-                        android:text="@string/actief" />
 
                     <Button
                         android:id="@+id/wijzigButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
+                        android:onClick="klasWijzigen_onClick"
                         android:text="@string/wijzigbtn" />
 
                     <Button
@@ -195,13 +162,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
+                        android:onClick="klasToevoegen_onClick"
                         android:text="@string/toevoegenbtn" />
 
                     <Button
                         android:id="@+id/verwijderButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="true"
                         android:layout_marginBottom="5dp"
+                        android:onClick="klasVerwijderen_onClick"
                         android:text="@string/verwijderbtn" />
 
                 </LinearLayout>

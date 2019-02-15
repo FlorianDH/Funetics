@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 public class PreteachingActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
 
     private MediaPlayer audioPlayer = null;
-    private int[] tracks = new int[3];
+    private int[] tracks = new int[1];
     private int currentTrack = 0;
     private boolean isPlaying = false; //false by default
 
@@ -55,9 +55,7 @@ public class PreteachingActivity extends AppCompatActivity implements MediaPlaye
     }
 
     public void setAudioPlayer() {
-        tracks[0] = R.raw.preteach1;
-        tracks[1] = R.raw.preteach2;                     // Oefenwoord
-        tracks[2] = R.raw.preteach3;
+        tracks[0] = R.raw.preteach;
     }
 
     public void playAudioPlayer(){

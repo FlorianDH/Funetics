@@ -5,7 +5,9 @@
     <string name="dialog_start">Start</string>
     <string name="dialog_annuleer">Annuleren</string>
     <string name="dialog_kies_kind">Kies een kind</string>
-    <string name="errordialog_message">FOUT: Gelieve eerst een kind te selecteren aan de hand van de opties aan de rechterkant van het scherm!</string>
+    <string name="dialog_kies_klas">Kies een klas</string>
+    <string name="errordialog_message">FOUT: Gelieve eerst een kind te selecteren!</string>
+    <string name="errordialog_message2">FOUT: Gelieve eerst een klas te selecteren!</string>
 
     <!-- Strings related to Settings -->
 

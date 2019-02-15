@@ -150,40 +150,16 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(aa);
     }
 
-//    private void leesKinderenWhereGroep(int groepId){
-//        final List<Kind> kinderen = db.getKinderenWhereGroepId(groepId, 1);
-//
-//        if (kinderen.isEmpty()){
-//            selectedKind = null;
-//        }
-//
-//        Spinner spinner = (Spinner) findViewById(R.id.spinnerKind);
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parentView, View childView, int position, long id) {
-//                selectedKind = kinderen.get(position);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parentView) {
-//                selectedKind = null;
-//            }
-//        });
-//
-//        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, kinderen);
-//        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        //Setting the ArrayAdapter data on the Spinner
-//        spinner.setAdapter(aa);
-//    }
-
     public void goBeheren_onClick(View v) {
-        Intent intent = new Intent(this, BeherenActivity.class);
+        Intent intent = new Intent(this, BeherenKlassenActivity.class);
         startActivity(intent);
     }
 
     public void goDetail_onClick(View v) {
-        if (selectedKind == null){
-            showErrorDialog();
+        if (selectedKlas == null){
+            showErrorDialog(1);
+        } else if (selectedKind == null){
+            showErrorDialog(2);
         }
         else {
             long selectedKindId = selectedKind.getId();
@@ -195,21 +171,26 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtras(bundle);
 
             startActivity(intent);
-
-            //startActivityForResult(intent, 1);  // 1 is requestCode
         }
-
     }
 
-    private void showErrorDialog(){
+    private void showErrorDialog(final int melding){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.errordialog_message)
                 .setPositiveButton(R.string.dialog_ok,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int whichButton) {
-                                Toast.makeText(getBaseContext(), getString(R.string.dialog_kies_kind),
-                                        Toast.LENGTH_SHORT).show();
+                                switch (melding){
+                                    case 1:
+                                        Toast.makeText(getBaseContext(), getString(R.string.dialog_kies_klas),
+                                                Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 2:
+                                        Toast.makeText(getBaseContext(), getString(R.string.dialog_kies_kind),
+                                                Toast.LENGTH_SHORT).show();
+                                    break;
+                                }
                             }
                         });
         AlertDialog dialog = builder.create();

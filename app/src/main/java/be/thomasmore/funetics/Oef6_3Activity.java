@@ -152,22 +152,20 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
         textWoordDeel1.setText(deel1);
 
         if(lettergrepen == 2){
-            tracks = new int [6];
+            tracks = new int [5];
             //textWoordStreep.setText(" - ");
             textWoordDeel2.setText(deel2);
             tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_1", "raw", getPackageName());
             tracks[1] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_2", "raw", getPackageName());
-            tracks[2] = R.raw.oef6_3_1;
-            tracks[3] = R.raw.oef6_3_2;
-            tracks[4] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_1", "raw", getPackageName());
-            tracks[5] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_2", "raw", getPackageName());
+            tracks[2] = R.raw.oef6_3;
+            tracks[3] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_1", "raw", getPackageName());
+            tracks[4] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_2", "raw", getPackageName());
         }else{
-            tracks = new int [4];
+            tracks = new int [3];
             woordPlayer = MediaPlayer.create(this, getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName()));
             tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());
-            tracks[1] = R.raw.oef6_3_1;
-            tracks[2] = R.raw.oef6_3_2;
-            tracks[3] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());
+            tracks[1] = R.raw.oef6_3;
+            tracks[2] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());
             //textWoordStreep.setText("");
             textWoordDeel2.setText("");
         }
