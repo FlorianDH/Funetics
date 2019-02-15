@@ -60,21 +60,12 @@
                 android:orientation="horizontal"
                 android:gravity="end|center_vertical"
                 android:padding="5dp">
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/floatingActionButtonRefresh"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:clickable="true"
-                    app:srcCompat="@drawable/ic_sync_black_24dp"
-                    android:onClick="buttonSync_onClick" />
                 <Button
                     android:id="@+id/buttonTerug"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/beherenTerugBtn"
                     android:onClick="goTerug_onClick"/>
-
             </LinearLayout>
 
         </LinearLayout>
@@ -114,8 +105,16 @@
                     android:text="@string/groep"
                     android:textSize="30sp"/>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:id="@+id/voormetingText"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fout"
+                    android:layout_marginTop="40dp"
+                    android:textSize="20sp"/>
+
                     <Button
-                        android:id="@+id/buttonVolgende"
+                        android:id="@+id/buttonStartTest"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="goStartTest_onClick"

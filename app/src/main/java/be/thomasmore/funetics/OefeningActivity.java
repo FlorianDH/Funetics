@@ -22,6 +22,7 @@ public class OefeningActivity extends Activity {
     private Doelwoord huidigDoelwoord;
     private long huidigGetestWoordId;
     private long huidigeTestId;
+    private int selectedConditie = 0;
 
     int alleScoreVoormeting[]; //Alle scores van alle woorden van de voormeting
     int getesteWoordenId[] = new int[4]; //Lijst met id's van reeds aangemaakte geteste woorden
@@ -32,19 +33,24 @@ public class OefeningActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_oefening);
 
         Bundle bundle = getIntent().getExtras();
         Long kindId = bundle.getLong("kindId");
-//        Long conditieId = bundle.getLong("conditie");
 
         db = new DatabaseHelper(this);
 
         huidigKind = db.getKindById(kindId);
-//        huidigeConditie = db.getConditieById(conditieId);
 
-        //Voormeting opstarten
-        startVoormeting();
+        //Check of er al een voormeting is gedaan
+        if(huidigKind.getVoormetingId() == 0){
+            //Voormeting opstarten
+            startVoormeting();
+        }
+
+        else{
+            //Start Preteaching
+            showConditieDialog();
+        }
     }
 
     @Override
@@ -499,5 +505,46 @@ public class OefeningActivity extends Activity {
         Intent intent = new Intent(this, NametingActivity.class);
         intent.putExtras(bundle);
         startActivityForResult(intent, 9);
+    }
+
+    private void showConditieDialog() {
+        final String[] items = { "Conditie 1", "Conditie 2", "Conditie 3" };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Selecteer de conditie die u wilt testen")
+                .setSingleChoiceItems(items, 0, null)
+                .setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        selectedConditie = ((AlertDialog)dialog).getListView().getCheckedItemPosition() + 1; //conditie 1 geeft als waarde ook 1
+
+                        Voormeting voormeting = db.getVoormetingById(huidigKind.getVoormetingId());
+
+                        int[] voormetingArray = new int[10];
+
+                        voormetingArray[0] = voormeting.getDuikbril();
+                        voormetingArray[1] = voormeting.getKlimtouw();
+                        voormetingArray[2] = voormeting.getKroos();
+                        voormetingArray[3] = voormeting.getRiet();
+                        voormetingArray[4] = voormeting.getVal();
+                        voormetingArray[5] = voormeting.getKompas();
+                        voormetingArray[6] = voormeting.getSteil();
+                        voormetingArray[7] = voormeting.getZwaan();
+                        voormetingArray[8] = voormeting.getKamp();
+                        voormetingArray[9] = voormeting.getZaklamp();
+
+                        //Terug naar oefeningactivity
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("voormeting", voormetingArray);
+                        returnIntent.putExtra("conditie", String.valueOf(selectedConditie));
+
+                        onActivityResult( 1, Activity.RESULT_OK, returnIntent);
+                    }
+                })
+                .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

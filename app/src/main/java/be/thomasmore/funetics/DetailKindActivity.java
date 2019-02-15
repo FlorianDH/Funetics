@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,6 +41,16 @@ public class DetailKindActivity extends Activity {
         TextView textNaamGroep = (TextView) findViewById(R.id.naamGroep);
         textNaamGroep.setText(db.getGroepById(huidigKind.getGroepId()).getNaam());
 
+        TextView textVoormeting = (TextView) findViewById(R.id.voormetingText);
+        if(huidigKind.getVoormetingId() == 0){
+            textVoormeting.setText("Heeft geen voormeting gedaan");
+            textVoormeting.setTextColor(ContextCompat.getColor(this, R.color.color_orange_dark));
+        }else{
+            textVoormeting.setText("Heeft voormeting gedaan");
+            textVoormeting.setTextColor(ContextCompat.getColor(this, R.color.color_green));
+
+        }
+
         leesTesten();
     }
 
@@ -51,46 +62,16 @@ public class DetailKindActivity extends Activity {
     }
 
     public void goTerug_onClick(View v) {
-//        Intent intent = new Intent(this, MainActivity.class);
         finish();
-//        startActivity(intent);
-    }
-
-    public void buttonSync_onClick(View v) {
-        leesTesten();
     }
 
     public void goStartTest_onClick(View v){
-        //Vragen welke conditie er getest moet worden
-//        showConditieDialog();
-
         beginTest();
     }
-
-//    private void showConditieDialog() {
-//        final String[] items = { "Conditie 1", "Conditie 2", "Conditie 3" };
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("Selecteer de conditie die u wilt testen")
-//                .setSingleChoiceItems(items, 0, null)
-//                .setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int whichButton) {
-//                        selectedConditie = ((AlertDialog)dialog).getListView().getCheckedItemPosition() + 1; //conditie 1 geeft als waarde ook 1
-//                        beginTest();
-//                    }
-//                })
-//                .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                    }
-//                });
-//        AlertDialog dialog = builder.create();
-//        dialog.show();
-//    }
 
     public void beginTest(){
         Bundle bundle = new Bundle();
         bundle.putLong("kindId", huidigKind.getId());
-//        bundle.putLong("conditie", selectedConditie);
 
         Intent intent = new Intent(this, OefeningActivity.class);
         intent.putExtras(bundle);
@@ -116,6 +97,16 @@ public class DetailKindActivity extends Activity {
                 leesTestDetail(selectedTestId);
             }
         });
+
+        TextView textVoormeting = (TextView) findViewById(R.id.voormetingText);
+        if(huidigKind.getVoormetingId() == 0){
+            textVoormeting.setText("Heeft geen voormeting gedaan");
+            textVoormeting.setTextColor(ContextCompat.getColor(this, R.color.color_orange_dark));
+        }else{
+            textVoormeting.setText("Heeft voormeting gedaan");
+            textVoormeting.setTextColor(ContextCompat.getColor(this, R.color.color_green));
+
+        }
     }
 
     private void leesTestDetail(long testId){
@@ -126,9 +117,5 @@ public class DetailKindActivity extends Activity {
         intent.putExtras(bundle);
 
         startActivity(intent);
-    }
-
-    public void deleteButton_onClick(View v) {
-        //Verwijder een specifieke test
     }
 }

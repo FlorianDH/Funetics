@@ -12,7 +12,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     // Database Version
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 12;
     // Database Name
     private static final String DATABASE_NAME = "funetics";
 
@@ -46,10 +46,26 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "actief INTEGER, " +
                 "klasId INTEGER NOT NULL, " +
                 "groepId INTEGER NOT NULL, " +
+                "voormetingId INTEGER DEFAULT 0, " +
                 "FOREIGN KEY (klasId) REFERENCES klas(id)," +
-                "FOREIGN KEY (groepId) REFERENCES groep(id))";
+                "FOREIGN KEY (groepId) REFERENCES groep(id)," +
+                "FOREIGN KEY (voormetingId) REFERENCES voormeting(id))";
 
                 db.execSQL(CREATE_TABLE_KIND);
+
+        String CREATE_TABLE_VOORMETING = "CREATE TABLE voormeting (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                "duikbril INTEGER NOT NULL, " +
+                "klimtouw INTEGER NOT NULL, " +
+                "kroos INTEGER NOT NULL, " +
+                "riet INTEGER NOT NULL, " +
+                "val INTEGER NOT NULL, " +
+                "kompas INTEGER NOT NULL, " +
+                "steil INTEGER NOT NULL, " +
+                "zwaan INTEGER NOT NULL, " +
+                "kamp INTEGER NOT NULL, " +
+                "zaklamp INTEGER NOT NULL)";
+        db.execSQL(CREATE_TABLE_VOORMETING);
 
         String CREATE_TABLE_TEST = "CREATE TABLE test (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
@@ -106,11 +122,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         insertKlassen(db);
         insertGroepen(db);
+        insertVoormeting(db);
         insertKinderen(db);
         insertCondities(db);
         insertWoordensets(db);
         insertDoelwoorden(db);
         insertOefeningen(db);
+
     }
 
     private void insertKlassen(SQLiteDatabase db) {
@@ -125,15 +143,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     private void insertKinderen(SQLiteDatabase db) {
-        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Henk', 'Destoute', 1, 1, 1);");
-        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Joske', 'Deflinke', 1, 1, 1);");
-        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Louisa', 'Depennensteler', 1, 2, 1);");
-        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Jefke', 'Devervelende', 1, 1, 2);");
-        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Jeanneke', 'Debrave', 1, 1, 2);");
-        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Koen', 'Degrave', 1, 2, 2);");
-        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Evert', 'Deslaper', 1, 1, 3);");
-        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Marianne', 'Destrever', 1, 1, 3);");
-        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId) VALUES ('Sven', 'Despieker', 1, 2, 3);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId, voormetingId) VALUES ('Henk', 'Destoute', 1, 1, 1, null);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId, voormetingId) VALUES ('Joske', 'Deflinke', 1, 1, 1, null);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId, voormetingId) VALUES ('Louisa', 'Depennensteler', 1, 2, 1, null);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId, voormetingId) VALUES ('Jefke', 'Devervelende', 1, 1, 2, null);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId, voormetingId) VALUES ('Jeanneke', 'Debrave', 1, 1, 2, null);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId, voormetingId) VALUES ('Koen', 'Degrave', 1, 2, 2, null);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId, voormetingId) VALUES ('Evert', 'Deslaper', 1, 1, 3, null);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId, voormetingId) VALUES ('Marianne', 'Destrever', 1, 1, 3, 0);");
+        db.execSQL("INSERT INTO kind (voornaam, naam, actief, klasId, groepId, voormetingId) VALUES ('Sven', 'Despieker', 1, 2, 3, null);");
     }
 
     private void insertCondities(SQLiteDatabase db) {
@@ -177,6 +195,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL("INSERT INTO oefening (id, naam) VALUES (9, 'Nameting');");
     }
 
+    private void insertVoormeting(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO voormeting (id, duikbril, klimtouw, kroos, riet, val, kompas, steil, zwaan, kamp, zaklamp) VALUES (0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1);");
+    }
+
     // methode wordt uitgevoerd als database geupgrade wordt
     // hierin de vorige tabellen wegdoen en opnieuw creëren
     @Override
@@ -191,6 +213,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS woordenset");
         db.execSQL("DROP TABLE IF EXISTS getesteOefening");
         db.execSQL("DROP TABLE IF EXISTS oefening");
+        db.execSQL("DROP TABLE IF EXISTS voormeting");
 
         // Create tables again
         onCreate(db);
@@ -301,6 +324,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         values.put("actief", kind.getActief());
         values.put("groepId", kind.getGroepId());
         values.put("klasId", kind.getKlasId());
+        values.put("voormetingId", kind.getVoormetingId());
 
         long id = db.insert("kind", null, values);
 
@@ -318,6 +342,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         values.put("actief", kind.getActief());
         values.put("groepId", kind.getGroepId());
         values.put("klasId", kind.getKlasId());
+        values.put("voormetingId", kind.getVoormetingId());
 
         int numrows = db.update(
                 "kind",
@@ -348,7 +373,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         Cursor cursor = db.query(
                 "kind",      // tabelnaam
-                new String[] { "id", "voornaam", "naam", "actief", "klasId", "groepId" }, // kolommen
+                new String[] { "id", "voornaam", "naam", "actief", "klasId", "groepId", "voormetingId" }, // kolommen
                 "id = ?",  // selectie
                 new String[] { String.valueOf(id) }, // selectieparameters
                 null,           // groupby
@@ -360,7 +385,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         if (cursor.moveToFirst()) {
             kind = new Kind(cursor.getLong(0),
-                    cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5));
+                    cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6));
         }
         cursor.close();
         db.close();
@@ -385,7 +410,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         if (cursor.moveToFirst()) {
             do {
                 Kind kind = new Kind(cursor.getLong(0),
-                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5));
+                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6));
                 lijst.add(kind);
             } while (cursor.moveToNext());
         }
@@ -413,7 +438,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         if (cursor.moveToFirst()) {
             do {
                 Kind kind = new Kind(cursor.getLong(0),
-                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5));
+                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6));
                 lijst.add(kind);
             } while (cursor.moveToNext());
         }
@@ -441,7 +466,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         if (cursor.moveToFirst()) {
             do {
                 Kind kind = new Kind(cursor.getLong(0),
-                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5));
+                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6));
                 lijst.add(kind);
             } while (cursor.moveToNext());
         }
@@ -782,5 +807,93 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.close();
         return lijst;
     }
+
+    // insert-methode met ContentValues
+    public long insertVoormeting(Voormeting voormeting) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("duikbril", voormeting.getDuikbril());
+        values.put("klimtouw", voormeting.getKlimtouw());
+        values.put("kroos", voormeting.getKroos());
+        values.put("riet", voormeting.getRiet());
+        values.put("val", voormeting.getVal());
+        values.put("kompas", voormeting.getKompas());
+        values.put("Steil", voormeting.getSteil());
+        values.put("Zwaan", voormeting.getZwaan());
+        values.put("Kamp", voormeting.getKamp());
+        values.put("zaklamp", voormeting.getZaklamp());
+
+        long id = db.insert("voormeting", null, values);
+
+        db.close();
+        return id;
+    }
+
+    // update-methode met ContentValues
+    public boolean updateVoormeting(Voormeting voormeting) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("duikbril", voormeting.getDuikbril());
+        values.put("klimtouw", voormeting.getKlimtouw());
+        values.put("kroos", voormeting.getKroos());
+        values.put("riet", voormeting.getRiet());
+        values.put("val", voormeting.getVal());
+        values.put("kompas", voormeting.getKompas());
+        values.put("Steil", voormeting.getSteil());
+        values.put("Zwaan", voormeting.getZwaan());
+        values.put("Kamp", voormeting.getKamp());
+        values.put("zaklamp", voormeting.getZaklamp());
+
+        int numrows = db.update(
+                "voormeting",
+                values,
+                "id = ?",
+                new String[] { String.valueOf(voormeting.getId()) });
+
+        db.close();
+        return numrows > 0;
+    }
+
+    // delete-methode
+    public boolean deleteVoormeting(long id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int numrows = db.delete(
+                "voormeting",
+                "id = ?",
+                new String[] { String.valueOf(id) });
+
+        db.close();
+        return numrows > 0;
+    }
+
+    // query-methode
+    public Voormeting getVoormetingById(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "voormeting",      // tabelnaam
+                new String[] { "id", "duikbril", "klimtouw", "kroos", "riet", "val", "kompas", "steil", "zwaan", "kamp", "zaklamp" }, // kolommen
+                "id = ?",  // selectie
+                new String[] { String.valueOf(id) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+
+        Voormeting voormeting = new Voormeting();
+
+        if (cursor.moveToFirst()) {
+            voormeting = new Voormeting(cursor.getLong(0),
+                    cursor.getInt(1),cursor.getInt(2),cursor.getInt(3),cursor.getInt(4),cursor.getInt(5),cursor.getInt(6),cursor.getInt(7),cursor.getInt(8),cursor.getInt(9),cursor.getInt(10));
+        }
+        cursor.close();
+        db.close();
+        return voormeting;
+    }
+
+
 }
 

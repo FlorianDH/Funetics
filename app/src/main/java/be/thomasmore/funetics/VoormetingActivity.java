@@ -35,6 +35,8 @@ public class VoormetingActivity extends AppCompatActivity {
     private ImageButton imageButton3;
     private ImageButton imageButton4;
 
+    private FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,7 @@ public class VoormetingActivity extends AppCompatActivity {
 
         setVoormeting();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.soundFAB);
+        fab = (FloatingActionButton) findViewById(R.id.soundFAB);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,24 +73,43 @@ public class VoormetingActivity extends AppCompatActivity {
             voormeting[oefening] ++;
         }
 
-        //Foute foto
-//        else {
-//
-//        }
-
-
         if (oefening < 9){
             oefening ++;
             setVoormeting();
             playWoordPlayer();
         }else {
+            textViewWoord.setVisibility(view.INVISIBLE);
             imageButton1.setVisibility(view.INVISIBLE);
             imageButton2.setVisibility(view.INVISIBLE);
             imageButton3.setVisibility(view.INVISIBLE);
             imageButton4.setVisibility(view.INVISIBLE);
+            fab.setVisibility(view.INVISIBLE);
+
+            saveVoormeting();
 
             showConditieDialog();
         }
+    }
+
+    private void saveVoormeting(){
+        Voormeting newVoormeting = new Voormeting();
+        newVoormeting.setDuikbril(voormeting[0]);
+        newVoormeting.setKlimtouw(voormeting[1]);
+        newVoormeting.setKroos(voormeting[2]);
+        newVoormeting.setRiet(voormeting[3]);
+        newVoormeting.setVal(voormeting[4]);
+        newVoormeting.setKompas(voormeting[5]);
+        newVoormeting.setSteil(voormeting[6]);
+        newVoormeting.setZwaan(voormeting[7]);
+        newVoormeting.setKamp(voormeting[8]);
+        newVoormeting.setZaklamp(voormeting[9]);
+
+        long voormetingId = db.insertVoormeting(newVoormeting);
+
+        Kind newKind = huidigKind;
+        newKind.setVoormetingId((int)voormetingId);
+
+        db.updateKind(newKind);
     }
 
     private void showConditieDialog() {
