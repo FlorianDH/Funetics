@@ -21,6 +21,7 @@ public class DetailKindActivity extends Activity {
     private Test selectedTest = null;
     private int selectedConditie = 0;
     private List<Test> testen;
+    private Long kindId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class DetailKindActivity extends Activity {
         setContentView(R.layout.activity_detail_kind);
 
         Bundle bundle = getIntent().getExtras();
-        Long kindId = bundle.getLong("kindId");
+        kindId = bundle.getLong("kindId");
 
         db = new DatabaseHelper(this);
 
@@ -97,6 +98,8 @@ public class DetailKindActivity extends Activity {
                 leesTestDetail(selectedTestId);
             }
         });
+
+        huidigKind = db.getKindById(kindId);
 
         TextView textVoormeting = (TextView) findViewById(R.id.voormetingText);
         if(huidigKind.getVoormetingId() == 0){
