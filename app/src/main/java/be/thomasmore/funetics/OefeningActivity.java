@@ -275,24 +275,41 @@ public class OefeningActivity extends Activity {
                     finish();
                 }
                 break;
-            case 9: //Einde Test
+            case 9: //Einde test met nameting
                 if(resultCode == Activity.RESULT_OK){
                     //Scores ophalen
                     alleScoreNameting = data.getIntArrayExtra("nameting");
 
-                    //Scores opslaan van de woorden uit de huidige lijst
-                    int tempPositie = 0;
-                    for (Doelwoord d: doelwoorden){
-                        int tempScore = alleScoreNameting[(int) d.getId()];
-                        //Nieuwe geteste oefening maken
-                        GetesteOefening nieuweGetesteOefening = new GetesteOefening();
-                        nieuweGetesteOefening.setScore(tempScore);
-                        nieuweGetesteOefening.setAantalPogingen(1);
-                        nieuweGetesteOefening.setOefeningId(9); //Id van de oefening
-                        nieuweGetesteOefening.setGetestWoordId(getesteWoordenId[tempPositie]);
-                        db.insertGetesteOefening(nieuweGetesteOefening);
-                        tempPositie++;
+                    //Alle testen van huidig kind ophalen
+                    List<Test> testen = db.getTestenWhereKindId((int) huidigKind.getId());
+
+                    for (Test test: testen) {
+                        List<GetestWoord> getesteWoorden = db.getGetesteWoordenWhereTestId((int) test.getId());
+                        for (GetestWoord getestWoord:getesteWoorden){
+                            int tempScore = alleScoreNameting[getestWoord.getDoelwoordId()];
+                            //Nieuwe geteste oefening maken bij bestaand getestwoord
+                            GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                            nieuweGetesteOefening.setScore(tempScore);
+                            nieuweGetesteOefening.setAantalPogingen(1);
+                            nieuweGetesteOefening.setOefeningId(9); //Id van de oefening
+                            nieuweGetesteOefening.setGetestWoordId((int) getestWoord.getId());
+                            db.insertGetesteOefening(nieuweGetesteOefening);
+                        }
                     }
+
+//                    //Scores opslaan van de woorden uit de huidige lijst
+//                    int tempPositie = 0;
+//                    for (Doelwoord d: doelwoorden){
+//                        int tempScore = alleScoreNameting[(int) d.getId()];
+//                        //Nieuwe geteste oefening maken
+//                        GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+//                        nieuweGetesteOefening.setScore(tempScore);
+//                        nieuweGetesteOefening.setAantalPogingen(1);
+//                        nieuweGetesteOefening.setOefeningId(9); //Id van de oefening
+//                        nieuweGetesteOefening.setGetestWoordId(getesteWoordenId[tempPositie]);
+//                        db.insertGetesteOefening(nieuweGetesteOefening);
+//                        tempPositie++;
+//                    }
 
                     finish();
                 }
