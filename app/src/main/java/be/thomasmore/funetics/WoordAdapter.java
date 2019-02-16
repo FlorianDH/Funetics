@@ -42,13 +42,15 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
         final TextView textViewOef5 = (TextView) rowView.findViewById(R.id.textViewOef5Resultaat);
         final TextView textViewOef6 = (TextView) rowView.findViewById(R.id.textViewOef6Resultaat);
         final TextView textViewOef6_2 = (TextView) rowView.findViewById(R.id.textViewOef6_2Resultaat);
-        textViewOef6_2.setVisibility(View.INVISIBLE);
+        textViewOef6_2.setVisibility(View.GONE);
+        textViewOef6_2.setTextColor(ContextCompat.getColor(context, R.color.color_green));
         final TextView textViewOef6_2Naam = (TextView) rowView.findViewById(R.id.textViewOef6_2);
-        textViewOef6_2Naam.setVisibility(View.INVISIBLE);
+        textViewOef6_2Naam.setVisibility(View.GONE);
         final TextView textViewOef6_3 = (TextView) rowView.findViewById(R.id.textViewOef6_3Resultaat);
-        textViewOef6_3.setVisibility(View.INVISIBLE);
+        textViewOef6_3.setVisibility(View.GONE);
+        textViewOef6_3.setTextColor(ContextCompat.getColor(context, R.color.color_green));
         final TextView textViewOef6_3Naam = (TextView) rowView.findViewById(R.id.textViewOef6_3);
-        textViewOef6_3Naam.setVisibility(View.INVISIBLE);
+        textViewOef6_3Naam.setVisibility(View.GONE);
         final TextView textViewOef6Naam = (TextView) rowView.findViewById(R.id.textViewOef6);
         final TextView textViewOefNameting = (TextView) rowView.findViewById(R.id.textViewNametingResultaat);
 
@@ -67,6 +69,10 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
         textViewOef5.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
         textViewOef6.setText("Niet voltooid");
         textViewOef6.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
+        textViewOef6_2.setText("Niet voltooid");
+        textViewOef6_2.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
+        textViewOef6_3.setText("Niet voltooid");
+        textViewOef6_3.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
         textViewOefNameting.setText("Niet voltooid");
         textViewOefNameting.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
 
@@ -79,8 +85,8 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
             textViewWoord.setText(doelwoord.getNaam() + " (oefenwoord)");
             textViewOef6_2.setVisibility(View.VISIBLE);
             textViewOef6_3.setVisibility(View.VISIBLE);
-            textViewOef6_2Naam.setVisibility(View.INVISIBLE);
-            textViewOef6_3Naam.setVisibility(View.INVISIBLE);
+            textViewOef6_2Naam.setVisibility(View.VISIBLE);
+            textViewOef6_3Naam.setVisibility(View.VISIBLE);
         }
         else {
             textViewWoord.setText(doelwoord.getNaam());
@@ -167,9 +173,16 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
                 case 7:
                     //Oefening 6.2
                     if (doelwoord.getId() == 0){
-                        textViewOef6_2.setText("Oefening 6.2: ");
-                        textViewOef6_2.setText("Voltooid");
-                        textViewOef6_2.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+                        if (getesteOefening.getScore() == 1){
+                            textViewOef6_2Naam.setText("Oefening 6.2: ");
+                            textViewOef6_2.setText("Voltooid");
+                            textViewOef6_2.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+                        }
+                        else {
+                            textViewOef6_2Naam.setText("Oefening 6.2: ");
+                            textViewOef6_2.setText("Niet voltooid");
+                            textViewOef6_2.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
+                        }
                     }
                     else {
                         textViewOef6Naam.setText("Oefening 6.2: ");
@@ -180,9 +193,16 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
                 case 8:
                     //Oefening 6.3
                     if (doelwoord.getId() == 0){
-                        textViewOef6_3.setText("Oefening 6.3: ");
-                        textViewOef6_3.setText("Voltooid");
-                        textViewOef6_3.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+                        if (getesteOefening.getScore() == 1){
+                            textViewOef6_3Naam.setText("Oefening 6.3: ");
+                            textViewOef6_3.setText("Voltooid");
+                            textViewOef6_3.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+                        }
+                        else {
+                            textViewOef6_3Naam.setText("Oefening 6.3: ");
+                            textViewOef6_3.setText("Niet voltooid");
+                            textViewOef6_3.setTextColor(ContextCompat.getColor(context, R.color.color_red_dark));
+                        }
                     }
                     else {
                         textViewOef6Naam.setText("Oefening 6.3: ");

@@ -229,29 +229,47 @@ public class OefeningActivity extends Activity {
                     int aantalPogingen = Integer.parseInt(data.getStringExtra("aantalPogingen"));
                     int nummer = Integer.parseInt(data.getStringExtra("nummer"));
 
-                    //Nieuwe geteste oefening opslaan in database
-                    GetesteOefening nieuweGetesteOefening = new GetesteOefening();
-                    nieuweGetesteOefening.setScore(score);
-                    nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
-                    if (huidigeConditie.getId() == 1){
-                        nieuweGetesteOefening.setOefeningId(6); //Id van de oefening
+                    if (huidigDoelwoord.getId() == 0){
+                        //Nieuwe geteste oefening opslaan in database
+                        GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                        nieuweGetesteOefening.setScore(score);
+                        nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
+                        if (huidigeConditie.getId() == 1){
+                            nieuweGetesteOefening.setOefeningId(6); //Id van de oefening
+                        }
+                        else if (huidigeConditie.getId() == 2){
+                            nieuweGetesteOefening.setOefeningId(7); //Id van de oefening
+                        }
+                        else {
+                            nieuweGetesteOefening.setOefeningId(8); //Id van de oefening
+                        }
+                        nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
+                        db.insertGetesteOefening(nieuweGetesteOefening);
                     }
-                    else if (huidigeConditie.getId() == 2){
-                        nieuweGetesteOefening.setOefeningId(7); //Id van de oefening
-                    }
-                    else {
-                        nieuweGetesteOefening.setOefeningId(8); //Id van de oefening
-                    }
-                    nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
-                    db.insertGetesteOefening(nieuweGetesteOefening);
 
                     //Oefenwoord werd getest
                     if (huidigDoelwoord.getId() == 0){
                         if (nummer == 1){
+                            //Nieuwe geteste oefening opslaan in database
+                            GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                            nieuweGetesteOefening.setScore(score);
+                            nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
+                            nieuweGetesteOefening.setOefeningId(7); //Id van de oefening
+                            nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
+                            db.insertGetesteOefening(nieuweGetesteOefening);
+
                             startOef6_2();
                             return;
                         }
                         else if (nummer == 2){
+                            //Nieuwe geteste oefening opslaan in database
+                            GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                            nieuweGetesteOefening.setScore(score);
+                            nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
+                            nieuweGetesteOefening.setOefeningId(8); //Id van de oefening
+                            nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
+                            db.insertGetesteOefening(nieuweGetesteOefening);
+
                             startOef6_3();
                             return;
                         }
