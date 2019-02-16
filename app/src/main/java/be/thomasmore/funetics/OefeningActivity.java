@@ -200,15 +200,21 @@ public class OefeningActivity extends Activity {
                     nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
                     db.insertGetesteOefening(nieuweGetesteOefening);
 
-                    //Volgende activity starten
-                    if (huidigeConditie.getId() == 1){
+                    //Bij oefenwoord altijd eerst naar oef 6.1 gaan
+                    if (huidigDoelwoord.getId() == 0){
                         startOef6_1();
                     }
-                    else if (huidigeConditie.getId() == 2){
-                        startOef6_2();
-                    }
                     else {
-                        startOef6_3();
+                        //Volgende activity starten
+                        if (huidigeConditie.getId() == 1){
+                            startOef6_1();
+                        }
+                        else if (huidigeConditie.getId() == 2){
+                            startOef6_2();
+                        }
+                        else {
+                            startOef6_3();
+                        }
                     }
                 }
                 if (resultCode == Activity.RESULT_CANCELED) {
@@ -221,6 +227,7 @@ public class OefeningActivity extends Activity {
                     //Score ophalen
                     int score = Integer.parseInt(data.getStringExtra("score"));
                     int aantalPogingen = Integer.parseInt(data.getStringExtra("aantalPogingen"));
+                    int nummer = Integer.parseInt(data.getStringExtra("nummer"));
 
                     //Nieuwe geteste oefening opslaan in database
                     GetesteOefening nieuweGetesteOefening = new GetesteOefening();
@@ -238,6 +245,17 @@ public class OefeningActivity extends Activity {
                     nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
                     db.insertGetesteOefening(nieuweGetesteOefening);
 
+                    //Oefenwoord werd getest
+                    if (huidigDoelwoord.getId() == 0){
+                        if (nummer == 1){
+                            startOef6_2();
+                        }
+                        else if (nummer == 2){
+                            startOef6_3();
+                        }
+                    }
+
+                    //Naar volgende woord gaan
                     if (getesteWoordenPositie != 3){
                         //Getest woord verhogen
                         getesteWoordenPositie++;
