@@ -375,7 +375,9 @@ public class OefeningActivity extends Activity {
 
         //Alle doelwoorden van de huidige woordenset in een lijst zetten
         doelwoorden = db.getDoelwoordenWhereWoordensetId((int) huidigeWoordenset.getId());
-        doelwoorden.add(0, db.getDoelwoordById(0));
+        if (huidigeConditie.getId() == 1){
+            doelwoorden.add(0, db.getDoelwoordById(0));
+        }
         //Eerste woord uit de lijst
         huidigDoelwoord = doelwoorden.get(0);
 
