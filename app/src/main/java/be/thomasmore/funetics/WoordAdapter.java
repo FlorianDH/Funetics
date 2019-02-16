@@ -41,6 +41,10 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
         final TextView textViewOef4 = (TextView) rowView.findViewById(R.id.textViewOef4Resultaat);
         final TextView textViewOef5 = (TextView) rowView.findViewById(R.id.textViewOef5Resultaat);
         final TextView textViewOef6 = (TextView) rowView.findViewById(R.id.textViewOef6Resultaat);
+        final TextView textViewOef6_2 = (TextView) rowView.findViewById(R.id.textViewOef6_2Resultaat);
+        textViewOef6_2.setVisibility(View.INVISIBLE);
+        final TextView textViewOef6_3 = (TextView) rowView.findViewById(R.id.textViewOef6_3Resultaat);
+        textViewOef6_3.setVisibility(View.INVISIBLE);
         final TextView textViewOef6Naam = (TextView) rowView.findViewById(R.id.textViewOef6);
         final TextView textViewOefNameting = (TextView) rowView.findViewById(R.id.textViewNametingResultaat);
 
@@ -66,9 +70,11 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
         GetestWoord getestWoord = values.get(position);
         Doelwoord doelwoord = db.getDoelwoordById(getestWoord.getDoelwoordId());
 
-        //Oefenwoord zetten achter duibril
+        //Oefenwoord duikbril
         if (doelwoord.getId() == 0){
             textViewWoord.setText(doelwoord.getNaam() + " (oefenwoord)");
+            textViewOef6_2.setVisibility(View.VISIBLE);
+            textViewOef6_3.setVisibility(View.VISIBLE);
         }
         else {
             textViewWoord.setText(doelwoord.getNaam());
@@ -154,15 +160,29 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
                     break;
                 case 7:
                     //Oefening 6.2
+                    if (doelwoord.getId() == 0){
+                        textViewOef6_2.setText("Oefening 6.2: ");
+                        textViewOef6_2.setText("Voltooid");
+                        textViewOef6_2.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+                    }
+                    else {
                         textViewOef6Naam.setText("Oefening 6.2: ");
                         textViewOef6.setText("Voltooid");
                         textViewOef6.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+                    }
                         break;
                 case 8:
                     //Oefening 6.3
-                    textViewOef6Naam.setText("Oefening 6.3: ");
-                    textViewOef6.setText("Voltooid");
-                    textViewOef6.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+                    if (doelwoord.getId() == 0){
+                        textViewOef6_3.setText("Oefening 6.3: ");
+                        textViewOef6_3.setText("Voltooid");
+                        textViewOef6_3.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+                    }
+                    else {
+                        textViewOef6Naam.setText("Oefening 6.3: ");
+                        textViewOef6.setText("Voltooid");
+                        textViewOef6.setTextColor(ContextCompat.getColor(context, R.color.color_green));
+                    }
                     break;
                 case 9:
                     //Nameting
