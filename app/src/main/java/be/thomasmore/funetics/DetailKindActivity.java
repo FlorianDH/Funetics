@@ -42,13 +42,13 @@ public class DetailKindActivity extends Activity {
         TextView textNaamGroep = (TextView) findViewById(R.id.naamGroep);
         textNaamGroep.setText(db.getGroepById(huidigKind.getGroepId()).getNaam());
 
-        TextView textVoormeting = (TextView) findViewById(R.id.voormetingText);
+        TextView textVoormetingText = (TextView) findViewById(R.id.voormetingGedaanText);
         if(huidigKind.getVoormetingId() == 0){
-            textVoormeting.setText("Heeft geen voormeting gedaan");
-            textVoormeting.setTextColor(ContextCompat.getColor(this, R.color.color_orange_dark));
+            textVoormetingText.setText("Heeft geen voormeting gedaan");
+            textVoormetingText.setTextColor(ContextCompat.getColor(this, R.color.color_orange_dark));
         }else{
-            textVoormeting.setText("Heeft voormeting gedaan");
-            textVoormeting.setTextColor(ContextCompat.getColor(this, R.color.color_green));
+            textVoormetingText.setText("Heeft voormeting gedaan");
+            textVoormetingText.setTextColor(ContextCompat.getColor(this, R.color.color_green));
 
         }
 
@@ -101,13 +101,13 @@ public class DetailKindActivity extends Activity {
 
         huidigKind = db.getKindById(kindId);
 
-        TextView textVoormeting = (TextView) findViewById(R.id.voormetingText);
+        TextView textVoormeting2 = (TextView) findViewById(R.id.voormetingGedaanText);
         if(huidigKind.getVoormetingId() == 0){
-            textVoormeting.setText("Heeft geen voormeting gedaan");
-            textVoormeting.setTextColor(ContextCompat.getColor(this, R.color.color_orange_dark));
+            textVoormeting2.setText("Heeft geen voormeting gedaan");
+            textVoormeting2.setTextColor(ContextCompat.getColor(this, R.color.color_orange_dark));
         }else{
-            textVoormeting.setText("Heeft voormeting gedaan");
-            textVoormeting.setTextColor(ContextCompat.getColor(this, R.color.color_green));
+            textVoormeting2.setText("Heeft voormeting gedaan");
+            textVoormeting2.setTextColor(ContextCompat.getColor(this, R.color.color_green));
 
         }
     }

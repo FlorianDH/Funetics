@@ -249,9 +249,11 @@ public class OefeningActivity extends Activity {
                     if (huidigDoelwoord.getId() == 0){
                         if (nummer == 1){
                             startOef6_2();
+                            return;
                         }
                         else if (nummer == 2){
                             startOef6_3();
+                            return;
                         }
                     }
                     else {
