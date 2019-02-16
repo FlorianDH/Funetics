@@ -28,6 +28,7 @@ public class OefeningActivity extends Activity {
     int getesteWoordenId[] = new int[4]; //Lijst met id's van reeds aangemaakte geteste woorden
     int getesteWoordenPositie; //Huidige positie in de lijst van doelwoorden en getesteWoordenId
     int alleScoreNameting[]; //Alle scores van alle woorden van de nameting
+    int[] nametingArray; //Alle scores van alle woorden van de nameting uit de tabel nameting
 
 
     @Override
@@ -277,8 +278,8 @@ public class OefeningActivity extends Activity {
                 break;
             case 9: //Einde test met nameting
                 if(resultCode == Activity.RESULT_OK){
-                    //Scores ophalen
-                    alleScoreNameting = data.getIntArrayExtra("nameting");
+                    //Scores nameting ophalen
+                    leesNameting();
 
                     //Alle testen van huidig kind ophalen
                     List<Test> testen = db.getTestenWhereKindId((int) huidigKind.getId());
@@ -286,7 +287,7 @@ public class OefeningActivity extends Activity {
                     for (Test test: testen) {
                         List<GetestWoord> getesteWoorden = db.getGetesteWoordenWhereTestId((int) test.getId());
                         for (GetestWoord getestWoord:getesteWoorden){
-                            int tempScore = alleScoreNameting[getestWoord.getDoelwoordId()];
+                            int tempScore = nametingArray[getestWoord.getDoelwoordId()];
                             //Nieuwe geteste oefening maken bij bestaand getestwoord
                             GetesteOefening nieuweGetesteOefening = new GetesteOefening();
                             nieuweGetesteOefening.setScore(tempScore);
@@ -296,20 +297,6 @@ public class OefeningActivity extends Activity {
                             db.insertGetesteOefening(nieuweGetesteOefening);
                         }
                     }
-
-//                    //Scores opslaan van de woorden uit de huidige lijst
-//                    int tempPositie = 0;
-//                    for (Doelwoord d: doelwoorden){
-//                        int tempScore = alleScoreNameting[(int) d.getId()];
-//                        //Nieuwe geteste oefening maken
-//                        GetesteOefening nieuweGetesteOefening = new GetesteOefening();
-//                        nieuweGetesteOefening.setScore(tempScore);
-//                        nieuweGetesteOefening.setAantalPogingen(1);
-//                        nieuweGetesteOefening.setOefeningId(9); //Id van de oefening
-//                        nieuweGetesteOefening.setGetestWoordId(getesteWoordenId[tempPositie]);
-//                        db.insertGetesteOefening(nieuweGetesteOefening);
-//                        tempPositie++;
-//                    }
 
                     finish();
                 }
@@ -563,5 +550,22 @@ public class OefeningActivity extends Activity {
                 });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void leesNameting() {
+        Nameting nameting = db.getNametingById(huidigKind.getNametingId());
+
+        nametingArray = new int[10];
+
+        nametingArray[0] = nameting.getDuikbril();
+        nametingArray[1] = nameting.getKlimtouw();
+        nametingArray[2] = nameting.getKroos();
+        nametingArray[3] = nameting.getRiet();
+        nametingArray[4] = nameting.getVal();
+        nametingArray[5] = nameting.getKompas();
+        nametingArray[6] = nameting.getSteil();
+        nametingArray[7] = nameting.getZwaan();
+        nametingArray[8] = nameting.getKamp();
+        nametingArray[9] = nameting.getZaklamp();
     }
 }
