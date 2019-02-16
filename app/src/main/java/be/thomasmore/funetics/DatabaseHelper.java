@@ -347,6 +347,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         values.put("groepId", kind.getGroepId());
         values.put("klasId", kind.getKlasId());
         values.put("voormetingId", kind.getVoormetingId());
+        values.put("nametingId", kind.getNametingId());
 
         long id = db.insert("kind", null, values);
 
@@ -365,6 +366,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         values.put("groepId", kind.getGroepId());
         values.put("klasId", kind.getKlasId());
         values.put("voormetingId", kind.getVoormetingId());
+        values.put("nametingId", kind.getNametingId());
 
         int numrows = db.update(
                 "kind",
@@ -395,7 +397,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         Cursor cursor = db.query(
                 "kind",      // tabelnaam
-                new String[] { "id", "voornaam", "naam", "actief", "klasId", "groepId", "voormetingId" }, // kolommen
+                new String[] { "id", "voornaam", "naam", "actief", "klasId", "groepId", "voormetingId", "nametingId" }, // kolommen
                 "id = ?",  // selectie
                 new String[] { String.valueOf(id) }, // selectieparameters
                 null,           // groupby
@@ -407,7 +409,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         if (cursor.moveToFirst()) {
             kind = new Kind(cursor.getLong(0),
-                    cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6));
+                    cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6), cursor.getInt(7));
         }
         cursor.close();
         db.close();
@@ -432,7 +434,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         if (cursor.moveToFirst()) {
             do {
                 Kind kind = new Kind(cursor.getLong(0),
-                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6));
+                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6), cursor.getInt(7));
                 lijst.add(kind);
             } while (cursor.moveToNext());
         }
@@ -460,7 +462,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         if (cursor.moveToFirst()) {
             do {
                 Kind kind = new Kind(cursor.getLong(0),
-                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6));
+                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6), cursor.getInt(7));
                 lijst.add(kind);
             } while (cursor.moveToNext());
         }
@@ -488,7 +490,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         if (cursor.moveToFirst()) {
             do {
                 Kind kind = new Kind(cursor.getLong(0),
-                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6));
+                        cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6), cursor.getInt(7));
                 lijst.add(kind);
             } while (cursor.moveToNext());
         }
