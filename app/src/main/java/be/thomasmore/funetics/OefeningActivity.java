@@ -254,39 +254,40 @@ public class OefeningActivity extends Activity {
                             startOef6_3();
                         }
                     }
-
-                    //Naar volgende woord gaan
-                    if (getesteWoordenPositie != 3){
-                        //Getest woord verhogen
-                        getesteWoordenPositie++;
-                        huidigGetestWoordId = getesteWoordenId[getesteWoordenPositie];
-
-                        //Huidig getest woord verhogen
-                        huidigDoelwoord = doelwoorden.get(getesteWoordenPositie);
-
-                        //Start oefening 1
-                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        builder.setTitle("Wilt u het volgende woord '" + huidigDoelwoord.getNaam() + "' testen?")
-                            .setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                    startOef1();
-                                }
-                            })
-                            .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        finish();
-                                    }
-                                });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                    }
-                    //nameting enkel starten na conditie 3
-                    else if (huidigeConditie.getId() == 3) {
-                        //Nameting starten
-                        startNameting();
-                    }
                     else {
-                        finish();
+                        //Naar volgende woord gaan
+                        if (getesteWoordenPositie != 3){
+                            //Getest woord verhogen
+                            getesteWoordenPositie++;
+                            huidigGetestWoordId = getesteWoordenId[getesteWoordenPositie];
+
+                            //Huidig getest woord verhogen
+                            huidigDoelwoord = doelwoorden.get(getesteWoordenPositie);
+
+                            //Start oefening 1
+                            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                            builder.setTitle("Wilt u het volgende woord '" + huidigDoelwoord.getNaam() + "' testen?")
+                                    .setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            startOef1();
+                                        }
+                                    })
+                                    .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            finish();
+                                        }
+                                    });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                        //nameting enkel starten na conditie 3
+                        else if (huidigeConditie.getId() == 3) {
+                            //Nameting starten
+                            startNameting();
+                        }
+                        else {
+                            finish();
+                        }
                     }
                 }
                 if (resultCode == Activity.RESULT_CANCELED) {

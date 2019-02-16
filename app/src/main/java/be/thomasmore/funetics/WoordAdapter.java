@@ -43,8 +43,12 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
         final TextView textViewOef6 = (TextView) rowView.findViewById(R.id.textViewOef6Resultaat);
         final TextView textViewOef6_2 = (TextView) rowView.findViewById(R.id.textViewOef6_2Resultaat);
         textViewOef6_2.setVisibility(View.INVISIBLE);
+        final TextView textViewOef6_2Naam = (TextView) rowView.findViewById(R.id.textViewOef6_2);
+        textViewOef6_2Naam.setVisibility(View.INVISIBLE);
         final TextView textViewOef6_3 = (TextView) rowView.findViewById(R.id.textViewOef6_3Resultaat);
         textViewOef6_3.setVisibility(View.INVISIBLE);
+        final TextView textViewOef6_3Naam = (TextView) rowView.findViewById(R.id.textViewOef6_3);
+        textViewOef6_3Naam.setVisibility(View.INVISIBLE);
         final TextView textViewOef6Naam = (TextView) rowView.findViewById(R.id.textViewOef6);
         final TextView textViewOefNameting = (TextView) rowView.findViewById(R.id.textViewNametingResultaat);
 
@@ -75,6 +79,8 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
             textViewWoord.setText(doelwoord.getNaam() + " (oefenwoord)");
             textViewOef6_2.setVisibility(View.VISIBLE);
             textViewOef6_3.setVisibility(View.VISIBLE);
+            textViewOef6_2Naam.setVisibility(View.INVISIBLE);
+            textViewOef6_3Naam.setVisibility(View.INVISIBLE);
         }
         else {
             textViewWoord.setText(doelwoord.getNaam());
