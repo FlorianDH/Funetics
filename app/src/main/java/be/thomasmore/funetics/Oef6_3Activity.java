@@ -122,6 +122,11 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
                 deel1 = "Riet";
                 deel2 = "";
                 break;
+            case "val":
+                lettergrepen = 1;
+                deel1 = "Val";
+                deel2 = "";
+                break;
             case "kompas":
                 lettergrepen = 2;
                 deel1 = "Kom";

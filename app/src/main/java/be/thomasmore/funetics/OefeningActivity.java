@@ -248,7 +248,7 @@ public class OefeningActivity extends Activity {
 
                         //Start oefening 1
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        builder.setTitle("Wilt u het volgende woord testen?")
+                        builder.setTitle("Wilt u het volgende woord '" + huidigDoelwoord.getNaam() + "' testen?")
                             .setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     startOef1();
