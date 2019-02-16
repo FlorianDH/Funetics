@@ -137,8 +137,8 @@
     <!-- Content_oef6 -->
     <string name="title_activity_oef6">Oefening 6 : Conditie training</string>
     <string name="title_activity_tobedeletete">tobedeletete</string>
-    <string name="title_activity_voormeting">VoormetingActivity</string>
-    <string name="title_activity_nameting">NametingActivity</string>
+    <string name="title_activity_voormeting">Voormeting</string>
+    <string name="title_activity_nameting">Nameting</string>
 
 
     <string name="draggable_text">Draggable Text</string>

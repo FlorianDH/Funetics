@@ -8,11 +8,12 @@ public class Kind {
     private int klasId;
     private int groepId;
     private int voormetingId;
+    private int nametingId;
 
     public Kind() {
     }
 
-    public Kind(long id, String voornaam, String naam, int actief, int klasId, int groepId, int voormetingId) {
+    public Kind(long id, String voornaam, String naam, int actief, int klasId, int groepId, int voormetingId, int nametingId) {
         this.id = id;
         this.voornaam = voornaam;
         this.naam = naam;
@@ -20,6 +21,7 @@ public class Kind {
         this.klasId = klasId;
         this.groepId = groepId;
         this.voormetingId = voormetingId;
+        this.nametingId = nametingId;
     }
 
     public long getId() {
@@ -77,6 +79,14 @@ public class Kind {
 
     public void setVoormetingId(int voormetingId) {
         this.voormetingId = voormetingId;
+    }
+
+    public int getNametingId() {
+        return nametingId;
+    }
+
+    public void setNametingId(int nametingId) {
+        this.nametingId = nametingId;
     }
 
     @Override

@@ -69,11 +69,6 @@ public class NametingActivity extends AppCompatActivity {
             nameting[oefening] ++;
         }
 
-        //Foute foto
-//        else {
-//        }
-
-
         if (oefening < 9){
             oefening ++;
             setNameting();
@@ -85,6 +80,8 @@ public class NametingActivity extends AppCompatActivity {
 
             while(audioPlayer.isPlaying());
 
+            saveNameting();
+
             //Terug naar oefening activity
             Intent returnIntent = new Intent();
             returnIntent.putExtra("nameting", nameting);
@@ -93,8 +90,30 @@ public class NametingActivity extends AppCompatActivity {
         }
     }
 
+    private void saveNameting(){
+        Nameting newNameting = new Nameting();
+        newNameting.setDuikbril(nameting[0]);
+        newNameting.setKlimtouw(nameting[1]);
+        newNameting.setKroos(nameting[2]);
+        newNameting.setRiet(nameting[3]);
+        newNameting.setVal(nameting[4]);
+        newNameting.setKompas(nameting[5]);
+        newNameting.setSteil(nameting[6]);
+        newNameting.setZwaan(nameting[7]);
+        newNameting.setKamp(nameting[8]);
+        newNameting.setZaklamp(nameting[9]);
+
+        long nametingId = db.insertNameting(newNameting);
+
+        Kind newKind = huidigKind;
+        newKind.setNametingId((int)nametingId);
+
+        db.updateKind(newKind);
+    }
+
+
     public void playOpdrachtSound(){
-        audioPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef0_nameting);
+        audioPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef0_voormeting);
         audioPlayer.start();
     }
 
