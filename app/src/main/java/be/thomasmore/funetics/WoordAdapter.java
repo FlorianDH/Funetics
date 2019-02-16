@@ -61,6 +61,13 @@ public class WoordAdapter extends ArrayAdapter<GetestWoord> {
         List<GetesteOefening> oefeningen = new ArrayList<GetesteOefening>();
         oefeningen = db.getGetesteOefeningenWhereGetestWoordId((int) getestWoord.getId());
 
+        for (GetesteOefening getesteOefening: oefeningen){
+            switch (getesteOefening.getOefeningId()){
+                case 0:
+
+            }
+        }
+
         //Alle resultaten bij de juiste oefening zetten
         //Voormeting
         GetesteOefening oefening0 = null;

@@ -553,6 +553,8 @@ public class OefeningActivity extends Activity {
     }
 
     private void leesNameting() {
+        huidigKind = db.getKindById(huidigKind.getId());
+
         Nameting nameting = db.getNametingById(huidigKind.getNametingId());
 
         nametingArray = new int[10];
