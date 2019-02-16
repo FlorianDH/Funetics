@@ -229,7 +229,7 @@ public class OefeningActivity extends Activity {
                     int aantalPogingen = Integer.parseInt(data.getStringExtra("aantalPogingen"));
                     int nummer = Integer.parseInt(data.getStringExtra("nummer"));
 
-                    if (huidigDoelwoord.getId() == 0){
+                    if (huidigDoelwoord.getId() != 0){
                         //Nieuwe geteste oefening opslaan in database
                         GetesteOefening nieuweGetesteOefening = new GetesteOefening();
                         nieuweGetesteOefening.setScore(score);
@@ -248,20 +248,33 @@ public class OefeningActivity extends Activity {
                     }
 
                     //Oefenwoord werd getest
-                    if (huidigDoelwoord.getId() == 0){
-                        if (nummer == 1){
-                            //Nieuwe geteste oefening opslaan in database
-                            GetesteOefening nieuweGetesteOefening = new GetesteOefening();
-                            nieuweGetesteOefening.setScore(score);
-                            nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
-                            nieuweGetesteOefening.setOefeningId(7); //Id van de oefening
-                            nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
-                            db.insertGetesteOefening(nieuweGetesteOefening);
+                    if (nummer == 1 && huidigDoelwoord.getId() == 0){
+                        //Nieuwe geteste oefening opslaan in database
+                        GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                        nieuweGetesteOefening.setScore(score);
+                        nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
+                        nieuweGetesteOefening.setOefeningId(6); //Id van de oefening
+                        nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
+                        db.insertGetesteOefening(nieuweGetesteOefening);
 
-                            startOef6_2();
-                            return;
-                        }
-                        else if (nummer == 2){
+                        startOef6_2();
+                        return;
+                    }
+                    else if (nummer == 2 && huidigDoelwoord.getId() == 0){
+                        //Nieuwe geteste oefening opslaan in database
+                        GetesteOefening nieuweGetesteOefening = new GetesteOefening();
+                        nieuweGetesteOefening.setScore(score);
+                        nieuweGetesteOefening.setAantalPogingen(aantalPogingen);
+                        nieuweGetesteOefening.setOefeningId(7); //Id van de oefening
+                        nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
+                        db.insertGetesteOefening(nieuweGetesteOefening);
+
+                        startOef6_3();
+                        return;
+                    }
+                    else {
+
+                        if (nummer == 3 && huidigDoelwoord.getId() == 0){
                             //Nieuwe geteste oefening opslaan in database
                             GetesteOefening nieuweGetesteOefening = new GetesteOefening();
                             nieuweGetesteOefening.setScore(score);
@@ -269,14 +282,10 @@ public class OefeningActivity extends Activity {
                             nieuweGetesteOefening.setOefeningId(8); //Id van de oefening
                             nieuweGetesteOefening.setGetestWoordId((int) huidigGetestWoordId);
                             db.insertGetesteOefening(nieuweGetesteOefening);
-
-                            startOef6_3();
-                            return;
                         }
-                    }
-                    else {
-                        //Naar volgende woord gaan
-                        if (getesteWoordenPositie != 3){
+
+                        if (getesteWoordenPositie != 2 && huidigeConditie.getId() != 1){
+
                             //Getest woord verhogen
                             getesteWoordenPositie++;
                             huidigGetestWoordId = getesteWoordenId[getesteWoordenPositie];
@@ -300,13 +309,40 @@ public class OefeningActivity extends Activity {
                             AlertDialog dialog = builder.create();
                             dialog.show();
                         }
-                        //nameting enkel starten na conditie 3
-                        else if (huidigeConditie.getId() == 3) {
-                            //Nameting starten
-                            startNameting();
+                        else if(getesteWoordenPositie != 3 && huidigeConditie.getId() == 1){
+
+                            //Getest woord verhogen
+                            getesteWoordenPositie++;
+                            huidigGetestWoordId = getesteWoordenId[getesteWoordenPositie];
+
+                            //Huidig getest woord verhogen
+                            huidigDoelwoord = doelwoorden.get(getesteWoordenPositie);
+
+                            //Start oefening 1
+                            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                            builder.setTitle("Wilt u het volgende woord '" + huidigDoelwoord.getNaam() + "' testen?")
+                                    .setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            startOef1();
+                                        }
+                                    })
+                                    .setNegativeButton(R.string.dialog_annuleer, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            finish();
+                                        }
+                                    });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
                         }
-                        else {
-                            finish();
+                        else{
+                            //nameting enkel starten na conditie 3
+                            if (huidigeConditie.getId() == 3) {
+                                //Nameting starten
+                                startNameting();
+                            }
+                            else if (huidigeConditie.getId() != 3){
+                                finish();
+                            }
                         }
                     }
                 }
