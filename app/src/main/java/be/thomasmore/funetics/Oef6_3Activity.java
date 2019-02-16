@@ -75,7 +75,7 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
                 //Terug naar oefening activity
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("score", String.valueOf(1));
-                returnIntent.putExtra("nummer", Integer.valueOf(3));
+                returnIntent.putExtra("nummer", String.valueOf(3));
                 returnIntent.putExtra("aantalPogingen", String.valueOf(1));
                 setResult(Activity.RESULT_OK,returnIntent);
                 finish();
