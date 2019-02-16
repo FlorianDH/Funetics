@@ -136,11 +136,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 "naam TEXT NOT NULL)";
         db.execSQL(CREATE_TABLE_OEFENING);
 
-        insertKlassen(db);
+//        insertKlassen(db);
         insertGroepen(db);
         insertVoormeting(db);
         insertNameting(db);
-        insertKinderen(db);
+//        insertKinderen(db);
         insertCondities(db);
         insertWoordensets(db);
         insertDoelwoorden(db);

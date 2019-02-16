@@ -168,7 +168,7 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
             tracks[4] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_2", "raw", getPackageName());
         }else{
             tracks = new int [3];
-            woordPlayer = MediaPlayer.create(this, getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName()));
+//            woordPlayer = MediaPlayer.create(this, getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName()));
             tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());
             tracks[1] = R.raw.oef6_3;
             tracks[2] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());
@@ -194,12 +194,12 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
             currentTrack++;
             audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
             if(lettergrepen == 2){
-                if (currentTrack == 1 || currentTrack == 4 ||currentTrack == 5 ){
+                if (currentTrack == 1 || currentTrack == 3 ||currentTrack == 4 ){
                     konijnAnimation1.start();
                     konijnAnimation2.start();
                 }
             }else{
-                if (currentTrack == 3){
+                if (currentTrack == 2){
                     konijnAnimation1.start();
                     konijnAnimation2.start();
                 }
