@@ -47,6 +47,9 @@ public class DetailTestActivity extends AppCompatActivity {
         TextView textConditieTest = (TextView) findViewById(R.id.conditieTest);
         textConditieTest.setText(huidigeConditie.getNaam());
 
+        TextView textNaamGroep = (TextView) findViewById(R.id.groepTest);
+        textNaamGroep.setText(db.getGroepById(huidigKind.getGroepId()).getNaam());
+
         leesWoorden();
     }
 
