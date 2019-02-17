@@ -93,8 +93,6 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
             }
         });
 
-
-
         findViews();
         setImages();
         implementEvents();

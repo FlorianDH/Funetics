@@ -127,7 +127,10 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     public void nextFAB_onClick(View view) {
         if (aantalJuistSelected == 3){
-            juistPlayer.start();
+            if(this.audioPlayer != null){
+                this.audioPlayer.release();
+                juistPlayer.start();
+            }
             while (juistPlayer.isPlaying()){
 
             }
@@ -142,7 +145,10 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
             finish();
         }
         else {
-            foutPlayer.start();
+            if(this.audioPlayer != null){
+                this.audioPlayer.release();
+                foutPlayer.start();
+            }
             aantalPogingen++;
         }
     }
