@@ -19,16 +19,12 @@ public class Oef6_2Activity extends AppCompatActivity implements MediaPlayer.OnC
     private MediaPlayer zoemPlayer = null;
     private MediaPlayer audioPlayer = null;
     private int[] tracks = new int[3];
-    private int[] tracks2 = new int[1];
     private int currentTrack = 0;
     private int zoemDuur;
 
     private DatabaseHelper db;
     private Doelwoord huidigDoelwoord;
     private Kind huidigKind;
-
-    private boolean isPlaying = false; //false by default
-    private boolean isPlaying2 = false; //false by default
 
     private ObjectAnimator bijAnimation = new ObjectAnimator();
 
@@ -73,6 +69,7 @@ public class Oef6_2Activity extends AppCompatActivity implements MediaPlayer.OnC
         nextFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                stopPlaying();
                 //Terug naar oefening activity
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("score", String.valueOf(1));
@@ -100,54 +97,81 @@ public class Oef6_2Activity extends AppCompatActivity implements MediaPlayer.OnC
 
     public void setAudioPlayer() {
         tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_2", "raw", getPackageName());
-        //tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_2", "raw", getPackageName()); //oefenwoord_6_2
+
         tracks[1] = R.raw.oef6_2;
         tracks[2] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_2", "raw", getPackageName());
-        //tracks[2] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_2", "raw", getPackageName()); //oefenwoord_6_2
+
     }
 
     public void setZoemPlayer() {
+        if(this.zoemPlayer != null){
+            this.zoemPlayer.release();
+        }
         zoemPlayer = MediaPlayer.create(this, getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_2", "raw", getPackageName()));
-        //tracks2[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());
-        //tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_2", "raw", getPackageName()); //oefenwoord_6_2
     }
 
     public void playAudioPlayer(){
-        isPlaying = true;
+        if(this.audioPlayer != null){
+            this.audioPlayer.release();
+        }
         audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
         audioPlayer.setOnCompletionListener(this);
-        audioPlayer.start();
+        audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                audioPlayer.start();
+            }
+        });
     }
 
     public void playZoemPlayer(){
-        isPlaying2 = true;
-        zoemPlayer.start();
+        setZoemPlayer();
+        zoemPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                zoemPlayer.start();
+            }
+        });
     }
 
     public void onCompletion(MediaPlayer audioPlayer2) {
-        audioPlayer2.release();
         if (currentTrack == 1){
             bijAnimation.start();
         }
 
         if (currentTrack < tracks.length-1) {
-            isPlaying = true;
             currentTrack++;
             audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
             audioPlayer.setOnCompletionListener(this);
-            audioPlayer.start();
+            audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    audioPlayer.start();
+                }
+            });
         }else {
-            isPlaying = false;
+            stopPlaying();
         }
     }
 
     public void playButton_onClick(View view) {
-        if (isPlaying){
+        stopPlaying();
+
+        playZoemPlayer();
+    }
+
+    private void stopPlaying() {
+        if (audioPlayer != null) {
             audioPlayer.stop();
+            audioPlayer.release();
+            audioPlayer = null;
         }
 
-        isPlaying2 = true;
-        playZoemPlayer();
+        if (zoemPlayer != null) {
+            zoemPlayer.stop();
+            zoemPlayer.release();
+            zoemPlayer = null;
+        }
     }
 
 }

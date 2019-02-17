@@ -23,8 +23,6 @@ public class Oef6_1Activity extends AppCompatActivity implements MediaPlayer.OnC
     private Doelwoord huidigDoelwoord;
     private Kind huidigKind;
 
-    private boolean isPlaying = false; //false by default
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +61,7 @@ public class Oef6_1Activity extends AppCompatActivity implements MediaPlayer.OnC
     public void droevigButton_onClick(View view) {
         aantalPogingen++;
 
-        if (isPlaying){
-            audioPlayer.stop();
-        }
+        stopPlaying();
 
         //Terug naar oefening activity
         Intent returnIntent = new Intent();
@@ -80,9 +76,7 @@ public class Oef6_1Activity extends AppCompatActivity implements MediaPlayer.OnC
         aantalPogingen++;
         score++;
 
-        if (isPlaying){
-            audioPlayer.stop();
-        }
+        stopPlaying();
 
         //Terug naar oefening activity
         Intent returnIntent = new Intent();
@@ -100,32 +94,49 @@ public class Oef6_1Activity extends AppCompatActivity implements MediaPlayer.OnC
     }
 
     public void playAudioPlayer(){
-        isPlaying = true;
+        if(this.audioPlayer != null){
+            this.audioPlayer.release();
+        }
         audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
         audioPlayer.setOnCompletionListener(this);
-        audioPlayer.start();
+        audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                audioPlayer.start();
+            }
+        });
     }
 
     public void onCompletion(MediaPlayer audioPlayer2) {
-        audioPlayer2.release();
         if (currentTrack < tracks.length-1) {
-            isPlaying = true;
             currentTrack++;
             audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
             audioPlayer.setOnCompletionListener(this);
-            audioPlayer.start();
+            audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    audioPlayer.start();
+                }
+            });
         }else {
-            isPlaying = false;
+            stopPlaying();
         }
     }
 
     public void playButton_onClick(View view) {
-        if (isPlaying){
-            audioPlayer.stop();
-        }
 
-        isPlaying = true;
+        stopPlaying();
+
         currentTrack = 0;
+
         playAudioPlayer();
+    }
+
+    private void stopPlaying() {
+        if (audioPlayer != null) {
+            audioPlayer.stop();
+            audioPlayer.release();
+            audioPlayer = null;
+        }
     }
 }
