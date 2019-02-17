@@ -12,19 +12,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class PreteachingActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener{
+public class PreteachingActivity extends AppCompatActivity{
 
     private MediaPlayer audioPlayer = null;
-    private int[] tracks = new int[1];
-    private int currentTrack = 0;
-    private boolean isPlaying = false; //false by default
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preteaching);
 
-        setAudioPlayer();
         playAudioPlayer();
 
         FloatingActionButton soundFab = (FloatingActionButton) findViewById(R.id.soundFAB);
@@ -39,50 +35,40 @@ public class PreteachingActivity extends AppCompatActivity implements MediaPlaye
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isPlaying){
-                    audioPlayer.stop();
-                    Intent returnIntent = new Intent();
-                    setResult(Activity.RESULT_OK, returnIntent);
-                    finish();
-                }
-                else{
-                    Intent returnIntent = new Intent();
-                    setResult(Activity.RESULT_OK, returnIntent);
-                    finish();
-                }
+
+                stopPlaying();
+
+                Intent returnIntent = new Intent();
+                setResult(Activity.RESULT_OK, returnIntent);
+                finish();
+
             }
         });
     }
 
-    public void setAudioPlayer() {
-        tracks[0] = R.raw.preteach;
-    }
-
     public void playAudioPlayer(){
-        isPlaying = true;
-        audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
-        audioPlayer.setOnCompletionListener(this);
-        audioPlayer.start();
+        if(this.audioPlayer != null){
+            this.audioPlayer.release();
+        }
+        audioPlayer = MediaPlayer.create(getApplicationContext(), R.raw.preteach);
+        audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                audioPlayer.start();
+            }
+        });
     }
 
-    public void onCompletion(MediaPlayer audioPlayer2) {
-        audioPlayer2.release();
-        if (currentTrack < tracks.length-1) {
-            isPlaying = true;
-            currentTrack++;
-            audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
-            audioPlayer.setOnCompletionListener(this);
-            audioPlayer.start();
-        }else {
-            isPlaying = false;
+    private void stopPlaying() {
+        if (audioPlayer != null) {
+            audioPlayer.stop();
+            audioPlayer.release();
+            audioPlayer = null;
         }
     }
 
     public void playButton_onClick(View view) {
-        if(isPlaying){
-            audioPlayer.stop();
-        }
-        currentTrack = 0;
+        stopPlaying();
         playAudioPlayer();
     }
 

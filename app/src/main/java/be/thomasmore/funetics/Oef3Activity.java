@@ -33,9 +33,6 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
     private Doelwoord huidigDoelwoord;
     private Kind huidigKind;
 
-    private boolean isPlaying = false; //false by default
-    private boolean isContextPlaying = false; //false by default
-
     private ImageButton goedButton;
     private ImageButton foutButton;
 
@@ -72,40 +69,103 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
         });
     }
 
+    private void stopPlaying() {
+        if (audioPlayer != null) {
+            audioPlayer.stop();
+            audioPlayer.release();
+            audioPlayer = null;
+        }
+
+        if (contextPlayer != null) {
+            contextPlayer.stop();
+            contextPlayer.release();
+            contextPlayer = null;
+        }
+
+        if (context2Player != null) {
+            context2Player.stop();
+            context2Player.release();
+            context2Player = null;
+        }
+
+        if (juistPlayer != null) {
+            juistPlayer.stop();
+            juistPlayer.release();
+            juistPlayer = null;
+        }
+
+        if (juist2Player != null) {
+            juist2Player.stop();
+            juist2Player.release();
+            juist2Player = null;
+        }
+
+        if (foutPlayer != null) {
+            foutPlayer.stop();
+            foutPlayer.release();
+            foutPlayer = null;
+        }
+    }
+
     public void foutButton_onClick(View view) {
         String waarde = (String) view.getContentDescription();
         pogingen++;
 
-        if (isPlaying){
-            audioPlayer.stop();
-            isPlaying = false;
-        }
+        stopPlaying();
 
         if(waarde=="juist"){
             if(pogingen == 1){
                 score++;
             }
-            juist2Player.start();
-            while (juist2Player.isPlaying()){}
 
-            if(oefening == 2){
-                //Terug naar oefening activity
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra("score", String.valueOf(score));
-                returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
-                setResult(Activity.RESULT_OK,returnIntent);
-                finish();
-            }else{
-                context2Player.start();
-                while (context2Player.isPlaying()){}
-                oefening ++;
-                pogingen = 0;
-                setOefening();
-                contextPlayer.start();
-            }
+            juist2Player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    juist2Player.start();
+                    while (juist2Player.isPlaying()){}
+
+                    if(oefening == 2){
+                        //Terug naar oefening activity
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("score", String.valueOf(score));
+                        returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
+                        setResult(Activity.RESULT_OK,returnIntent);
+                        finish();
+                    }else{
+
+                        context2Player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mediaPlayer) {
+                                context2Player.start();
+                                while (context2Player.isPlaying()){}
+
+                                oefening ++;
+                                pogingen = 0;
+                                setOefening();
+
+                                contextPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                    @Override
+                                    public void onPrepared(MediaPlayer mediaPlayer) {
+                                        contextPlayer.start();
+                                    }
+                                });
+                            }
+                        });
+
+                    }
+                }
+            });
+
+
         }else{
-            foutPlayer.start();
-            while (foutPlayer.isPlaying()){}
+
+            foutPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    foutPlayer.start();
+                    while (foutPlayer.isPlaying()){}
+                }
+            });
         }
     }
 
@@ -113,36 +173,57 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
         String waarde = (String) view.getContentDescription();
         pogingen++;
 
-        if (isPlaying){
-            audioPlayer.stop();
-            isPlaying = false;
-        }
+        stopPlaying();
 
         if(waarde=="juist"){
             if(pogingen == 1){
                 score++;
             }
-            juistPlayer.start();
-            while (juistPlayer.isPlaying()){}
 
-            if(oefening == 2){
-                //Terug naar oefening activity
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra("score", String.valueOf(score));
-                returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
-                setResult(Activity.RESULT_OK,returnIntent);
-                finish();
-            }else{
-                context2Player.start();
-                while (context2Player.isPlaying()){}
-                oefening ++;
-                pogingen = 0;
-                setOefening();
-                contextPlayer.start();
-            }
+            juistPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    juistPlayer.start();
+                    while (juistPlayer.isPlaying()){}
+
+                    if(oefening == 2){
+                        //Terug naar oefening activity
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("score", String.valueOf(score));
+                        returnIntent.putExtra("aantalPogingen", String.valueOf(aantalPogingen));
+                        setResult(Activity.RESULT_OK,returnIntent);
+                        finish();
+                    }else{
+                        context2Player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mediaPlayer) {
+                                context2Player.start();
+                                while (context2Player.isPlaying()){}
+
+                                oefening ++;
+                                pogingen = 0;
+                                setOefening();
+
+                                contextPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                    @Override
+                                    public void onPrepared(MediaPlayer mediaPlayer) {
+                                        contextPlayer.start();
+                                    }
+                                });
+                            }
+                        });
+
+                    }
+                }
+            });
         }else{
-            foutPlayer.start();
-            while (foutPlayer.isPlaying()){}
+            foutPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    foutPlayer.start();
+                    while (foutPlayer.isPlaying()){}
+                }
+            });
         }
 
     }
@@ -155,6 +236,21 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     public void setContextPlayer() {
+        if(this.contextPlayer != null){
+            this.contextPlayer.release();
+        }
+        if(this.context2Player != null){
+            this.context2Player.release();
+        }
+        if(this.juistPlayer != null){
+            this.juistPlayer.release();
+        }
+        if(this.juist2Player != null){
+            this.juist2Player.release();
+        }
+        if(this.foutPlayer != null){
+            this.foutPlayer.release();
+        }
         contextPlayer = MediaPlayer.create(getApplicationContext(),getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_3_2", "raw", getPackageName()));
         context2Player = MediaPlayer.create(getApplicationContext(), R.raw.oef3_4);
         juistPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef3_2);
@@ -163,34 +259,48 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     public void playAudioPlayer(){
-        isPlaying = true;
+        if(this.audioPlayer != null){
+            this.audioPlayer.release();
+        }
         audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
         audioPlayer.setOnCompletionListener(this);
-        audioPlayer.start();
+        audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                audioPlayer.start();
+            }
+        });
     }
 
     public void onCompletion(MediaPlayer audioPlayer2) {
-        audioPlayer2.release();
         if (currentTrack < tracks.length-1) {
-            isPlaying = true;
             currentTrack++;
             audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
             audioPlayer.setOnCompletionListener(this);
-            audioPlayer.start();
+            audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    audioPlayer.start();
+                }
+            });
         }else {
-            isPlaying = false;
+            stopPlaying();
         }
     }
 
     public void playButton_onClick(View view) {
-        if (isPlaying){
-            audioPlayer.stop();
-        }
-        isPlaying = false;
+        stopPlaying();
 
         currentTrack = 0;
 
-        contextPlayer.start();
+        setContextPlayer();
+
+        contextPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                contextPlayer.start();
+            }
+        });
     }
 
     public void setOefening(){

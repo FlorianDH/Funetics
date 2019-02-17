@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 public class VoormetingActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
@@ -58,15 +60,17 @@ public class VoormetingActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playWoordPlayer();
+                playAudio();
             }
         });
 
-        playWoordPlayer();
+        playAudio();
     }
 
     public void imageButton_onClick(View view) {
         String waarde = (String) view.getContentDescription();
+
+        stopPlaying();
 
         // Juiste foto
         if(waarde.equals("juist")){
@@ -76,7 +80,7 @@ public class VoormetingActivity extends AppCompatActivity {
         if (oefening < 9){
             oefening ++;
             setVoormeting();
-            playWoordPlayer();
+            playAudio();
         }else {
             textViewWoord.setVisibility(view.INVISIBLE);
             imageButton1.setVisibility(view.INVISIBLE);
@@ -139,17 +143,51 @@ public class VoormetingActivity extends AppCompatActivity {
     }
 
 
-    public void playOpdrachtSound(){
+    public void playAudio(){
+        if(oefening == 0){
+            playOpdrachtPlayer();
+        }
+        else{
+            playWoordPlayer();
+        }
+    }
+
+    private void stopPlaying() {
+        if (woordPlayer != null) {
+            woordPlayer.stop();
+            woordPlayer.release();
+            woordPlayer = null;
+        }
+        if (audioPlayer != null) {
+            audioPlayer.stop();
+            audioPlayer.release();
+            audioPlayer = null;
+        }
+    }
+
+    public void playOpdrachtPlayer(){
+        if(this.audioPlayer != null){
+            this.audioPlayer.release();
+        }
         audioPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef0_voormeting);
-        audioPlayer.start();
+        audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                audioPlayer.start();
+                while (audioPlayer.isPlaying()){}
+                playWoordPlayer();
+            }
+        });
     }
 
     public void playWoordPlayer(){
-        if(oefening == 0){
-            playOpdrachtSound();
-            while (audioPlayer.isPlaying()){}
-        }
-        woordPlayer.start();
+        setWoordPlayer();
+        woordPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                    woordPlayer.start();
+            }
+        });
     }
 
     public void setVoormeting(){
@@ -166,6 +204,11 @@ public class VoormetingActivity extends AppCompatActivity {
     }
 
     public void setWoordPlayer() {
+
+        if(this.woordPlayer != null){
+            this.woordPlayer.release();
+        }
+
         switch (oefening){
             case 0:
                 woordPlayer = MediaPlayer.create(getApplicationContext(), R.raw.duikbril);
