@@ -49,8 +49,6 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
     private MediaPlayer juistPlayer = null;
     private MediaPlayer foutPlayer = null;
 
-    private boolean isPlaying = false; //false by default
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,22 +156,40 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     public void playAudioPlayer(){
-        isPlaying = true;
+        if(this.audioPlayer != null){
+            this.audioPlayer.release();
+        }
         audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
         audioPlayer.setOnCompletionListener(this);
-        audioPlayer.start();
+        audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                audioPlayer.start();
+            }
+        });
     }
 
     public void onCompletion(MediaPlayer audioPlayer2) {
-        audioPlayer2.release();
         if (currentTrack < tracks.length-1) {
-            isPlaying = true;
             currentTrack++;
             audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
             audioPlayer.setOnCompletionListener(this);
-            audioPlayer.start();
+            audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    audioPlayer.start();
+                }
+            });
         }else {
-            isPlaying = false;
+            stopPlaying();
+        }
+    }
+
+    private void stopPlaying() {
+        if (audioPlayer != null) {
+            audioPlayer.stop();
+            audioPlayer.release();
+            audioPlayer = null;
         }
     }
 
