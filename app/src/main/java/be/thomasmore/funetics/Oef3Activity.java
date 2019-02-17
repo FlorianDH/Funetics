@@ -113,6 +113,8 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
         stopPlaying();
 
+        setContextPlayer();
+
         if(waarde=="juist"){
             if(pogingen == 1){
                 score++;
@@ -158,7 +160,6 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
 
         }else{
-
             foutPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
@@ -174,6 +175,8 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
         pogingen++;
 
         stopPlaying();
+
+        setContextPlayer();
 
         if(waarde=="juist"){
             if(pogingen == 1){
@@ -194,9 +197,12 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
                         setResult(Activity.RESULT_OK,returnIntent);
                         finish();
                     }else{
+
+                        setContextPlayer();
                         context2Player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                             @Override
                             public void onPrepared(MediaPlayer mediaPlayer) {
+
                                 context2Player.start();
                                 while (context2Player.isPlaying()){}
 
@@ -311,6 +317,9 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
             case 1:
                 textViewContext = (TextView) this.findViewById(R.id.textViewContext);
                 textViewContext.setText(huidigDoelwoord.getJuisteZin());
+                if(this.contextPlayer != null){
+                    this.contextPlayer.release();
+                }
                 contextPlayer = MediaPlayer.create(getApplicationContext(), getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_3_2", "raw", getPackageName()));
                 goedButton.setContentDescription("juist");
                 foutButton.setContentDescription("fout");
@@ -318,6 +327,9 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
             case 2:
                 textViewContext = (TextView) this.findViewById(R.id.textViewContext);
                 textViewContext.setText(huidigDoelwoord.getFouteZin());
+                if(this.contextPlayer != null){
+                    this.contextPlayer.release();
+                }
                 contextPlayer = MediaPlayer.create(getApplicationContext(), getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_3_3", "raw", getPackageName()));
                 goedButton.setContentDescription("fout");
                 foutButton.setContentDescription("juist");
