@@ -299,7 +299,7 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
         currentTrack = 0;
 
-        setContextPlayer();
+        setOefening();
 
         contextPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
