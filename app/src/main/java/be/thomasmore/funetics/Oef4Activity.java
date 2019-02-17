@@ -126,14 +126,19 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
     }
 
     public void nextFAB_onClick(View view) {
-        if (aantalJuistSelected == 3){
-            if(this.audioPlayer != null){
-                this.audioPlayer.release();
-                juistPlayer.start();
-            }
-            while (juistPlayer.isPlaying()){
+        stopPlaying();
 
-            }
+        setAudioPlayer();
+
+        if (aantalJuistSelected == 3){
+            juistPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    juistPlayer.start();
+                    while (juistPlayer.isPlaying()){}
+                }
+            });
+
             score++;
             aantalPogingen++;
 
@@ -145,10 +150,14 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
             finish();
         }
         else {
-            if(this.audioPlayer != null){
-                this.audioPlayer.release();
-                foutPlayer.start();
-            }
+            foutPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    foutPlayer.start();
+                    while (foutPlayer.isPlaying()){}
+                }
+            });
+
             aantalPogingen++;
         }
     }
@@ -196,6 +205,18 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
             audioPlayer.stop();
             audioPlayer.release();
             audioPlayer = null;
+        }
+
+        if (juistPlayer != null) {
+            juistPlayer.stop();
+            juistPlayer.release();
+            juistPlayer = null;
+        }
+
+        if (foutPlayer != null) {
+            foutPlayer.stop();
+            foutPlayer.release();
+            foutPlayer = null;
         }
     }
 
