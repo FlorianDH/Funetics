@@ -55,8 +55,6 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
     private int[] tracks = new int[2];
     private int currentTrack = 0;
 
-    private boolean isPlaying = false; //false by default
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,40 +144,65 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
     }
 
     public void playButton_onClick() {
-        if (isPlaying){
-            audioPlayer.stop();
-        }
+        stopPlaying();
 
-        isPlaying = true;
+        currentTrack = 0;
         playAudioPlayer();
+    }
+
+    private void stopPlaying() {
+        if (audioPlayer != null) {
+            audioPlayer.stop();
+            audioPlayer.release();
+            audioPlayer = null;
+        }
+        if (foutPlayer != null){
+            foutPlayer.stop();
+            foutPlayer.release();
+            foutPlayer = null;
+        }
+        if (juistPlayer != null){
+            juistPlayer.stop();
+            juistPlayer.release();
+            juistPlayer = null;
+        }
     }
 
     public void setAudioPlayer() {
         tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_5", "raw", getPackageName()); //oefenwoord_herhaal
         tracks[1] = R.raw.oef5_1;
 
-
         juistPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef5_2);
         foutPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef5_3);
     }
 
     public void playAudioPlayer(){
-        isPlaying = true;
+        if(this.audioPlayer != null){
+            this.audioPlayer.release();
+        }
         audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
         audioPlayer.setOnCompletionListener(this);
-        audioPlayer.start();
+        audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                audioPlayer.start();
+            }
+        });
     }
 
     public void onCompletion(MediaPlayer audioPlayer2) {
-        audioPlayer2.release();
         if (currentTrack < tracks.length-1) {
-            isPlaying = true;
             currentTrack++;
             audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
             audioPlayer.setOnCompletionListener(this);
-            audioPlayer.start();
+            audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    audioPlayer.start();
+                }
+            });
         }else {
-            isPlaying = false;
+            stopPlaying();
         }
     }
 
