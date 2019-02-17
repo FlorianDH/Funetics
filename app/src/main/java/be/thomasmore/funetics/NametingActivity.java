@@ -87,7 +87,6 @@ public class NametingActivity extends AppCompatActivity {
                 public void onPrepared(MediaPlayer mediaPlayer) {
                     audioPlayer.start();
                     while (audioPlayer.isPlaying()){}
-                    playWoordPlayer();
                 }
             });
 
