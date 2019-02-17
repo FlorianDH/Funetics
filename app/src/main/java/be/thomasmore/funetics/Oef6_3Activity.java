@@ -18,10 +18,8 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
     int lettergrepen = 0;
 
     private MediaPlayer audioPlayer = null;
-    private MediaPlayer woordPlayer = null;
 
     private int[] tracks;
-    private int[] woordTracks = new int[2];
 
     private int currentTrack = 0;
 
@@ -31,8 +29,6 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
     private DatabaseHelper db;
     private Doelwoord huidigDoelwoord;
     private Kind huidigKind;
-
-    private boolean isPlaying = false; //false by default
 
     private ObjectAnimator konijnAnimation1 = new ObjectAnimator();
     private ObjectAnimator konijnAnimation2 = new ObjectAnimator();
@@ -72,6 +68,7 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
         nextFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                stopPlaying();
                 //Terug naar oefening activity
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("score", String.valueOf(1));
@@ -168,7 +165,6 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
             tracks[4] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + "_6_3_2", "raw", getPackageName());
         }else{
             tracks = new int [3];
-//            woordPlayer = MediaPlayer.create(this, getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName()));
             tracks[0] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());
             tracks[1] = R.raw.oef6_3;
             tracks[2] = getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase(), "raw", getPackageName());
@@ -180,17 +176,23 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
     public void playAudioPlayer(){
         konijnAnimation1.start();
         konijnAnimation2.start();
-        isPlaying = true;
+
+        if(this.audioPlayer != null){
+            this.audioPlayer.release();
+        }
         audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
         audioPlayer.setOnCompletionListener(this);
-        audioPlayer.start();
+        audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                audioPlayer.start();
+            }
+        });
     }
 
     public void onCompletion(MediaPlayer audioPlayer2) {
-        audioPlayer2.release();
-
         if (currentTrack < tracks.length-1) {
-            isPlaying = true;
+
             currentTrack++;
             audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
             if(lettergrepen == 2){
@@ -206,19 +208,29 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
             }
 
             audioPlayer.setOnCompletionListener(this);
-            audioPlayer.start();
+            audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    audioPlayer.start();
+                }
+            });
         }else {
-            isPlaying = false;
+            stopPlaying();
         }
     }
 
     public void playButton_onClick(View view) {
-        if (isPlaying){
-            audioPlayer.stop();
-        }
+        stopPlaying();
 
-        isPlaying = true;
         currentTrack = 0;
         playAudioPlayer();
+    }
+
+    private void stopPlaying() {
+        if (audioPlayer != null) {
+            audioPlayer.stop();
+            audioPlayer.release();
+            audioPlayer = null;
+        }
     }
 }

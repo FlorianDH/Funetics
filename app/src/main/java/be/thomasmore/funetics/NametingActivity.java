@@ -33,6 +33,8 @@ public class NametingActivity extends AppCompatActivity {
     private ImageButton ImageButton3;
     private ImageButton ImageButton4;
 
+    private FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,19 +52,21 @@ public class NametingActivity extends AppCompatActivity {
 
         setNameting();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.soundFAB);
+        fab = (FloatingActionButton) findViewById(R.id.soundFAB);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playWoordPlayer();
+                playAudio();
             }
         });
 
-        playWoordPlayer();
+        playAudio();
     }
 
     public void imageButton_onClick(View view) {
         String waarde = (String) view.getContentDescription();
+
+        stopPlaying();
 
         // Juiste foto
         if(waarde.equals("juist")){
@@ -72,11 +76,20 @@ public class NametingActivity extends AppCompatActivity {
         if (oefening < 9){
             oefening ++;
             setNameting();
-            playWoordPlayer();
+            playAudio();
         }else {
-
+            if(this.audioPlayer != null){
+                this.audioPlayer.release();
+            }
             audioPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef0_einde);
-            audioPlayer.start();
+            audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    audioPlayer.start();
+                    while (audioPlayer.isPlaying()){}
+                    playWoordPlayer();
+                }
+            });
 
             while(audioPlayer.isPlaying());
 
@@ -111,18 +124,51 @@ public class NametingActivity extends AppCompatActivity {
         db.updateKind(newKind);
     }
 
+    public void playAudio(){
+        if(oefening == 0){
+            playOpdrachtPlayer();
+        }
+        else{
+            playWoordPlayer();
+        }
+    }
 
-    public void playOpdrachtSound(){
+    private void stopPlaying() {
+        if (woordPlayer != null) {
+            woordPlayer.stop();
+            woordPlayer.release();
+            woordPlayer = null;
+        }
+        if (audioPlayer != null) {
+            audioPlayer.stop();
+            audioPlayer.release();
+            audioPlayer = null;
+        }
+    }
+
+    public void playOpdrachtPlayer(){
+        if(this.audioPlayer != null){
+            this.audioPlayer.release();
+        }
         audioPlayer = MediaPlayer.create(getApplicationContext(), R.raw.oef0_voormeting);
-        audioPlayer.start();
+        audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                audioPlayer.start();
+                while (audioPlayer.isPlaying()){}
+                playWoordPlayer();
+            }
+        });
     }
 
     public void playWoordPlayer(){
-        if(oefening == 0){
-            playOpdrachtSound();
-            while (audioPlayer.isPlaying()){}
-        }
-        woordPlayer.start();
+        setWoordPlayer();
+        woordPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                woordPlayer.start();
+            }
+        });
     }
 
     public void setNameting(){
@@ -139,6 +185,9 @@ public class NametingActivity extends AppCompatActivity {
     }
 
     public void setWoordPlayer() {
+        if(this.woordPlayer != null){
+            this.woordPlayer.release();
+        }
         switch (oefening){
             case 0:
                 woordPlayer = MediaPlayer.create(getApplicationContext(), R.raw.duikbril);
