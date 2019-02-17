@@ -154,7 +154,6 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
                     foutPlayer.start();
-                    while (foutPlayer.isPlaying()){}
                 }
             });
 

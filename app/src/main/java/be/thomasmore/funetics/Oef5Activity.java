@@ -98,10 +98,9 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
     }
 
     public void nextFAB_onClick(View view) {
-        if (isPlaying){
-            audioPlayer.stop();
-            isPlaying = false;
-        }
+        stopPlaying();
+
+        setAudioPlayer();
 
         juistLayout = (LinearLayout) findViewById(R.id.juist_layout);
         foutLayout = (LinearLayout) findViewById(R.id.fout_layout);
@@ -129,8 +128,13 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
         if(juisteAfbeeldingen == 4){
             score ++;
 
-            juistPlayer.start();
-            while (juistPlayer.isPlaying());
+            juistPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    juistPlayer.start();
+                    while (juistPlayer.isPlaying()){}
+                }
+            });
 
             //Terug naar oefening activity
             Intent returnIntent = new Intent();
@@ -139,7 +143,12 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
             setResult(Activity.RESULT_OK,returnIntent);
             finish();
         }else{
-            foutPlayer.start();
+            foutPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    foutPlayer.start();
+                }
+            });
         }
     }
 
