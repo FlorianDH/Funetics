@@ -119,7 +119,7 @@ public class Oef6_2Activity extends AppCompatActivity implements MediaPlayer.OnC
         audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
-                audioPlayer.start();
+                mediaPlayer.start();
             }
         });
     }
@@ -129,7 +129,7 @@ public class Oef6_2Activity extends AppCompatActivity implements MediaPlayer.OnC
         zoemPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
-                zoemPlayer.start();
+                mediaPlayer.start();
             }
         });
     }
@@ -146,7 +146,7 @@ public class Oef6_2Activity extends AppCompatActivity implements MediaPlayer.OnC
             audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
-                    audioPlayer.start();
+                    mediaPlayer.start();
                 }
             });
         }else {
@@ -162,15 +162,33 @@ public class Oef6_2Activity extends AppCompatActivity implements MediaPlayer.OnC
 
     private void stopPlaying() {
         if (audioPlayer != null) {
-            audioPlayer.stop();
-            audioPlayer.release();
-            audioPlayer = null;
+            try{
+                audioPlayer.reset();
+                audioPlayer.prepare();
+                audioPlayer.stop();
+                audioPlayer.release();
+                audioPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
 
         if (zoemPlayer != null) {
-            zoemPlayer.stop();
-            zoemPlayer.release();
-            zoemPlayer = null;
+            try{
+                zoemPlayer.reset();
+                zoemPlayer.prepare();
+                zoemPlayer.stop();
+                zoemPlayer.release();
+                zoemPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
     }
 

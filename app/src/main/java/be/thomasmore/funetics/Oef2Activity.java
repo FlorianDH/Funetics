@@ -60,9 +60,18 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     private void stopPlaying() {
         if (audioPlayer != null) {
-            audioPlayer.stop();
-            audioPlayer.release();
-            audioPlayer = null;
+            try{
+                audioPlayer.reset();
+                audioPlayer.prepare();
+                audioPlayer.stop();
+                audioPlayer.release();
+                audioPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
     }
 
@@ -110,7 +119,7 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
         audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
-                audioPlayer.start();
+                mediaPlayer.start();
             }
         });
     }
@@ -123,7 +132,7 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
             audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
-                    audioPlayer.start();
+                    mediaPlayer.start();
                 }
             });
         }else {

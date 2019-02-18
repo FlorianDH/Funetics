@@ -71,39 +71,93 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     private void stopPlaying() {
         if (audioPlayer != null) {
-            audioPlayer.stop();
-            audioPlayer.release();
-            audioPlayer = null;
+            try{
+                audioPlayer.reset();
+                audioPlayer.prepare();
+                audioPlayer.stop();
+                audioPlayer.release();
+                audioPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
 
         if (contextPlayer != null) {
-            contextPlayer.stop();
-            contextPlayer.release();
-            contextPlayer = null;
+            try{
+                contextPlayer.reset();
+                contextPlayer.prepare();
+                contextPlayer.stop();
+                contextPlayer.release();
+                contextPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
 
         if (context2Player != null) {
-            context2Player.stop();
-            context2Player.release();
-            context2Player = null;
+            try{
+                context2Player.reset();
+                context2Player.prepare();
+                context2Player.stop();
+                context2Player.release();
+                context2Player = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
 
         if (juistPlayer != null) {
-            juistPlayer.stop();
-            juistPlayer.release();
-            juistPlayer = null;
+            try{
+                juistPlayer.reset();
+                juistPlayer.prepare();
+                juistPlayer.stop();
+                juistPlayer.release();
+                juistPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
 
         if (juist2Player != null) {
-            juist2Player.stop();
-            juist2Player.release();
-            juist2Player = null;
+            try{
+                juist2Player.reset();
+                juist2Player.prepare();
+                juist2Player.stop();
+                juist2Player.release();
+                juist2Player = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
 
         if (foutPlayer != null) {
-            foutPlayer.stop();
-            foutPlayer.release();
-            foutPlayer = null;
+            try{
+                foutPlayer.reset();
+                foutPlayer.prepare();
+                foutPlayer.stop();
+                foutPlayer.release();
+                foutPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
     }
 

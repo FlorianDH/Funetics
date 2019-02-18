@@ -85,8 +85,8 @@ public class NametingActivity extends AppCompatActivity {
             audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
-                    audioPlayer.start();
-                    while (audioPlayer.isPlaying()){}
+                    mediaPlayer.start();
+                    while (mediaPlayer.isPlaying()){}
                 }
             });
 
@@ -134,14 +134,31 @@ public class NametingActivity extends AppCompatActivity {
 
     private void stopPlaying() {
         if (woordPlayer != null) {
-            woordPlayer.stop();
-            woordPlayer.release();
-            woordPlayer = null;
+            try{
+                woordPlayer.reset();
+                woordPlayer.prepare();
+                woordPlayer.stop();
+                woordPlayer.release();
+                woordPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
         if (audioPlayer != null) {
-            audioPlayer.stop();
-            audioPlayer.release();
-            audioPlayer = null;
+            try{
+                audioPlayer.reset();
+                audioPlayer.prepare();
+                audioPlayer.stop();
+                audioPlayer.release();
+                audioPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
     }
 
@@ -153,8 +170,8 @@ public class NametingActivity extends AppCompatActivity {
         audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
-                audioPlayer.start();
-                while (audioPlayer.isPlaying()){}
+                mediaPlayer.start();
+                while (mediaPlayer.isPlaying()){}
                 playWoordPlayer();
             }
         });
@@ -165,7 +182,7 @@ public class NametingActivity extends AppCompatActivity {
         woordPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
-                woordPlayer.start();
+                mediaPlayer.start();
             }
         });
     }

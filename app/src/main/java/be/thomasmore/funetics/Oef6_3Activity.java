@@ -185,7 +185,7 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
         audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
-                audioPlayer.start();
+                mediaPlayer.start();
             }
         });
     }
@@ -211,7 +211,7 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
             audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
-                    audioPlayer.start();
+                    mediaPlayer.start();
                 }
             });
         }else {
@@ -228,9 +228,18 @@ public class Oef6_3Activity extends AppCompatActivity implements MediaPlayer.OnC
 
     private void stopPlaying() {
         if (audioPlayer != null) {
-            audioPlayer.stop();
-            audioPlayer.release();
-            audioPlayer = null;
+            try{
+                audioPlayer.reset();
+                audioPlayer.prepare();
+                audioPlayer.stop();
+                audioPlayer.release();
+                audioPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
     }
 }

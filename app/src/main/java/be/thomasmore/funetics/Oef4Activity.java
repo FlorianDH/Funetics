@@ -134,8 +134,8 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
             juistPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
-                    juistPlayer.start();
-                    while (juistPlayer.isPlaying()){}
+                    mediaPlayer.start();
+                    while (mediaPlayer.isPlaying()){}
                 }
             });
 
@@ -153,7 +153,7 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
             foutPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
-                    foutPlayer.start();
+                    mediaPlayer.start();
                 }
             });
 
@@ -178,7 +178,7 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
         audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
-                audioPlayer.start();
+                mediaPlayer.start();
             }
         });
     }
@@ -191,7 +191,7 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
             audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
-                    audioPlayer.start();
+                    mediaPlayer.start();
                 }
             });
         }else {
@@ -201,21 +201,48 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
 
     private void stopPlaying() {
         if (audioPlayer != null) {
-            audioPlayer.stop();
-            audioPlayer.release();
-            audioPlayer = null;
+            try{
+                audioPlayer.reset();
+                audioPlayer.prepare();
+                audioPlayer.stop();
+                audioPlayer.release();
+                audioPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
 
         if (juistPlayer != null) {
-            juistPlayer.stop();
-            juistPlayer.release();
-            juistPlayer = null;
+            try{
+                juistPlayer.reset();
+                juistPlayer.prepare();
+                juistPlayer.stop();
+                juistPlayer.release();
+                juistPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
 
         if (foutPlayer != null) {
-            foutPlayer.stop();
-            foutPlayer.release();
-            foutPlayer = null;
+            try{
+                foutPlayer.reset();
+                foutPlayer.prepare();
+                foutPlayer.stop();
+                foutPlayer.release();
+                foutPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
     }
 

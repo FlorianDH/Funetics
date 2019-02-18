@@ -131,8 +131,8 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
             juistPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
-                    juistPlayer.start();
-                    while (juistPlayer.isPlaying()){}
+                    mediaPlayer.start();
+                    while (mediaPlayer.isPlaying()){}
                 }
             });
 
@@ -146,7 +146,7 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
             foutPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
-                    foutPlayer.start();
+                    mediaPlayer.start();
                 }
             });
         }
@@ -161,19 +161,46 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
 
     private void stopPlaying() {
         if (audioPlayer != null) {
-            audioPlayer.stop();
-            audioPlayer.release();
-            audioPlayer = null;
+            try{
+                audioPlayer.reset();
+                audioPlayer.prepare();
+                audioPlayer.stop();
+                audioPlayer.release();
+                audioPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
-        if (foutPlayer != null){
-            foutPlayer.stop();
-            foutPlayer.release();
-            foutPlayer = null;
+        if (foutPlayer != null) {
+            try{
+                foutPlayer.reset();
+                foutPlayer.prepare();
+                foutPlayer.stop();
+                foutPlayer.release();
+                foutPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
-        if (juistPlayer != null){
-            juistPlayer.stop();
-            juistPlayer.release();
-            juistPlayer = null;
+        if (juistPlayer != null) {
+            try{
+                juistPlayer.reset();
+                juistPlayer.prepare();
+                juistPlayer.stop();
+                juistPlayer.release();
+                juistPlayer = null;
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
         }
     }
 
@@ -194,7 +221,7 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
         audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
-                audioPlayer.start();
+                mediaPlayer.start();
             }
         });
     }
@@ -207,7 +234,7 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
             audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
-                    audioPlayer.start();
+                    mediaPlayer.start();
                 }
             });
         }else {
