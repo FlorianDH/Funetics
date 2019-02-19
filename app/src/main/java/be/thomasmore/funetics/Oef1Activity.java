@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -78,6 +79,8 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
             this.audioPlayer.release();
         }
         audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+//        audioPlayer.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
+
         audioPlayer.setOnCompletionListener(this);
         audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -91,6 +94,7 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
         if (currentTrack < tracks.length-1) {
             currentTrack++;
             audioPlayer = MediaPlayer.create(getApplicationContext(), tracks[currentTrack]);
+//            audioPlayer.setWakeMode(getApplicationContext(), PowerManager.PARTIAL_WAKE_LOCK);
             audioPlayer.setOnCompletionListener(this);
             audioPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
@@ -136,5 +140,11 @@ public class Oef1Activity extends AppCompatActivity implements MediaPlayer.OnCom
         returnIntent.putExtra("aantalPogingen", "1");
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        stopPlaying();
     }
 }

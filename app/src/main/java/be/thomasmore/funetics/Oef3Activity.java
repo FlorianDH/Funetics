@@ -390,4 +390,10 @@ public class Oef3Activity extends AppCompatActivity implements MediaPlayer.OnCom
                 break;
         }
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        stopPlaying();
+    }
 }

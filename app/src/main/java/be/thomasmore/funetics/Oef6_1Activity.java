@@ -148,4 +148,10 @@ public class Oef6_1Activity extends AppCompatActivity implements MediaPlayer.OnC
 
         }
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        stopPlaying();
+    }
 }

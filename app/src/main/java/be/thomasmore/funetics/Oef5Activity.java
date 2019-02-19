@@ -42,6 +42,7 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
 
     private LinearLayout juistLayout;
     private LinearLayout foutLayout;
+    private LinearLayout topLayout;
 
     private static final String IMAGE_VIEW1_TAG = "Image1";
     private static final String IMAGE_VIEW2_TAG = "Image2";
@@ -79,6 +80,7 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
 
         juistLayout = (LinearLayout) findViewById(R.id.juist_layout);
         foutLayout = (LinearLayout) findViewById(R.id.fout_layout);
+        topLayout = (LinearLayout) findViewById(R.id.top_layout);
 
         nextFAB = (FloatingActionButton) findViewById(R.id.nextFAB);
         nextFAB.setVisibility(View.VISIBLE); //Maak de volgende-knop onzichtbaar tot er 3 woorden zijn aangeduid
@@ -274,6 +276,8 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
         imageView3.setContentDescription(shuffleArray[2][1]);
         imageView4.setImageResource(getResources().getIdentifier(huidigDoelwoord.getNaam().toLowerCase() + shuffleArray[3][0], "drawable", getPackageName()));
         imageView4.setContentDescription(shuffleArray[3][1]);
+
+
     }
 
 
@@ -407,14 +411,18 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
 
                 // Invalidates the view to force a redraw
                 view.invalidate();
+//
+//                 Does a getResult(), and displays what happened.
+                if (event.getResult()){
+                    Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
+                }
 
-                // Does a getResult(), and displays what happened.
-//                if (event.getResult())
-//                    Toast.makeText(this, "The drop was handled.", Toast.LENGTH_SHORT).show();
-//
-//                else
-//                    Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_SHORT).show();
-//
+                else{
+                    Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_SHORT).show();
+                    View vImage = (View) event.getLocalState();
+                    vImage.setVisibility(View.VISIBLE);//finally set Visibility to VISIBLE
+                }
+
 
                 // returns true; the value is ignored.
                 return true;
@@ -427,6 +435,39 @@ public class Oef5Activity extends AppCompatActivity implements View.OnDragListen
         return false;
     }
 
+//    public void buttonRestart_onClick(View view){
+//        stopPlaying();
+//        findViews();
+//
+//        ViewGroup owner1 = (ViewGroup) imageView1.getParent();
+//        owner1.removeView(imageView1);
+//        topLayout.addView(imageView1);
+//        imageView1.setVisibility(View.VISIBLE);
+//
+//        ViewGroup owner2 = (ViewGroup) imageView2.getParent();
+//        owner2.removeView(imageView2);
+//        topLayout.addView(imageView2);
+//        imageView2.setVisibility(View.VISIBLE);
+//
+//
+//        ViewGroup owner3 = (ViewGroup) imageView3.getParent();
+//        owner3.removeView(imageView3);
+//        topLayout.addView(imageView3);
+//        imageView3.setVisibility(View.VISIBLE);
+//
+//
+//        ViewGroup owner4 = (ViewGroup) imageView4.getParent();
+//        owner4.removeView(imageView4);
+//        topLayout.addView(imageView4);
+//        imageView4.setVisibility(View.VISIBLE);
+//
+//        setImages();
+//    }
 
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        stopPlaying();
+    }
 
 }

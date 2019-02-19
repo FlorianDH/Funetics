@@ -369,4 +369,10 @@ public class VoormetingActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        stopPlaying();
+    }
 }

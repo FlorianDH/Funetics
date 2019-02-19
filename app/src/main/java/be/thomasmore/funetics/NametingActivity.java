@@ -348,4 +348,10 @@ public class NametingActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        stopPlaying();
+    }
+
 }

@@ -361,4 +361,10 @@ public class Oef4Activity extends AppCompatActivity implements MediaPlayer.OnCom
         }
     }
 
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        stopPlaying();
+    }
+
 }

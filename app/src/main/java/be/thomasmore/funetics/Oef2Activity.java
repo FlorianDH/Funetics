@@ -146,4 +146,10 @@ public class Oef2Activity extends AppCompatActivity implements MediaPlayer.OnCom
         currentTrack = 0;
         playAudioPlayer();
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        stopPlaying();
+    }
 }
